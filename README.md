@@ -22,3 +22,14 @@ pnpm dev               # http://localhost:3000
 ```
 
 See `docs/superpowers/plans/` for implementation plans.
+
+## Vercel deployment
+
+1. Push this repo to GitHub.
+2. Go to https://vercel.com/new → import the repo.
+3. Framework: Next.js (auto-detected). Build command: `pnpm build`. Install command: `pnpm install --frozen-lockfile`.
+4. Environment variables — set every key from `.env.example` with real values. Scope: Production + Preview.
+5. Region: Mumbai (`bom1`) — already set in `vercel.json`.
+6. Deploy. Confirm both `https://<project>.vercel.app/` and `https://<project>.vercel.app/ta-IN` render.
+
+Domain (aesta.co.in) wiring happens in a later plan once DNS is ready.
