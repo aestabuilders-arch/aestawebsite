@@ -2,28 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  html {
+    font-family: theme('fontFamily.sans');
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-    rgb(var(--background-start-rgb));
-}
+  html[lang='ta-IN'] {
+    font-family: theme('fontFamily.tamil');
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  html[lang='ta-IN'] h1,
+  html[lang='ta-IN'] h2,
+  html[lang='ta-IN'] h3 {
+    font-family: theme('fontFamily.tamil-display');
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: theme('fontFamily.serif');
   }
 }

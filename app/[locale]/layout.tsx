@@ -2,8 +2,34 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import { Inter, Fraunces, Noto_Sans_Tamil, Hind_Madurai } from 'next/font/google';
 import { isValidLocale, type Locale, locales } from '@/i18n/config';
 import '../globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+});
+
+const notoTamil = Noto_Sans_Tamil({
+  subsets: ['tamil', 'latin'],
+  variable: '--font-tamil',
+  display: 'swap',
+});
+
+const hindMadurai = Hind_Madurai({
+  subsets: ['tamil', 'latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-tamil-display',
+  display: 'swap',
+});
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -33,8 +59,11 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale as Locale}>
-      <body>
+    <html
+      lang={locale as Locale}
+      className={`${inter.variable} ${fraunces.variable} ${notoTamil.variable} ${hindMadurai.variable}`}
+    >
+      <body className="bg-limestone-50 text-charcoal-900 antialiased">
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
     </html>
