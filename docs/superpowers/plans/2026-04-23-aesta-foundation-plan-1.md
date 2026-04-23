@@ -9,7 +9,9 @@
 After this plan was written, the user chose **hosted Supabase (project ref `rcbhsakwfdwjheorxmzk`) with the Supabase MCP server** instead of local Docker + Supabase CLI. The following overrides apply. When an original task conflicts with an amendment, the **amendment wins**.
 
 ### A1. Prerequisites — Docker Desktop and Supabase CLI are NOT required
+
 Replace the prerequisites list with:
+
 - Node.js 20+ (existing: v24 works)
 - pnpm 9+ (existing: v10 works; corepack will pin if needed)
 - git (existing)
@@ -18,7 +20,9 @@ Replace the prerequisites list with:
 - Hosted Supabase project at `https://rcbhsakwfdwjheorxmzk.supabase.co` (already provisioned)
 
 ### A2. Supabase paths — use quickstart convention
+
 Use **`utils/supabase/`** (not `lib/supabase/`) per the Supabase Next.js quickstart the user pasted. Files:
+
 - `utils/supabase/client.ts` — browser (`createBrowserClient`)
 - `utils/supabase/server.ts` — server (`createServerClient`, `getAll`/`setAll` cookie pattern)
 - `utils/supabase/middleware.ts` — session refresh helper
@@ -28,7 +32,9 @@ Use **`utils/supabase/`** (not `lib/supabase/`) per the Supabase Next.js quickst
 Keep `lib/constants/nap.ts` in `lib/constants/` — unrelated to Supabase.
 
 ### A3. Env-var naming — use the new Supabase key names
+
 The project is on Supabase's new API key format. Use:
+
 - `NEXT_PUBLIC_SUPABASE_URL` (unchanged)
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (replaces `NEXT_PUBLIC_SUPABASE_ANON_KEY`)
 - `SUPABASE_SERVICE_ROLE_KEY` (unchanged — for the admin client)
@@ -36,13 +42,17 @@ The project is on Supabase's new API key format. Use:
 `.env.local` has already been written with the URL and publishable key. Still need the service-role key (fetched from Supabase dashboard) before Plan 5 (admin panel).
 
 ### A4. Cookie pattern — use quickstart's `getAll`/`setAll`
+
 The `utils/supabase/server.ts` and `utils/supabase/middleware.ts` must use the modern `getAll` + `setAll` cookie pattern from the Supabase quickstart, not the older `get`/`set`/`remove` pattern shown in this plan's Task 9.
 
 ### A5. Task 5 — DELETE this task
+
 No local Supabase boot. No `supabase init`. No `supabase/config.toml`. The MCP server handles schema operations directly against the hosted DB.
 
 ### A6. Tasks 7 & 8 — apply migrations via Supabase MCP, not `pnpm db:reset`
+
 Instead of the migration flow in Tasks 7 and 8:
+
 - Still write migration SQL files to `supabase/migrations/` (source of truth for git history)
 - Apply each migration using the MCP tool `mcp__supabase__apply_migration` with the migration name (snake_case) and SQL body
 - For the cities seed, use `mcp__supabase__execute_sql` (seeds aren't DDL, so not a migration)
@@ -51,12 +61,15 @@ Instead of the migration flow in Tasks 7 and 8:
 No `supabase/config.toml`, no `supabase/seed.sql` auto-run. The `supabase/migrations/` directory becomes a records-only convention aligned with the MCP-applied migrations.
 
 ### A7. Task 9 — types via MCP, clients via utils/supabase
+
 - Regenerate `utils/supabase/types.ts` using the MCP tool `mcp__supabase__generate_typescript_types` (writes to stdout; pipe/save into the file)
 - Write the clients at `utils/supabase/` per A2 + A4
 - Keep `utils/supabase/admin.ts` (service-role) — gated with `'server-only'` import
 
 ### A8. package.json — remove local-dev scripts
+
 Remove the following scripts from Task 2:
+
 - `supabase:start`, `supabase:stop`, `supabase:status` (no local daemon)
 - `db:reset`, `db:push` (no local migration apply)
 
@@ -65,7 +78,9 @@ Keep `db:types` but change to: `"db:types": "echo 'Use mcp__supabase__generate_t
 Also remove `supabase` from devDependencies (the CLI isn't needed; MCP server is npx-loaded on demand).
 
 ### A9. What's already done
+
 Before any subagent starts, the controller has already created:
+
 - [.mcp.json](../../../.mcp.json) — Supabase MCP registered
 - [.env.local](../../../.env.local) — URL + publishable key populated
 - [.claude/settings.local.json](../../../.claude/settings.local.json) — `SUPABASE_ACCESS_TOKEN` (gitignored)
@@ -74,6 +89,7 @@ Before any subagent starts, the controller has already created:
 Subagents executing Tasks 1 and 6 must preserve these files — do not overwrite.
 
 ### A11. `.gitignore` — additional entry
+
 Task 1 Step 3's `.gitignore` content must include this line in the `# env` section to prevent `.claude/settings.local.json` (which holds `SUPABASE_ACCESS_TOKEN`) from being committed:
 
 ```gitignore
@@ -83,6 +99,7 @@ Task 1 Step 3's `.gitignore` content must include this line in the `# env` secti
 Add under the existing `# supabase` section or as a new `# claude` section — placement flexible, presence mandatory.
 
 ### A10. Completion criteria — revised
+
 1. `pnpm dev` serves `http://localhost:3000` (English) and `http://localhost:3000/ta-IN` (Tamil).
 2. All migrations listed in `mcp__supabase__list_migrations` include `base_schema` and `seo_schema`.
 3. `mcp__supabase__list_tables` returns 13 tables (7 base + 6 SEO); `cities` row count = 17.
@@ -101,6 +118,7 @@ Add under the existing `# supabase` section or as a new `# claude` section — p
 **Tech Stack:** Next.js 14.2+, TypeScript 5.4+, Tailwind 3.4+, Supabase (PostgreSQL + Auth + Storage), next-intl 3.x, Vitest 1.x, GitHub Actions, Vercel, pnpm 9+, Node 20 LTS.
 
 **Out of scope (deferred to later plans in the series):**
+
 - Homepage + marketing pages (Plan 3)
 - Schema-emitting components like `<FAQSection>`, `<ProcessSteps>`, `<AggregateRating>` (Plan 2)
 - Content system (blog, entities, authors, MDX pipeline) (Plan 4)
@@ -110,6 +128,7 @@ Add under the existing `# supabase` section or as a new `# claude` section — p
 - Content writing, GBP setup, citations, backlink outreach, Tamil translation — operational, not code
 
 **Companion documents:**
+
 - Strategy: [docs/superpowers/specs/2026-04-23-aesta-seo-aeo-strategy-design.md](../specs/2026-04-23-aesta-seo-aeo-strategy-design.md)
 - Master plan: [AESTA_WEBSITE_PLAN.md](../../../AESTA_WEBSITE_PLAN.md)
 
@@ -212,6 +231,7 @@ AestaWebsite/
 ## Task 1: Git init + .gitignore + README stub + .nvmrc + node pinning
 
 **Files:**
+
 - Create: `.gitignore`
 - Create: `README.md`
 - Create: `.nvmrc`
@@ -292,12 +312,13 @@ Note: keep `AESTA_WEBSITE_PLAN.md` and `docs/` tracked. They are intentionally v
 
 Write file `README.md` with exact content:
 
-```markdown
+````markdown
 # AESTA Website
 
 Marketing website and web app for AESTA — Architects & Builders.
 
 See:
+
 - Master plan: [AESTA_WEBSITE_PLAN.md](./AESTA_WEBSITE_PLAN.md)
 - SEO/AEO strategy: [docs/superpowers/specs/2026-04-23-aesta-seo-aeo-strategy-design.md](./docs/superpowers/specs/2026-04-23-aesta-seo-aeo-strategy-design.md)
 - Implementation plans: [docs/superpowers/plans/](./docs/superpowers/plans/)
@@ -316,9 +337,11 @@ pnpm supabase:start    # boots local Postgres + Auth in Docker
 pnpm db:push           # applies migrations
 pnpm dev               # http://localhost:3000
 ```
+````
 
 See `docs/superpowers/plans/` for implementation plans.
-```
+
+````
 
 - [ ] **Step 5: Verify and commit**
 
@@ -326,7 +349,7 @@ See `docs/superpowers/plans/` for implementation plans.
 ls -la .gitignore README.md .nvmrc AESTA_WEBSITE_PLAN.md
 git add .gitignore README.md .nvmrc AESTA_WEBSITE_PLAN.md docs/
 git commit -m "chore: init repo with .gitignore, readme, and existing planning docs"
-```
+````
 
 Expected: 4 files + docs tree committed. If the existing `AESTA_WEBSITE_PLAN.md` or `docs/` were not committed on init, they are now.
 
@@ -335,6 +358,7 @@ Expected: 4 files + docs tree committed. If the existing `AESTA_WEBSITE_PLAN.md`
 ## Task 2: Create Next.js 14 project with TypeScript, App Router, Tailwind
 
 **Files:**
+
 - Create (many): `package.json`, `tsconfig.json`, `next.config.mjs`, `tailwind.config.ts`, `postcss.config.mjs`, `app/globals.css`, `app/layout.tsx`, `app/page.tsx`, `.eslintrc.json`
 - Delete: the default `app/page.tsx` content (replaced in a later task)
 
@@ -442,6 +466,7 @@ git commit -m "feat: scaffold next.js 14 with typescript, tailwind, eslint"
 ## Task 3: Prettier configuration
 
 **Files:**
+
 - Create: `.prettierrc`
 - Create: `.prettierignore`
 
@@ -506,6 +531,7 @@ git commit --amend --no-edit
 ## Task 4: Vitest setup
 
 **Files:**
+
 - Create: `vitest.config.ts`
 - Create: `vitest.setup.ts`
 - Create: `lib/__smoke__/smoke.test.ts` (removed later — proves Vitest works)
@@ -620,6 +646,7 @@ git commit -m "test: add vitest with jsdom and testing-library setup"
 ## Task 5: Supabase CLI init + local dev boot + config
 
 **Files:**
+
 - Create: `supabase/config.toml` (created by `supabase init`)
 - Create: `supabase/seed.sql` (placeholder, populated in Task 8)
 
@@ -681,6 +708,7 @@ git commit -m "chore: init supabase local dev config"
 ## Task 6: Environment variable management
 
 **Files:**
+
 - Create: `.env.example`
 - Create: `.env.local` (gitignored)
 
@@ -741,6 +769,7 @@ git commit -m "chore: add .env.example with supabase local + NAP placeholders"
 ## Task 7: Base schema migration (AESTA master plan §7.2 tables)
 
 **Files:**
+
 - Create: `supabase/migrations/20260423000000_base_schema.sql`
 
 - [ ] **Step 1: Write the base schema migration**
@@ -925,6 +954,7 @@ git commit -m "feat(db): add base schema migration — projects, cities, leads, 
 ## Task 8: SEO/AEO additive schema migration + cities seed
 
 **Files:**
+
 - Create: `supabase/migrations/20260423000001_seo_schema.sql`
 - Create: `supabase/seed.sql`
 
@@ -1131,6 +1161,7 @@ git commit -m "feat(db): add seo schema (entities, authors, reviews, review_outr
 ## Task 9: Supabase type generation + client helpers
 
 **Files:**
+
 - Create: `lib/supabase/client.ts`
 - Create: `lib/supabase/server.ts`
 - Create: `lib/supabase/admin.ts`
@@ -1247,6 +1278,7 @@ git commit -m "feat(supabase): add typed clients (browser, server, admin) + gene
 ## Task 10: NAP constants module (TDD)
 
 **Files:**
+
 - Create: `lib/constants/nap.ts`
 - Create: `lib/constants/nap.test.ts`
 
@@ -1391,6 +1423,7 @@ git commit -m "feat(nap): add NAP constants module with phone/whatsapp/mailto he
 ## Task 11: next-intl configuration for en-IN + ta-IN
 
 **Files:**
+
 - Create: `i18n/config.ts`
 - Create: `i18n/request.ts`
 - Create: `i18n/messages/en-IN.json`
@@ -1500,9 +1533,7 @@ export default createMiddleware({
 });
 
 export const config = {
-  matcher: [
-    '/((?!api|_next|_vercel|admin|.*\\..*).*)',
-  ],
+  matcher: ['/((?!api|_next|_vercel|admin|.*\\..*).*)'],
 };
 ```
 
@@ -1609,6 +1640,7 @@ pnpm dev
 ```
 
 Open in browser:
+
 - `http://localhost:3000` — English (default, no prefix)
 - `http://localhost:3000/ta-IN` — Tamil
 
@@ -1634,6 +1666,7 @@ git commit -m "feat(i18n): configure next-intl for en-IN and ta-IN with locale-a
 ## Task 12: Tamil font loading + Tailwind brand tokens
 
 **Files:**
+
 - Modify: `app/[locale]/layout.tsx`
 - Modify: `tailwind.config.ts`
 - Modify: `app/globals.css`
@@ -1806,6 +1839,7 @@ git commit -m "feat(styling): add brand tokens + load Inter, Fraunces, Noto Sans
 ## Task 13: GitHub Actions CI — lint, typecheck, test, build
 
 **Files:**
+
 - Create: `.github/workflows/ci.yml`
 
 - [ ] **Step 1: Create CI workflow**
@@ -1861,9 +1895,9 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder
           SUPABASE_SERVICE_ROLE_KEY: ci-placeholder
-          NEXT_PUBLIC_BUSINESS_NAME: "AESTA — Architects & Builders"
-          NEXT_PUBLIC_BUSINESS_PHONE: "+91-0000000000"
-          NEXT_PUBLIC_BUSINESS_WHATSAPP: "+91-0000000000"
+          NEXT_PUBLIC_BUSINESS_NAME: 'AESTA — Architects & Builders'
+          NEXT_PUBLIC_BUSINESS_PHONE: '+91-0000000000'
+          NEXT_PUBLIC_BUSINESS_WHATSAPP: '+91-0000000000'
           NEXT_PUBLIC_BUSINESS_EMAIL: hello@aesta.co.in
         run: pnpm build
 ```
@@ -1891,6 +1925,7 @@ git commit -m "ci: add github actions workflow (format, lint, typecheck, test, b
 ## Task 14: Vercel deployment configuration
 
 **Files:**
+
 - Create: `vercel.json`
 
 - [ ] **Step 1: Write vercel.json**
@@ -1916,7 +1951,6 @@ Create `vercel.json`:
 Append to `README.md`:
 
 ```markdown
-
 ## Vercel deployment
 
 1. Push this repo to GitHub.
@@ -1941,6 +1975,7 @@ git commit -m "chore(deploy): add vercel.json (Mumbai region) + README deploy no
 ## Task 15: Remove smoke test + final green run
 
 **Files:**
+
 - Delete: `lib/__smoke__/smoke.test.ts`
 
 The smoke test was to prove Vitest wiring. Real tests (NAP) now exist, so the smoke can go.
@@ -1999,6 +2034,7 @@ Navigate to `https://github.com/<user>/aesta/actions`. Wait for the `CI / verify
 Expected: green across format, lint, typecheck, test, build.
 
 If CI fails:
+
 - Read the failing step's log.
 - Reproduce locally with the same command.
 - Fix, commit, push. Do not `--no-verify` or bypass hooks.

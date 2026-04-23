@@ -3,6 +3,7 @@
 Marketing website and web app for AESTA — Architects & Builders.
 
 See:
+
 - Master plan: [AESTA_WEBSITE_PLAN.md](./AESTA_WEBSITE_PLAN.md)
 - SEO/AEO strategy: [docs/superpowers/specs/2026-04-23-aesta-seo-aeo-strategy-design.md](./docs/superpowers/specs/2026-04-23-aesta-seo-aeo-strategy-design.md)
 - Implementation plans: [docs/superpowers/plans/](./docs/superpowers/plans/)

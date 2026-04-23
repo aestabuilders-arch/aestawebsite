@@ -19,7 +19,7 @@ AESTA is a **design-build firm** — architecture, construction, and project man
 
 ### 1.2 Brand meaning
 
-AESTA has four layered meanings we can draw on: *divinely beautiful*, *star-like* (Latin/classical roots), *sunset/set aside* (Sanskrit), and *auction/staff* (Italian). For brand storytelling, we lead on **"divinely beautiful"** and **"star-like"** — fits an architecture firm that builds sustainable, beautiful homes.
+AESTA has four layered meanings we can draw on: _divinely beautiful_, _star-like_ (Latin/classical roots), _sunset/set aside_ (Sanskrit), and _auction/staff_ (Italian). For brand storytelling, we lead on **"divinely beautiful"** and **"star-like"** — fits an architecture firm that builds sustainable, beautiful homes.
 
 ### 1.3 Tagline options (pick one)
 
@@ -34,7 +34,7 @@ AESTA has four layered meanings we can draw on: *divinely beautiful*, *star-like
 ### 1.4 Brand voice
 
 - **Confident, not boastful.** ("16 years. 100+ homes. Zero compromises.")
-- **Client-centric.** Talk about *their* dream home, not our awards.
+- **Client-centric.** Talk about _their_ dream home, not our awards.
 - **Bilingual fluency.** Tamil where it matters (homepage hero, testimonials, contact), English everywhere (SEO, specs, forms).
 - **Transparent.** Pricing visible, specs visible, process visible.
 
@@ -94,6 +94,7 @@ We will **not** try to outrank JustDial — that's a losing battle. We'll rank a
 Organized by intent. Each cluster maps to a page or set of pages.
 
 **Cluster A — High-intent, high-volume (homepage + service pages):**
+
 - best construction company in Pudukkottai
 - house construction cost Pudukkottai
 - building contractor Pudukkottai
@@ -103,6 +104,7 @@ Organized by intent. Each cluster maps to a page or set of pages.
 - [same set] for Karaikudi, Aranthangi, Trichy, Thanjavur, Sivaganga
 
 **Cluster B — Service-specific (service pages):**
+
 - residential construction Tamil Nadu
 - commercial construction Pudukkottai
 - house renovation Pudukkottai / Karaikudi
@@ -115,6 +117,7 @@ Organized by intent. Each cluster maps to a page or set of pages.
 - individual house construction with materials
 
 **Cluster C — Cost/pricing (huge intent signal — these people are ready to buy):**
+
 - house construction cost per square feet Pudukkottai
 - 1000 sqft house construction cost Tamil Nadu
 - 1200 sqft house construction cost
@@ -124,6 +127,7 @@ Organized by intent. Each cluster maps to a page or set of pages.
 - villa construction cost Karaikudi
 
 **Cluster D — Long-tail informational (blog/resources, builds authority):**
+
 - how to plan house construction in Tamil Nadu
 - DTCP approval process Pudukkottai
 - vastu compliant house design Tamil Nadu
@@ -134,6 +138,7 @@ Organized by intent. Each cluster maps to a page or set of pages.
 - soil testing for home construction Pudukkottai
 
 **Cluster E — Tamil-language (massive advantage, almost no competition):**
+
 - புதுக்கோட்டை வீடு கட்ட செலவு (house construction cost Pudukkottai in Tamil)
 - காரைக்குடி கட்டிட ஒப்பந்தக்காரர் (building contractor Karaikudi in Tamil)
 - சிறந்த ஆர்க்கிடெக்ட் புதுக்கோட்டை
@@ -145,6 +150,7 @@ Organized by intent. Each cluster maps to a page or set of pages.
 We'll build a dedicated landing page for each city. Same template, unique content per city (client list, project photos from that city, a paragraph about the area, nearby districts we serve).
 
 **Primary (Tier 1 — full content page, 1500+ words):**
+
 - /locations/pudukkottai
 - /locations/karaikudi
 - /locations/aranthangi
@@ -152,6 +158,7 @@ We'll build a dedicated landing page for each city. Same template, unique conten
 - /locations/thanjavur
 
 **Secondary (Tier 2 — shorter content page, 800–1000 words):**
+
 - /locations/keeranur
 - /locations/thirumayam
 - /locations/thirupathur
@@ -170,6 +177,7 @@ That's 17 location pages. Each one is an SEO asset that ranks for "[service] in 
 ### 3.3 Google Business Profile & local SEO
 
 Non-negotiable. Day-one actions:
+
 - Create/claim Google Business Profile — "AESTA — Architects & Builders, Pudukkottai"
 - Add all 100+ projects as photos (geotagged where possible)
 - Get 20 client reviews in month 1 (ask past clients on WhatsApp)
@@ -177,6 +185,7 @@ Non-negotiable. Day-one actions:
 - Weekly posts: project updates, completion milestones
 
 Also:
+
 - Submit to Google Search Console + Bing Webmaster
 - Structured data (LocalBusiness, Organization, Service, FAQPage, BreadcrumbList)
 - NAP consistency (Name/Address/Phone same everywhere)
@@ -242,13 +251,13 @@ Also:
 
 Structure (top to bottom):
 
-1. **Hero section** — Full-width photo of best project. Headline: *"Divinely beautiful. Built to last."* Subhead: *"Design-build homes by NIT Trichy architects. 16 years. 100+ projects. Pudukkottai to Chennai."* Two CTAs: [Get Free Quote] [WhatsApp Us].
+1. **Hero section** — Full-width photo of best project. Headline: _"Divinely beautiful. Built to last."_ Subhead: _"Design-build homes by NIT Trichy architects. 16 years. 100+ projects. Pudukkottai to Chennai."_ Two CTAs: [Get Free Quote] [WhatsApp Us].
 2. **Credibility strip** — "Founded 2010 · 100+ Projects · NIT Trichy Alumni · Serving 17 Cities"
 3. **Featured projects carousel** — 6 best projects, photo + name + location + sqft + type.
 4. **Our services** — 8 service cards with icons, each links to its page.
 5. **Pricing tiers** — 4-column comparison: Economy / Standard / Premium / Luxury, with "Starting at ₹X/sqft" and "See what's included →"
 6. **How we work** — 8 steps with icons (Consult → Design → Estimate → Approve → Break ground → Build → Quality check → Handover).
-7. **Why AESTA** — 4 pillars: *Qualified architects* (NIT Trichy), *Transparent pricing* (no hidden costs), *Single point of accountability* (design + build in one firm), *Sustainable materials* (low-carbon, low-maintenance).
+7. **Why AESTA** — 4 pillars: _Qualified architects_ (NIT Trichy), _Transparent pricing_ (no hidden costs), _Single point of accountability_ (design + build in one firm), _Sustainable materials_ (low-carbon, low-maintenance).
 8. **Testimonials** — 3–4 text testimonials with client name, location, project type.
 9. **Locations we serve** — Map or list of 17 cities, each a link.
 10. **Blog/resources** — 3 latest posts.
@@ -313,12 +322,12 @@ Based on 2026 Tamil Nadu market research, here are the proposed tiers. **You mus
 
 ### 5.1 Pricing structure (proposed — validate and adjust)
 
-| Tier | Price per sqft | Positioning | Target client |
-|------|----------------|-------------|---------------|
-| **Economy** | ₹1,999 – ₹2,199 | Entry-level, quality basics | First-time builders, rental property owners |
-| **Standard** | ₹2,299 – ₹2,599 | Best value, what most clients pick | Middle-class families, 3BHK homes |
-| **Premium** | ₹2,699 – ₹2,999 | Design-forward, better materials | Upper-middle, professionals, NRIs |
-| **Luxury** | ₹3,299+ | Bespoke, architect-led, top finishes | Villa, large bungalow, commercial |
+| Tier         | Price per sqft  | Positioning                          | Target client                               |
+| ------------ | --------------- | ------------------------------------ | ------------------------------------------- |
+| **Economy**  | ₹1,999 – ₹2,199 | Entry-level, quality basics          | First-time builders, rental property owners |
+| **Standard** | ₹2,299 – ₹2,599 | Best value, what most clients pick   | Middle-class families, 3BHK homes           |
+| **Premium**  | ₹2,699 – ₹2,999 | Design-forward, better materials     | Upper-middle, professionals, NRIs           |
+| **Luxury**   | ₹3,299+         | Bespoke, architect-led, top finishes | Villa, large bungalow, commercial           |
 
 **Note on competitive positioning:** Chennai competitors start at ₹1,999 (Deejos), ₹2,100 (Bluemoon), and go up to ₹3,500+ for premium. In Pudukkottai/Karaikudi, rates are typically ₹200–400 lower than Chennai due to lower labor/material costs. So actual Pudukkottai market range: **₹1,800–₹3,200**. We position at the quality-conscious end of the local market while staying accessible.
 
@@ -326,50 +335,51 @@ Based on 2026 Tamil Nadu market research, here are the proposed tiers. **You mus
 
 The pricing page will have a detailed comparison table. Here are the ~25 line items we need to spec out for each tier:
 
-| Line item | Economy | Standard | Premium | Luxury |
-|-----------|---------|----------|---------|--------|
-| **Structural** |
-| Cement brand | Ramco / Coromandel (PPC) | Dalmia / UltraTech (PPC) | UltraTech / ACC (PPC + OPC mix) | Birla / UltraTech OPC 53 |
-| Steel (TMT) | Fe 500 (local) | Fe 500 (branded — TATA Tiscon, Jindal) | Fe 500D (TATA Tiscon, Jindal) | Fe 550D (premium) |
-| Bricks (exterior walls) | Chamber brick 9" | Wire-cut brick 9" | Wire-cut brick 9" | AAC block / Wire-cut 9" |
-| Bricks (interior) | Chamber brick 4.5" | Wire-cut brick 4.5" | Wire-cut / AAC block 4.5" | AAC block |
-| Foundation | Standard RCC footing | Standard RCC footing | Strengthened RCC footing | Raft/Pile as required |
-| Waterproofing | Basic (sunken areas) | Dr. Fixit (sunken + terrace) | Dr. Fixit / Fosroc (full) | Premium membrane system |
-| **Flooring** |
-| Living/Dining | 2'×2' vitrified tile, upto ₹45/sqft | 2'×4' vitrified tile, upto ₹65/sqft | 4'×2' double-charge vitrified, upto ₹120/sqft | Quartz / Italian marble, upto ₹250/sqft |
-| Bedrooms | 2'×2' vitrified, upto ₹40/sqft | Same as living | Wooden-finish vitrified or engineered wood | Engineered wood / premium vitrified |
-| Kitchen | Anti-skid ceramic | Anti-skid vitrified | Anti-skid premium vitrified | Anti-skid premium + feature backsplash |
-| Bathroom floor | Anti-skid ceramic | Anti-skid vitrified | Anti-skid premium | Anti-skid premium + designer inserts |
-| Bathroom wall tile | Up to ceiling, ₹40/sqft | Up to ceiling, ₹55/sqft | Up to ceiling, ₹85/sqft + designer | Up to ceiling, ₹150/sqft + full feature wall |
-| **Doors & windows** |
-| Main door | Country wood frame + panel door | Burma teak frame + teak door | Malaysian teak frame + teak door | Ghana teak frame + teak door |
-| Bedroom doors | Flush doors | Flush doors + laminate | Flush + premium laminate | Panel doors (teak) |
-| Windows | UPVC 2-track sliding | UPVC 3-track sliding | UPVC premium 3-track + grills | Aluminum/UPVC premium + grills |
-| **Electrical** |
-| Wiring | ISI standard (Finolex/Polycab) | Polycab / Havells | Havells / Anchor by Panasonic | Havells / Legrand |
-| Switches | Anchor Roma | Anchor Roma / Havells | Havells / Legrand Myrius | Legrand Arteor / Schneider |
-| Light points | Standard count per room | +15% extra points | +25% extra, LED provisions | +40% extra, smart-home ready |
-| AC points | 1 per bedroom | 1 per bedroom + living | Each room + outdoor unit sockets | Each room + concealed piping |
-| **Plumbing** |
-| Pipes | ISI PVC/CPVC | Ashirwad / Astral CPVC | Ashirwad / Astral premium | Ashirwad / Astral premium |
-| Bath fittings | Parryware / Hindware basic | Parryware / Hindware mid | Jaquar / Kohler entry | Kohler / Grohe |
-| EWC/washbasin | Parryware standard | Hindware premium / Jaquar entry | Jaquar / Kohler | Kohler / Duravit |
-| Overhead tank | Sintex 1000L | Sintex 1500L | RCC 2000–3000L | RCC 3000L+ with waterproofing |
-| **Painting** |
-| Interior | Asian Tractor Emulsion | Asian Royale / Berger Silk | Asian Royale Luxury / Nerolac Impressions | Asian Royale Aspira / Luxury textured |
-| Exterior | Asian Ace Exterior | Asian Apex / Berger Weathercoat | Asian Apex Ultima | Asian Apex Ultima Protek |
-| **Kitchen** |
-| Platform | Granite slab standard | Black galaxy granite premium | Quartz / premium granite | Italian marble / quartz |
-| Sink | Standard SS | Franke / Nirali | Franke premium | Franke / Kohler |
-| Cabinets | Not included (client) | Not included (client) | Optional add-on | Optional modular included |
+| Line item                 | Economy                             | Standard                               | Premium                                       | Luxury                                       |
+| ------------------------- | ----------------------------------- | -------------------------------------- | --------------------------------------------- | -------------------------------------------- |
+| **Structural**            |
+| Cement brand              | Ramco / Coromandel (PPC)            | Dalmia / UltraTech (PPC)               | UltraTech / ACC (PPC + OPC mix)               | Birla / UltraTech OPC 53                     |
+| Steel (TMT)               | Fe 500 (local)                      | Fe 500 (branded — TATA Tiscon, Jindal) | Fe 500D (TATA Tiscon, Jindal)                 | Fe 550D (premium)                            |
+| Bricks (exterior walls)   | Chamber brick 9"                    | Wire-cut brick 9"                      | Wire-cut brick 9"                             | AAC block / Wire-cut 9"                      |
+| Bricks (interior)         | Chamber brick 4.5"                  | Wire-cut brick 4.5"                    | Wire-cut / AAC block 4.5"                     | AAC block                                    |
+| Foundation                | Standard RCC footing                | Standard RCC footing                   | Strengthened RCC footing                      | Raft/Pile as required                        |
+| Waterproofing             | Basic (sunken areas)                | Dr. Fixit (sunken + terrace)           | Dr. Fixit / Fosroc (full)                     | Premium membrane system                      |
+| **Flooring**              |
+| Living/Dining             | 2'×2' vitrified tile, upto ₹45/sqft | 2'×4' vitrified tile, upto ₹65/sqft    | 4'×2' double-charge vitrified, upto ₹120/sqft | Quartz / Italian marble, upto ₹250/sqft      |
+| Bedrooms                  | 2'×2' vitrified, upto ₹40/sqft      | Same as living                         | Wooden-finish vitrified or engineered wood    | Engineered wood / premium vitrified          |
+| Kitchen                   | Anti-skid ceramic                   | Anti-skid vitrified                    | Anti-skid premium vitrified                   | Anti-skid premium + feature backsplash       |
+| Bathroom floor            | Anti-skid ceramic                   | Anti-skid vitrified                    | Anti-skid premium                             | Anti-skid premium + designer inserts         |
+| Bathroom wall tile        | Up to ceiling, ₹40/sqft             | Up to ceiling, ₹55/sqft                | Up to ceiling, ₹85/sqft + designer            | Up to ceiling, ₹150/sqft + full feature wall |
+| **Doors & windows**       |
+| Main door                 | Country wood frame + panel door     | Burma teak frame + teak door           | Malaysian teak frame + teak door              | Ghana teak frame + teak door                 |
+| Bedroom doors             | Flush doors                         | Flush doors + laminate                 | Flush + premium laminate                      | Panel doors (teak)                           |
+| Windows                   | UPVC 2-track sliding                | UPVC 3-track sliding                   | UPVC premium 3-track + grills                 | Aluminum/UPVC premium + grills               |
+| **Electrical**            |
+| Wiring                    | ISI standard (Finolex/Polycab)      | Polycab / Havells                      | Havells / Anchor by Panasonic                 | Havells / Legrand                            |
+| Switches                  | Anchor Roma                         | Anchor Roma / Havells                  | Havells / Legrand Myrius                      | Legrand Arteor / Schneider                   |
+| Light points              | Standard count per room             | +15% extra points                      | +25% extra, LED provisions                    | +40% extra, smart-home ready                 |
+| AC points                 | 1 per bedroom                       | 1 per bedroom + living                 | Each room + outdoor unit sockets              | Each room + concealed piping                 |
+| **Plumbing**              |
+| Pipes                     | ISI PVC/CPVC                        | Ashirwad / Astral CPVC                 | Ashirwad / Astral premium                     | Ashirwad / Astral premium                    |
+| Bath fittings             | Parryware / Hindware basic          | Parryware / Hindware mid               | Jaquar / Kohler entry                         | Kohler / Grohe                               |
+| EWC/washbasin             | Parryware standard                  | Hindware premium / Jaquar entry        | Jaquar / Kohler                               | Kohler / Duravit                             |
+| Overhead tank             | Sintex 1000L                        | Sintex 1500L                           | RCC 2000–3000L                                | RCC 3000L+ with waterproofing                |
+| **Painting**              |
+| Interior                  | Asian Tractor Emulsion              | Asian Royale / Berger Silk             | Asian Royale Luxury / Nerolac Impressions     | Asian Royale Aspira / Luxury textured        |
+| Exterior                  | Asian Ace Exterior                  | Asian Apex / Berger Weathercoat        | Asian Apex Ultima                             | Asian Apex Ultima Protek                     |
+| **Kitchen**               |
+| Platform                  | Granite slab standard               | Black galaxy granite premium           | Quartz / premium granite                      | Italian marble / quartz                      |
+| Sink                      | Standard SS                         | Franke / Nirali                        | Franke premium                                | Franke / Kohler                              |
+| Cabinets                  | Not included (client)               | Not included (client)                  | Optional add-on                               | Optional modular included                    |
 | **Services & guarantees** |
-| Structural design | In-house | In-house + detailed | Structural engineer-approved | Senior structural engineer + soil test |
-| Architect involvement | Plan + basic elevation | 2D + 3D elevation | Full design + site visits | Dedicated architect throughout |
-| Site visits | Weekly | Twice weekly | 3× weekly | Daily supervision |
-| Project management app | ❌ | ✅ Photo updates | ✅ Photo + progress tracking | ✅ Full app + timeline + approvals |
-| Warranty | 1 year workmanship | 3 years workmanship | 5 years workmanship | 10 years structural |
+| Structural design         | In-house                            | In-house + detailed                    | Structural engineer-approved                  | Senior structural engineer + soil test       |
+| Architect involvement     | Plan + basic elevation              | 2D + 3D elevation                      | Full design + site visits                     | Dedicated architect throughout               |
+| Site visits               | Weekly                              | Twice weekly                           | 3× weekly                                     | Daily supervision                            |
+| Project management app    | ❌                                  | ✅ Photo updates                       | ✅ Photo + progress tracking                  | ✅ Full app + timeline + approvals           |
+| Warranty                  | 1 year workmanship                  | 3 years workmanship                    | 5 years workmanship                           | 10 years structural                          |
 
 **Important disclaimers to add to every pricing page:**
+
 - Rates are for built-up area (not carpet area, not plot area).
 - Rates exclude: land cost, DTCP/panchayat approvals, compound wall, sump/borewell, interior furniture, landscaping, solar/inverter.
 - Final quote depends on site conditions, design complexity, and material choices.
@@ -407,16 +417,16 @@ Eight service pages for v1. You asked me to help define these — here's what ma
 
 **Pricing/charging model — to be finalized:**
 
-| Service | Typical charging method |
-|---------|------------------------|
-| Residential construction | Per sqft (tier-based) |
-| Commercial construction | Per sqft (usually +10% over residential standard) |
-| Architectural design only | ₹15–40/sqft depending on complexity |
-| Interior design | Lump sum per room or % of furnishing cost (10–15%) |
-| Renovation | Per sqft (usually 60–80% of new construction rate) |
-| Project management only | 5–10% of total construction cost |
-| 3D visualization | ₹5,000–₹25,000 per project depending on scope |
-| Turnkey | Per sqft (tier-based) + 8–12% PM fee |
+| Service                   | Typical charging method                            |
+| ------------------------- | -------------------------------------------------- |
+| Residential construction  | Per sqft (tier-based)                              |
+| Commercial construction   | Per sqft (usually +10% over residential standard)  |
+| Architectural design only | ₹15–40/sqft depending on complexity                |
+| Interior design           | Lump sum per room or % of furnishing cost (10–15%) |
+| Renovation                | Per sqft (usually 60–80% of new construction rate) |
+| Project management only   | 5–10% of total construction cost                   |
+| 3D visualization          | ₹5,000–₹25,000 per project depending on scope      |
+| Turnkey                   | Per sqft (tier-based) + 8–12% PM fee               |
 
 **You need to validate these rates against your actual cost structure.** This is a starting framework.
 
@@ -567,6 +577,7 @@ Accessed at `/admin`, protected by Supabase Auth (phone OTP since he uses mobile
 6. **Site stats** — Update the homepage counter numbers (projects completed, years, cities) when needed
 
 **Design principles for admin panel:**
+
 - Large touch targets (he'll use mobile)
 - Minimal text, clear icons
 - Tamil labels alongside English
@@ -682,17 +693,20 @@ Given your other commitments, I've built this as parallel tracks. Some can run s
 ### Week 1 — Foundation
 
 **Track A (you):**
+
 - Purchase aesta.co.in domain (~₹800 for 2 years on BigRock/GoDaddy/Namecheap)
 - Start collecting project details + photos (Section 8.1, 8.2)
 - WhatsApp past clients for testimonials
 - Validate pricing tiers — tell me what to adjust
 
 **Track B (design, I help):**
+
 - Finalize logo direction + design in Figma
 - Lock brand colors, typography
 - Design homepage + service page + pricing page mockups in Figma
 
 **Track C (technical setup):**
+
 - Create `aesta` repo on GitHub
 - Initialize Next.js 14 + TypeScript + Tailwind
 - Create Supabase project, run schema migrations
@@ -774,14 +788,14 @@ Given your other commitments, I've built this as parallel tracks. Some can run s
 
 ## 11. Risks & Mitigations
 
-| Risk | Mitigation |
-|------|-----------|
-| Content collection delays (photos, project details) | Start now; we can launch with 3 projects and add more later |
-| Pricing publication makes competitors undercut | Our pricing is bundled with quality spec — undercutters won't match the spec, clients will see through it |
-| Your bandwidth (Neram, APPC, portfolio all competing) | Admin panel makes supervisor + future VA autonomous; only you do strategy + high-leverage content |
-| Tamil content quality | We'll draft in English, translate carefully, have a native speaker review (you, Tamil, Madhu — Madhu's M.A. English Lit could help here) |
-| Free Vercel/Supabase tier hits limits | You've already optimized Neram for this; AESTA traffic will be low-medium for 6+ months |
-| Lead response time (clients expect fast) | WhatsApp alert to you + Tamil on every lead; target <1hr response during work hours |
+| Risk                                                  | Mitigation                                                                                                                               |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Content collection delays (photos, project details)   | Start now; we can launch with 3 projects and add more later                                                                              |
+| Pricing publication makes competitors undercut        | Our pricing is bundled with quality spec — undercutters won't match the spec, clients will see through it                                |
+| Your bandwidth (Neram, APPC, portfolio all competing) | Admin panel makes supervisor + future VA autonomous; only you do strategy + high-leverage content                                        |
+| Tamil content quality                                 | We'll draft in English, translate carefully, have a native speaker review (you, Tamil, Madhu — Madhu's M.A. English Lit could help here) |
+| Free Vercel/Supabase tier hits limits                 | You've already optimized Neram for this; AESTA traffic will be low-medium for 6+ months                                                  |
+| Lead response time (clients expect fast)              | WhatsApp alert to you + Tamil on every lead; target <1hr response during work hours                                                      |
 
 ---
 
@@ -815,4 +829,4 @@ Once you validate this plan (especially Section 12 open decisions):
 
 ---
 
-*End of plan. Version 1.0. Ready for review.*
+_End of plan. Version 1.0. Ready for review._

@@ -32,9 +32,10 @@
 
 **What we build:**
 
-1. **Answer-first page structure.** Every content page opens with: `<h1>Question</h1>` → one-sentence direct answer in bold → supporting detail. LLMs extract the bold sentence as the citation; humans scan it as the summary. Example: *"What does a 1500 sqft G+1 house cost in Pudukkottai?"* → **"In 2026, a 1500 sqft G+1 house in Pudukkottai costs ₹31–48 lakh depending on specification tier (Economy to Luxury)."** → full cost breakdown table.
+1. **Answer-first page structure.** Every content page opens with: `<h1>Question</h1>` → one-sentence direct answer in bold → supporting detail. LLMs extract the bold sentence as the citation; humans scan it as the summary. Example: _"What does a 1500 sqft G+1 house cost in Pudukkottai?"_ → **"In 2026, a 1500 sqft G+1 house in Pudukkottai costs ₹31–48 lakh depending on specification tier (Economy to Luxury)."** → full cost breakdown table.
 
 2. **Schema layer — full, not token.** Every page ships with at least one of:
+
    - `LocalBusiness` + `Service` (all service pages)
    - `FAQPage` (every page with 3+ Q&As — homepage, services, pricing, city pages, blog)
    - `HowTo` (process pages: "how to plan construction", "DTCP approval steps")
@@ -46,26 +47,27 @@
    - `Organization` with `founder`, `numberOfEmployees`, `award` (homepage, about)
 
 3. **Entity pages** — Wikipedia-style definitive answers. Target 15–20 total in year 1:
-   - *What is DTCP approval in Tamil Nadu?*
-   - *What is Chettinad architecture?*
-   - *What is a G+1 house?*
-   - *Construction cost per sqft in Tamil Nadu 2026*
-   - *Vastu-compliant house design in Tamil Nadu*
-   - *Types of house foundations used in Pudukkottai soil*
-   - *Turnkey vs. contractor-only construction*
-   - *Soil testing for home construction in Tamil Nadu*
-   - *Home construction loan process in Tamil Nadu*
-   - *Sustainable construction materials in Tamil Nadu*
-   - *Compound wall cost and design in Tamil Nadu*
-   - *Borewell and sump planning for new homes*
-   - *Difference between RCC and AAC block construction*
-   - *Bathroom waterproofing methods for TN climate*
-   - *Choosing flooring for a Tamil Nadu home*
+
+   - _What is DTCP approval in Tamil Nadu?_
+   - _What is Chettinad architecture?_
+   - _What is a G+1 house?_
+   - _Construction cost per sqft in Tamil Nadu 2026_
+   - _Vastu-compliant house design in Tamil Nadu_
+   - _Types of house foundations used in Pudukkottai soil_
+   - _Turnkey vs. contractor-only construction_
+   - _Soil testing for home construction in Tamil Nadu_
+   - _Home construction loan process in Tamil Nadu_
+   - _Sustainable construction materials in Tamil Nadu_
+   - _Compound wall cost and design in Tamil Nadu_
+   - _Borewell and sump planning for new homes_
+   - _Difference between RCC and AAC block construction_
+   - _Bathroom waterproofing methods for TN climate_
+   - _Choosing flooring for a Tamil Nadu home_
    - 3–5 additional based on Google Search Console data post-launch
-   
+
    These become pages LLMs cite because nobody else in this market writes them properly.
 
-4. **`llms.txt` and AI-crawler allowlist.** Explicit `llms.txt` at root listing canonical content for AI ingestion. Robots rules that *welcome* GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Bingbot, Applebot-Extended, CCBot. Most sites (and all directories) block or ignore AI crawlers; we actively invite them.
+4. **`llms.txt` and AI-crawler allowlist.** Explicit `llms.txt` at root listing canonical content for AI ingestion. Robots rules that _welcome_ GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Bingbot, Applebot-Extended, CCBot. Most sites (and all directories) block or ignore AI crawlers; we actively invite them.
 
 5. **Answer-engine-friendly formatting:**
    - Short paragraphs (2–3 sentences)
@@ -76,6 +78,7 @@
    - Date every page (`datePublished`, `dateModified` in schema and visible on page)
 
 **Build implications:**
+
 - Add MDX-based entity pages to `content/entities/` directory
 - Build shared `<FAQSection>` component that auto-generates `FAQPage` JSON-LD from props
 - Build shared `<ProcessSteps>` component that auto-generates `HowTo` schema
@@ -89,6 +92,7 @@
 **What we build:**
 
 1. **GBP — treated as a product, not a checkbox.**
+
    - Weekly photo posts (completed project milestones)
    - Weekly text posts with UTM-tagged CTAs
    - Q&A section seeded with 15–20 real questions answered by AESTA before customers ask (GBP allows business to post and answer its own Q&As)
@@ -98,6 +102,7 @@
    - Secondary GBP for Karaikudi office if a physical address exists there (never fake an address — Google penalizes hard)
 
 2. **Local citation network — 40 citations in 60 days.** NAP-consistent listings:
+
    - Indian directories: JustDial, Sulekha, IndiaMART, TradeIndia, Getzinfoz, AskMe, Yalwa
    - Construction-specific: Houzz India, 99acres Professionals, MagicBricks Agents & Builders, NoBroker Pro, UrbanClap/UrbanPro
    - Maps: Google Maps, Bing Places, Apple Maps Connect, Here WeGo, OpenStreetMap
@@ -115,6 +120,7 @@
    - Local construction regulations (TNCDBR rules applicable, town panchayat vs. municipality)
 
 **Build implications:**
+
 - `cities` table in Supabase expanded with: `geo_lat`, `geo_lng`, `soil_type`, `governing_authority`, `climate_notes`, `nearby_suppliers[]`
 - `<LocationHero>` component renders a static geo-pinned map (Mapbox static tile or similar free tier)
 - Centralized `NAP` constant (TypeScript `const`) — single source of truth consumed by schema, footer, contact page, GBP export
@@ -127,24 +133,26 @@
 
 1. **Review target — ~120 reviews in 12 months across 5+ platforms:**
 
-   | Platform | Target Month 6 | Target Month 12 | Purpose |
-   |---|---|---|---|
-   | Google Business Profile | 25 | 50 | Ranking factor, AI Overviews cite GBP |
-   | Facebook | 10 | 20 | Meta's graph, FB search |
-   | JustDial | 10 | 20 | Ranks listing *within* JD |
-   | Sulekha | 5 | 10 | Same reason |
-   | Houzz India | 5 | 10 | Design-focused, high-intent audience |
-   | IndiaMART | 3 | 5 | B2B commercial surface |
-   | Trustpilot | 2 | 5 | Increasingly cited by LLMs |
-   | **Total** | **60** | **~120** | |
+   | Platform                | Target Month 6 | Target Month 12 | Purpose                               |
+   | ----------------------- | -------------- | --------------- | ------------------------------------- |
+   | Google Business Profile | 25             | 50              | Ranking factor, AI Overviews cite GBP |
+   | Facebook                | 10             | 20              | Meta's graph, FB search               |
+   | JustDial                | 10             | 20              | Ranks listing _within_ JD             |
+   | Sulekha                 | 5              | 10              | Same reason                           |
+   | Houzz India             | 5              | 10              | Design-focused, high-intent audience  |
+   | IndiaMART               | 3              | 5               | B2B commercial surface                |
+   | Trustpilot              | 2              | 5               | Increasingly cited by LLMs            |
+   | **Total**               | **60**         | **~120**        |                                       |
 
 2. **Review collection — systematized:**
+
    - Post-handover automation: 7 days after project status = "completed", Supabase trigger → WhatsApp message to client with pre-filled links for GBP + Facebook + JustDial (one tap each)
    - Incentive: ₹500 Amazon voucher for clients completing 3+ platforms — verify platform ToS permit this before launching
    - Tamil + English review templates offered to clients who prefer help drafting
    - Supabase `review_outreach` table tracks per-client status: invited / posted-GBP / posted-FB / etc.
 
 3. **On-site review display with schema:**
+
    - `/reviews` page aggregating all reviews with source platform badges
    - Homepage carousel pulls from aggregated pool
    - Each project page shows reviews tagged to that project
@@ -157,6 +165,7 @@
 5. **Video testimonial subset** — 10 of the 100+ target as 45–90 second Tamil video testimonials, embedded with `VideoObject` + `Review` schema.
 
 **Build implications:**
+
 - `reviews` + `review_outreach` tables in Supabase (schema in §6)
 - `<ReviewCard>` component with platform-source badge
 - `/reviews` aggregator page with filter by platform and rating
@@ -169,6 +178,7 @@
 **Why directories can't match it:** Directories scale by adding empty-shell listings. AESTA scales by adding specific, useful, unique 800–1500 word pages that convert.
 
 **Dimensions (multiplied carefully to avoid doorway-page trap):**
+
 - **Locations:** 17 cities
 - **Services:** 8
 - **Modifiers:** tier (Economy/Standard/Premium/Luxury), size (1000/1200/1500/2000 sqft), floors (G/G+1/G+2), style (Chettinad/modern/contemporary)
@@ -178,20 +188,24 @@ Unrestricted cross-product is a trap (thousands of thin pages → Google penalty
 **Phased programmatic plan (sized honestly to 1 programmatic page/week cadence):**
 
 **Phase 1 — Launch (already in master plan):** 25 pages
+
 - 17 city pages (1 × city)
 - 8 service pages (1 × service)
 
 **Phase 2 — Months 2–4 (~12 new programmatic pages, cumulative ~37):**
+
 - Service × top-3-cities (Pudukkottai + Karaikudi + Aranthangi): 8 × 3 − 3 overlap with launch city pages = ~8 new pages
 - Size-cost pages: 4 pages (1000 / 1200 / 1500 / 2000 sqft)
 
 **Phase 3 — Months 5–9 (~25 new programmatic pages, cumulative ~62):**
+
 - Service × secondary cities: ship ~15 of the highest-volume combinations (gate by Google Search Console impression data)
 - Size-cost pages: 2 more (800, 3000+ sqft)
 - Style × city: 5 style-specific ("Chettinad architecture in Karaikudi", "modern duplex Pudukkottai")
 - Tier × construction deep spec pages: 3 (Economy, Premium, Luxury — Standard covered by base pricing page)
 
 **Phase 4 — Months 10–12 (~15 new programmatic pages, cumulative ~77):**
+
 - Cost-comparison pages: 5 ("G+1 vs G+2 cost Tamil Nadu")
 - Additional service × secondary-city pages based on Phase 3 performance data: 10
 
@@ -212,6 +226,7 @@ If VA or writer is hired at day 90, Phase 3 + Phase 4 can accelerate by ~30%. Bu
 - **Content governance:** Pages drafted by Claude/AI using a rigid template, then edited by a human (Hari, VA, or Tamil). Zero pure-AI pages published. Every page has a human author byline for E-E-A-T.
 
 **Build implications:**
+
 - `landing_pages` table in Supabase (schema in §6): `slug`, `city_slug`, `service_slug`, `tier`, `modifiers`, `hero_image_id`, `unique_intro_md`, `unique_example_md`, `author_id`, `published`
 - Next.js dynamic routes: `/[city]/[service]` and `/services/[service]/[modifier]`
 - Programmatic sitemap generation with sitemap-index split (50K URLs/file limit — not a near-term concern but designed right)
@@ -223,22 +238,23 @@ If VA or writer is hired at day 90, Phase 3 + Phase 4 can accelerate by ~30%. Bu
 
 **Backlink acquisition — 30 quality backlinks in 6 months:**
 
-| Source type | Target | Tactic |
-|---|---|---|
-| NIT Trichy alumni network | 5 | Alumni directory, alumni magazine feature, department project showcase |
-| Architecture portals (IIA, COA India, ArchiDiaries, Architizer, Rethinking The Future) | 5 | Submit 2–3 best projects with photos + case study |
-| TN local news (The Hindu TN, Dinamalar, Dinakaran, local weeklies) | 5 | Pitch: "NIT-educated architects return to Pudukkottai, build 100 sustainable homes" |
-| Sustainable construction blogs (TERI, GreenTech, BuildingGreen, Think Sustainability) | 3 | Guest post on a specific sustainable build |
-| Construction industry pubs (Construction World, CW Interiors, Buildofy) | 3 | Paid or earned feature of a premium project |
-| Neram ecosystem cross-links | 4 | From Neram Classes + other Neram properties |
-| Local business cross-links | 3 | Local suppliers (cement dealer, tile showroom) — reciprocal |
-| University/academic | 2 | TN architecture colleges using AESTA projects as student case studies |
+| Source type                                                                            | Target | Tactic                                                                              |
+| -------------------------------------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------- |
+| NIT Trichy alumni network                                                              | 5      | Alumni directory, alumni magazine feature, department project showcase              |
+| Architecture portals (IIA, COA India, ArchiDiaries, Architizer, Rethinking The Future) | 5      | Submit 2–3 best projects with photos + case study                                   |
+| TN local news (The Hindu TN, Dinamalar, Dinakaran, local weeklies)                     | 5      | Pitch: "NIT-educated architects return to Pudukkottai, build 100 sustainable homes" |
+| Sustainable construction blogs (TERI, GreenTech, BuildingGreen, Think Sustainability)  | 3      | Guest post on a specific sustainable build                                          |
+| Construction industry pubs (Construction World, CW Interiors, Buildofy)                | 3      | Paid or earned feature of a premium project                                         |
+| Neram ecosystem cross-links                                                            | 4      | From Neram Classes + other Neram properties                                         |
+| Local business cross-links                                                             | 3      | Local suppliers (cement dealer, tile showroom) — reciprocal                         |
+| University/academic                                                                    | 2      | TN architecture colleges using AESTA projects as student case studies               |
 
 **Reddit seeding** — r/india, r/bangalore, r/tamilnadu, r/IndianRealEstate, r/personalfinanceindia. Increasingly cited by Perplexity and Google AI Overviews. Answer genuine construction questions, build "verified architect" posture, no link-drops. Link only when asked or when a link adds real value. Long game: an account with 500+ karma answering construction questions becomes a reference LLMs cite.
 
 **Quora seeding — 30 high-quality answers in 6 months.** Quora ranks in Google SERPs for long-tail construction queries; answers get cited in AI Overviews. Write 400–600 word answers with byline (B.Arch NIT Trichy, founder AESTA). 1–2 project photos per answer. Soft CTA at end.
 
 **YouTube — 2 videos/month, Tamil-forward:**
+
 - Project walkthroughs (Tamil narration, English subtitles) — 1/month
 - Educational shorts (60-second explainers: DTCP approval, steel quantity, etc.) — 1/month
 - Tamil title + description, tags include city names, `VideoObject` schema when embedded on site
@@ -249,7 +265,8 @@ If VA or writer is hired at day 90, Phase 3 + Phase 4 can accelerate by ~30%. Bu
 **HARO / SourceBottle / ProfNet India / Qwoted.** NIT-qualified working architect is a valuable source profile. Subscribe, respond to relevant construction/property/design queries, earn mentions in national press.
 
 **Build implications:**
-- Resource/blog posts structured as *linkable* assets (data tables, original research, quotable stats). Example: "Construction cost trend Tamil Nadu 2020–2026" with original dataset.
+
+- Resource/blog posts structured as _linkable_ assets (data tables, original research, quotable stats). Example: "Construction cost trend Tamil Nadu 2020–2026" with original dataset.
 - Author pages (`/about/team/[name]`) with full credentials — drives E-E-A-T
 - Press kit page (`/press`) with hi-res logos, founder bio, story angles, project photos, contact
 
@@ -258,6 +275,7 @@ If VA or writer is hired at day 90, Phase 3 + Phase 4 can accelerate by ~30%. Bu
 **Why directories can't match it:** JustDial has some Tamil, Sulekha has minimal, nobody does bilingual at depth. More importantly: ChatGPT, Gemini, Perplexity currently answer Tamil construction queries poorly — no good source material. AESTA becomes that source.
 
 **Tamil coverage scope (expanded beyond master plan):**
+
 - All 8 service pages (Tamil versions)
 - Top 5 city pages (Pudukkottai, Karaikudi, Aranthangi, Trichy, Thanjavur)
 - All 15–20 entity pages (Pillar 1)
@@ -267,6 +285,7 @@ If VA or writer is hired at day 90, Phase 3 + Phase 4 can accelerate by ~30%. Bu
 - Tamil FAQ pages
 
 **Tamil SEO done right:**
+
 - Written by native speaker (Madhu, or TN freelance writer at ₹1.50–₹3/word market rate)
 - Tamil meta titles, meta descriptions, H1s — not machine-translated
 - URL strategy: English slug, Tamil content, Tamil H1 (avoid URL encoding issues with transliterated paths)
@@ -285,6 +304,7 @@ If VA or writer is hired at day 90, Phase 3 + Phase 4 can accelerate by ~30%. Bu
 **Tamil on AI answer engines** — 12–18 month moat window. Publishing 40–50 Tamil pages with schema positions AESTA as near-default citation before competitors catch on.
 
 **Build implications:**
+
 - `locale` field throughout `projects`, `blog_posts`, `landing_pages`, `entities` tables (parallel rows per locale)
 - `<LanguageSwitcher>` component with `hreflang` wiring
 - `next-intl` configured: `en-IN` default, `ta-IN` alternate, URL strategy `/ta/*`
@@ -295,9 +315,10 @@ If VA or writer is hired at day 90, Phase 3 + Phase 4 can accelerate by ~30%. Bu
 
 ## 3. Directory counter-play
 
-**Reframe:** Directories are a distribution channel that already has traffic. Job: be the winning listing *inside* each directory.
+**Reframe:** Directories are a distribution channel that already has traffic. Job: be the winning listing _inside_ each directory.
 
 **JustDial (highest priority — ~60% of TN construction directory traffic):**
+
 - Claim free listing immediately, fill every field: 17 cities as service areas, 8 services, hours, 50+ photos, owner video intro
 - Upload project photos weekly from admin panel (JD rewards activity)
 - **Paid "JD Verified" (₹10–20K/year) — evaluate by ROI, not ideology.** If it drives 5 leads/month at ₹3,000 CPL, it beats Google Ads. Test for 3 months, then decide.
@@ -314,9 +335,10 @@ If VA or writer is hired at day 90, Phase 3 + Phase 4 can accelerate by ~30%. Bu
 **MagicBricks / 99acres Professionals:** Claim builder profiles; minimal effort for residual traffic.
 
 **The deeper play — content that makes directories redundant.** Create `/resources/` posts designed to outrank the directory listing for informational queries:
-- *"Best construction companies in Pudukkottai — 2026 comparison"* (include competitors honestly; AESTA comes out well)
-- *"How to choose a contractor in Tamil Nadu — 2026 guide"*
-- *"JustDial vs. direct builder — which is better for house construction?"*
+
+- _"Best construction companies in Pudukkottai — 2026 comparison"_ (include competitors honestly; AESTA comes out well)
+- _"How to choose a contractor in Tamil Nadu — 2026 guide"_
+- _"JustDial vs. direct builder — which is better for house construction?"_
 
 These rank because directories can't self-compare objectively. Users searching "best builder in X" want curation — AESTA provides it, honestly, with AESTA featured.
 
@@ -327,6 +349,7 @@ These rank because directories can't self-compare objectively. Users searching "
 Assumes moderate capacity (option 3).
 
 **Days 1–14 — Foundation:**
+
 - NAP constants finalized; all schema consumes them
 - `llms.txt` + robots.txt configured (AI crawlers allowed)
 - GBP created and verified (verification takes 5–14 days — start day 1)
@@ -338,6 +361,7 @@ Assumes moderate capacity (option 3).
 - Post-handover WhatsApp automation wired
 
 **Days 15–30 — Credibility burst:**
+
 - JD, Sulekha, IndiaMART, Houzz, MagicBricks, 99acres listings claimed + optimized
 - 15 additional local citations submitted
 - 20 GBP reviews from past clients via WhatsApp outreach
@@ -347,6 +371,7 @@ Assumes moderate capacity (option 3).
 - First YouTube video (flagship project walkthrough, Tamil + English subs)
 
 **Days 31–60 — Content engine online (4 weeks × 2 content pieces/week = 8 pieces):**
+
 - Phase 2 programmatic: 4 pages (1/week) — service × top-3-cities
 - Blog posts: 3 posts (educational, entity, cost-focused)
 - Entity pages: 1 published (DTCP approval, highest search-volume topic first)
@@ -357,6 +382,7 @@ Assumes moderate capacity (option 3).
 - GBP Q&A seeded with 15 self-answered questions
 
 **Days 61–90 — Compounding (4 weeks × 2 pieces/week = 8 pieces):**
+
 - Phase 2 programmatic: 4 more pages (cumulative ~33 pages published site-wide)
 - Blog posts: 3 more (cumulative 6)
 - Entity pages: 1 more (cumulative 2 — Chettinad architecture or G+1 house)
@@ -372,6 +398,7 @@ Assumes moderate capacity (option 3).
 ## 5. KPIs and measurement
 
 **Weekly dashboard:**
+
 - Organic sessions (GA4)
 - Keyword rankings for 20 tracked queries (GSC + Ubersuggest/Ahrefs Webmaster)
 - New reviews count
@@ -380,8 +407,9 @@ Assumes moderate capacity (option 3).
 - Lead response time (median)
 
 **Monthly:**
+
 - Referring-domain count (Ahrefs Webmaster Tools, free tier)
-- AI citation audit — manually test 10 tracked queries in ChatGPT, Perplexity, Google AI Overviews: *is AESTA cited?*
+- AI citation audit — manually test 10 tracked queries in ChatGPT, Perplexity, Google AI Overviews: _is AESTA cited?_
 - Core Web Vitals (CrUX data, Google Search Console report)
 - Directory listing performance (JD dashboard impressions/calls; Sulekha same)
 - Conversion rate by source
@@ -389,19 +417,20 @@ Assumes moderate capacity (option 3).
 
 **Targets by milestone:**
 
-| Metric | Month 3 | Month 6 | Month 12 |
-|---|---|---|---|
-| Pages indexed (all types) | 45 | 90 | 160–170 |
-| Monthly organic sessions | 500 | 2,000 | 8,000 |
-| Ranking page 1 for... | 10 long-tail | 25 (incl. 3 primary) | 50 (incl. 8 primary) |
-| Total reviews (all platforms) | 30 | 60 | 120 |
-| Qualified leads/month from organic | 10 | 30 | 50+ |
-| Backlinks (referring domains) | 10 | 25 | 50+ |
-| AI citations observed (of 10 test queries) | 2 | 5 | 8 |
-| YouTube subscribers | 50 | 300 | 1,500 |
-| Signed projects attributable to website | 1–2 cumulative | 3–5 cumulative | 10+ cumulative |
+| Metric                                     | Month 3        | Month 6              | Month 12             |
+| ------------------------------------------ | -------------- | -------------------- | -------------------- |
+| Pages indexed (all types)                  | 45             | 90                   | 160–170              |
+| Monthly organic sessions                   | 500            | 2,000                | 8,000                |
+| Ranking page 1 for...                      | 10 long-tail   | 25 (incl. 3 primary) | 50 (incl. 8 primary) |
+| Total reviews (all platforms)              | 30             | 60                   | 120                  |
+| Qualified leads/month from organic         | 10             | 30                   | 50+                  |
+| Backlinks (referring domains)              | 10             | 25                   | 50+                  |
+| AI citations observed (of 10 test queries) | 2              | 5                    | 8                    |
+| YouTube subscribers                        | 50             | 300                  | 1,500                |
+| Signed projects attributable to website    | 1–2 cumulative | 3–5 cumulative       | 10+ cumulative       |
 
 **Kill/scale criteria at Day 90:**
+
 - Month 3 leads/month < 5 → **something's broken**; audit technical SEO + conversion funnel before adding pages
 - Month 3 leads/month 5–10 → **on track**; continue Phase 2 programmatic
 - Month 3 leads/month > 15 → **above plan**; accelerate Phase 3, increase content budget, test paid local ads
@@ -554,6 +583,7 @@ alter table cities add column climate_notes_ta text;
 ## 7. Build implications (delta from master plan §7)
 
 **New / expanded sitemap nodes:**
+
 - `/resources/entities/[slug]` — 15–20 entity pages
 - `/reviews` — aggregated reviews with platform filters
 - `/press` — press kit for journalists
@@ -563,17 +593,20 @@ alter table cities add column climate_notes_ta text;
 - `/ta/*` — expanded Tamil coverage (top 5 cities + all services + all entity pages + 6 projects)
 
 **Build-time artifacts:**
+
 - `llms.txt` — generated from a ranked list of canonical URLs
 - `sitemap-index.xml` + per-section sitemaps (pages, blog, entities, projects, locations, landing, ta)
 - `robots.txt` — AI crawlers allowed explicitly
 
 **CI additions:**
+
 - Schema validation: run `schema-dts` typecheck + Schema.org structured-data testing against key page types
 - Lighthouse CI on homepage + pricing + one city page + one service page — fail build if any score drops > 5 points
 - Broken-link check on all internal links (prevents programmatic page drift)
 - `hreflang` validation (every `ta-IN` page has a matching `en-IN` and vice versa)
 
 **Admin panel additions (delta from master plan §7.3):**
+
 - **Reviews management** — list reviews by platform and status; add JD/Sulekha reviews manually; edit response text; mark featured; upload video testimonial
 - **Review outreach inbox** — list past clients not yet invited; one-tap WhatsApp invite with pre-filled message; track status
 - **Landing pages CRUD** — template-driven page creation with required unique-intro and unique-example fields; AI-assisted draft with human-edit-required gate before publish; published/draft toggle
@@ -583,6 +616,7 @@ alter table cities add column climate_notes_ta text;
 - **AI-citation checklist** — monthly form to log results of 10 test queries across ChatGPT / Perplexity / Google AI Overviews (manual, but persisted for trend tracking)
 
 **Component additions:**
+
 - `<FAQSection>` — renders Q&A pairs and emits `FAQPage` JSON-LD
 - `<ProcessSteps>` — renders numbered steps and emits `HowTo` JSON-LD
 - `<AggregateRating>` — renders stars + count and emits `AggregateRating` JSON-LD (only when source-verified reviews ≥ 3)
@@ -637,4 +671,4 @@ Explicit edits to the master plan (not full re-draft):
 
 ---
 
-*End of design. Version 1.0. Ready for user review and transition to implementation plan.*
+_End of design. Version 1.0. Ready for user review and transition to implementation plan._
