@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "siteName": "AESTA — Architects & Builders",
+    "tagline": "Divinely beautiful. Built to last."
+  },
+  "nav": {
+    "services": "Services",
+    "projects": "Projects",
+    "pricing": "Pricing",
+    "locations": "Locations",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "cta": {
+    "getQuote": "Get Free Quote",
+    "whatsapp": "WhatsApp Us",
+    "callNow": "Call Now"
+  }
+}
