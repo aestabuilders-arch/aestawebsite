@@ -4,6 +4,8 @@ import { getMessages, getTranslations, unstable_setRequestLocale } from 'next-in
 import { notFound } from 'next/navigation';
 import { Inter, Fraunces, Noto_Sans_Tamil, Hind_Madurai } from 'next/font/google';
 import { isValidLocale, type Locale, locales } from '@/i18n/config';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { buildOrganization } from '@/lib/schema/organization';
 import '../globals.css';
 
 const inter = Inter({
@@ -64,6 +66,7 @@ export default async function RootLayout({
       className={`${inter.variable} ${fraunces.variable} ${notoTamil.variable} ${hindMadurai.variable}`}
     >
       <body className="bg-limestone-50 text-charcoal-900 antialiased">
+        <JsonLd data={buildOrganization()} />
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
       </body>
     </html>
