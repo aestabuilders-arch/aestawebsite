@@ -15,5 +15,8 @@
     "getQuote": "Get Free Quote",
     "whatsapp": "WhatsApp Us",
     "callNow": "Call Now"
+  },
+  "layout": {
+    "skipToContent": "Skip to main content"
   }
 }
