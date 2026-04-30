@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { cookies } from 'next/headers';
 import type { Metadata } from 'next';
 import { unstable_setRequestLocale } from 'next-intl/server';

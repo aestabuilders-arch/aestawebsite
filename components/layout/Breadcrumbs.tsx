@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import type { WithContext, BreadcrumbList } from 'schema-dts';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { Link } from '@/i18n/navigation';
 import { NAP } from '@/lib/constants/nap';
 
 export type BreadcrumbItem = {

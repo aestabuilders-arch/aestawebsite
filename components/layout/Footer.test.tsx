@@ -31,10 +31,6 @@ vi.mock('next-intl', () => ({
   useLocale: () => 'en-IN',
 }));
 
-vi.mock('next/navigation', () => ({
-  usePathname: () => '/',
-}));
-
 import { Footer } from './Footer';
 
 describe('Footer', () => {

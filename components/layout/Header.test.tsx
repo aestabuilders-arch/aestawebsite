@@ -20,10 +20,6 @@ vi.mock('next-intl', () => ({
   useLocale: () => 'en-IN',
 }));
 
-vi.mock('next/navigation', () => ({
-  usePathname: () => '/',
-}));
-
 import { Header } from './Header';
 
 describe('Header', () => {

@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import { PRIMARY_NAV } from '@/lib/nav/primary-nav';
 import { LanguageSwitcher } from '@/components/seo/LanguageSwitcher';
 import { MobileMenu } from './MobileMenu';
