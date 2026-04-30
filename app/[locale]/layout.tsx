@@ -6,6 +6,9 @@ import { Inter, Fraunces, Noto_Sans_Tamil, Hind_Madurai } from 'next/font/google
 import { isValidLocale, type Locale, locales } from '@/i18n/config';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { buildOrganization } from '@/lib/schema/organization';
+import { SkipToContent } from '@/components/layout/SkipToContent';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import '../globals.css';
 
 const inter = Inter({
@@ -67,7 +70,12 @@ export default async function RootLayout({
     >
       <body className="bg-limestone-50 text-charcoal-900 antialiased">
         <JsonLd data={buildOrganization()} />
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
+          <SkipToContent />
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

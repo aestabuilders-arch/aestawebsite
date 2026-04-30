@@ -36,5 +36,14 @@
     "blog": "Blog",
     "press": "Press",
     "reviews": "Reviews"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "subtitle": "This page is on our build list — coming soon.",
+    "back": "Back to home",
+    "popular": "Popular pages",
+    "services": "Our services",
+    "pricing": "Transparent pricing",
+    "contact": "Contact us"
   }
 }
