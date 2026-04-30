@@ -17,6 +17,8 @@
     "callNow": "Call Now"
   },
   "layout": {
-    "skipToContent": "Skip to main content"
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   }
 }
