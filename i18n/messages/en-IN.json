@@ -20,5 +20,21 @@
     "skipToContent": "Skip to main content",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
+  },
+  "footer": {
+    "services": "Services",
+    "locations": "Locations",
+    "resources": "Resources",
+    "contact": "Contact",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "rights": "All rights reserved.",
+    "blog": "Blog",
+    "press": "Press",
+    "reviews": "Reviews"
   }
 }
