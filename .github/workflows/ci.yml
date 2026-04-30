@@ -47,7 +47,7 @@ jobs:
           NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ci-placeholder
           SUPABASE_SERVICE_ROLE_KEY: ci-placeholder
           NEXT_PUBLIC_BUSINESS_NAME: 'AESTA — Architects & Builders'
-          NEXT_PUBLIC_BUSINESS_PHONE: '+91-0000000000'
-          NEXT_PUBLIC_BUSINESS_WHATSAPP: '+91-0000000000'
-          NEXT_PUBLIC_BUSINESS_EMAIL: hello@aesta.co.in
+          NEXT_PUBLIC_BUSINESS_PHONE: '+91-9176137043'
+          NEXT_PUBLIC_BUSINESS_WHATSAPP: '+91-9176137043'
+          NEXT_PUBLIC_BUSINESS_EMAIL: aestabuilders@gmail.com
         run: pnpm build
