@@ -1,0 +1,37 @@
+name: Post-Deploy Smoke Check
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Wait for Vercel deploy
+        # Vercel auto-deploys on the same push. Give it a head start before polling.
+        run: sleep 90
+
+      - name: Smoke test homepage
+        run: |
+          attempts=0
+          max=10
+          until curl -fsSL https://aesta.co.in/ | grep -qi 'AESTA'; do
+            attempts=$((attempts + 1))
+            if [ "$attempts" -ge "$max" ]; then
+              echo "::error::Homepage smoke failed after $max attempts"
+              exit 1
+            fi
+            echo "Attempt $attempts: not ready, retrying in 30s"
+            sleep 30
+          done
+          echo "Homepage OK"
+
+      - name: Smoke test about page
+        run: |
+          if ! curl -fsSL https://aesta.co.in/about | grep -qi 'AESTA'; then
+            echo "::error::About page smoke failed"
+            exit 1
+          fi
+          echo "About page OK"
