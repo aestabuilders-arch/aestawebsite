@@ -9,6 +9,7 @@ This file is auto-loaded into every Claude Code session in this repo. Keep it sh
 - **Hosting:** Vercel team `aesta-management`, project `aesta-website`, region `bom1`
 - **Database:** Supabase project `rcbhsakwfdwjheorxmzk` (Tokyo region)
 - **DNS:** GoDaddy → Vercel A record `76.76.21.21` (Cloudflare migration deferred)
+- **Deploy pipeline validated:** 2026-05-01
 
 ## Deploy commands
 
