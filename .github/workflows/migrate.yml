@@ -1,0 +1,49 @@
+name: Apply Supabase Migrations
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "If true, only list pending migrations without applying them"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SUPABASE_PROJECT_REF: rcbhsakwfdwjheorxmzk
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Link project and list pending migrations
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          supabase link --project-ref "$SUPABASE_PROJECT_REF"
+          echo "::group::Pending migrations"
+          supabase migration list
+          echo "::endgroup::"
+
+      - name: Apply migrations
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: |
+          supabase db push --password "$SUPABASE_DB_PASSWORD"
+
+      - name: Skipped (dry run)
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: echo "Dry run complete. No migrations applied."
