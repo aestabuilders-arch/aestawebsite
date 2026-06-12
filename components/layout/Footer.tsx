@@ -92,7 +92,8 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-neutral-700">
               <li>
                 <span className="font-medium">{tFooter('address')}: </span>
-                {NAP.address.addressLocality}, {NAP.address.addressRegion}
+                {NAP.address.streetAddress}, {NAP.address.addressLocality},{' '}
+                {NAP.address.addressRegion} {NAP.address.postalCode}
               </li>
               <li>
                 <a href={getPhoneLink()} className="hover:underline">

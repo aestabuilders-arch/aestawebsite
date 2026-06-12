@@ -58,9 +58,9 @@ const WHY_AESTA = [
 
 const HOMEPAGE_FAQS = [
   {
-    question: 'How much does a 1500 sqft G+1 house cost in 2026?',
+    question: 'How much does it cost to build a house in Pudukkottai?',
     answer:
-      'Approximately ₹31–48 lakh in our spec tiers (Economy ₹2,099/sqft to Luxury ₹3,299+/sqft) for built-up area. Excludes land, DTCP fees, compound wall, and interiors.',
+      'Roughly ₹1,999–₹3,299+ per sqft of built-up area depending on spec tier (Economy to Luxury) — about ₹30–50 lakh for a 1500 sqft G+1 home. Excludes land, DTCP fees, compound wall and interiors. See our cost guides and pricing page for the full breakdown.',
   },
   {
     question: 'Where do you build?',

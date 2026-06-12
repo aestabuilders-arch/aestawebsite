@@ -25,4 +25,13 @@ describe('GET /llms.txt', () => {
     const body = await res.text();
     expect(body).toMatch(/^## /m);
   });
+
+  it('surfaces NAP facts and per-sqft pricing for AI answers', async () => {
+    const res = await GET();
+    const body = await res.text();
+    expect(body).toContain('Pudukkottai');
+    expect(body).toMatch(/\+91/); // phone
+    expect(body).toMatch(/₹[\d,]+/); // a rupee rate from the tier card
+    expect(body).toContain('/guides/'); // cost guides are linked
+  });
 });
