@@ -1,5 +1,4 @@
 import { Link } from '@/i18n/navigation';
-import { cookies } from 'next/headers';
 import type { Metadata } from 'next';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { isValidLocale, type Locale } from '@/i18n/config';
@@ -8,13 +7,11 @@ import { buildPageMetadata } from '@/lib/metadata/page-metadata';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { LocationHero } from '@/components/seo/LocationHero';
 import { FAQSection } from '@/components/seo/FAQSection';
-import { createClient } from '@/utils/supabase/server';
 import { SERVICES } from '@/lib/content/services';
-
-const TIER1_SLUGS = ['pudukkottai', 'karaikudi', 'aranthangi', 'trichy', 'thanjavur'] as const;
+import { getLocation, getLocationSlugs } from '@/lib/content/locations';
 
 export function generateStaticParams() {
-  return TIER1_SLUGS.map((slug) => ({ slug }));
+  return getLocationSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -23,105 +20,17 @@ export async function generateMetadata({
   params: { locale: string; slug: string };
 }): Promise<Metadata> {
   if (!isValidLocale(locale)) return {};
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const { data: city } = await supabase
-    .from('cities')
-    .select('slug, name')
-    .eq('slug', slug)
-    .maybeSingle();
-
+  const city = getLocation(slug);
   if (!city) return {};
   return buildPageMetadata({
     locale: locale as Locale,
     pathname: `/locations/${slug}`,
-    title: `Construction in ${city.name} — AESTA Architects & Builders`,
-    description: `Design-build construction in ${city.name}. NIT Trichy architects, transparent pricing, single-point accountability. Local soil, climate, and regulatory expertise.`,
+    title: `Builders in ${city.name} | Construction Company & Architects — AESTA`,
+    description: `Design-build construction in ${city.name}, ${city.district} district. NIT Trichy architects, transparent per-sqft pricing, local soil and approval expertise. Free site visit.`,
   });
 }
 
-const CITY_BLURBS: Record<
-  string,
-  { intro: string; soilNote: string; faqs: { question: string; answer: string }[] }
-> = {
-  pudukkottai: {
-    intro:
-      'Pudukkottai is our home district. We have built more homes here than anywhere else — soil, climate, regulations, and material supply chains are second nature to us.',
-    soilNote:
-      'Pudukkottai soil is largely lateritic with red-soil pockets. Foundations typically need stepped footing on slopes; soil-test recommended for plots over 2400 sqft.',
-    faqs: [
-      {
-        question: 'How long does construction take in Pudukkottai?',
-        answer:
-          'A 1500 sqft G+1 home typically takes 7–10 months. Monsoon (October–December) can add 2–4 weeks if foundation work overlaps.',
-      },
-      {
-        question: 'Do you handle DTCP approvals in Pudukkottai?',
-        answer:
-          'Yes. We have the panchayat / DTCP relationships in Pudukkottai town and surrounding panchayats — typical approval cycle is 4–8 weeks.',
-      },
-    ],
-  },
-  karaikudi: {
-    intro:
-      'Karaikudi clients often want Chettinad-style proportions with modern services. We balance heritage influences (large halls, courtyards, period-correct details) with contemporary structural and electrical standards.',
-    soilNote:
-      'Karaikudi has predominantly sandy loam soils. Foundations are straightforward; deep raft is rarely needed below 2 storeys.',
-    faqs: [
-      {
-        question: 'Can you build a modern Chettinad-style house in Karaikudi?',
-        answer:
-          'Yes — this is one of our specialties. We work with you to balance heritage proportions and details with modern services and earthquake-resistant structure.',
-      },
-      {
-        question: 'How is Karaikudi different from Pudukkottai construction?',
-        answer:
-          'Plots tend to be larger (3000+ sqft is common), expectations on craft are higher, and clients often have NRI links — so we often coordinate by video on key decisions.',
-      },
-    ],
-  },
-  aranthangi: {
-    intro:
-      'Aranthangi covers a coastal–interior mix. We work in town and across surrounding villages. Material supply runs from Pudukkottai/Trichy; we factor lead times into the schedule.',
-    soilNote:
-      'Aranthangi soil is variable — sandy near the coast, clay-rich inland. Soil test is strongly recommended for plots over 1500 sqft.',
-    faqs: [
-      {
-        question: 'Do you build in coastal Aranthangi villages?',
-        answer:
-          'Yes. We pay extra attention to corrosion-resistant fittings and waterproofing on coastal sites; this is included in our Premium and Luxury tiers.',
-      },
-    ],
-  },
-  trichy: {
-    intro:
-      'Trichy is the regional centre. Many of our clients are professionals working in Trichy who want to build family homes here or in nearby districts. Approvals through TCP (Town Country Planning) are well-understood.',
-    soilNote:
-      'Trichy has rocky / hard-stratum sites in some pockets. Excavation cost can vary by location; we survey before quoting.',
-    faqs: [
-      {
-        question: 'Can you build in central Trichy and the suburbs?',
-        answer:
-          'Yes. We build across Trichy city and the surrounding panchayats including Srirangam, Thiruverumbur, Lalgudi.',
-      },
-    ],
-  },
-  thanjavur: {
-    intro:
-      'Thanjavur is rich with traditional building knowledge. Many sites carry heritage considerations or proximity-to-temple rules. We respect those and integrate them with modern engineering.',
-    soilNote:
-      'Thanjavur sits in alluvial plains. Bearing capacity is generally fine; flood-risk awareness is important on low-lying plots near the Cauvery.',
-    faqs: [
-      {
-        question: 'Are there special rules near temples in Thanjavur?',
-        answer:
-          'Some plots fall under archaeological / heritage proximity rules. We check before scoping; in restricted zones we adjust massing and finishes accordingly.',
-      },
-    ],
-  },
-};
-
-export default async function LocationPage({
+export default function LocationPage({
   params: { locale, slug },
 }: {
   params: { locale: string; slug: string };
@@ -129,16 +38,13 @@ export default async function LocationPage({
   if (!isValidLocale(locale)) notFound();
   unstable_setRequestLocale(locale);
 
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const { data: city } = await supabase.from('cities').select('*').eq('slug', slug).maybeSingle();
+  const city = getLocation(slug);
   if (!city) notFound();
-
-  const blurb = CITY_BLURBS[slug];
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 md:px-6 md:py-12">
       <Breadcrumbs
+        locale={locale as Locale}
         items={[
           { name: 'Home', href: '/' },
           { name: 'Locations', href: '/locations' },
@@ -146,44 +52,28 @@ export default async function LocationPage({
         ]}
       />
 
-      {city.geo_lat && city.geo_lng ? (
-        <LocationHero
-          cityName={city.name}
-          cityNameTa={city.name_ta ?? undefined}
-          citySlug={city.slug}
-          lat={Number(city.geo_lat)}
-          lng={Number(city.geo_lng)}
-        />
-      ) : (
-        <header className="my-8">
-          <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
-            AESTA — Building in {city.name}
-          </h1>
-          <p className="mt-3 text-lg text-neutral-700">since 2010</p>
-        </header>
-      )}
+      <LocationHero
+        cityName={city.name}
+        cityNameTa={city.nameTa}
+        citySlug={city.slug}
+        lat={city.geo.lat}
+        lng={city.geo.lng}
+      />
 
-      {blurb ? (
-        <section className="my-12">
-          <p className="text-lg leading-relaxed text-neutral-700">{blurb.intro}</p>
-        </section>
-      ) : null}
+      <section className="my-12">
+        <p className="text-lg leading-relaxed text-neutral-700">{city.intro}</p>
+      </section>
 
       <section className="my-12">
         <h2 className="mb-4 text-2xl font-bold text-charcoal-900">Local context</h2>
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-lg border border-neutral-200 bg-white p-5">
-            <h3 className="font-semibold text-charcoal-900">Soil & foundation</h3>
-            <p className="mt-2 text-sm text-neutral-700">
-              {blurb?.soilNote ?? 'Soil context for this city: ask us during your consultation.'}
-            </p>
+            <h3 className="font-semibold text-charcoal-900">Soil &amp; foundation</h3>
+            <p className="mt-2 text-sm text-neutral-700">{city.soilNote}</p>
           </div>
           <div className="rounded-lg border border-neutral-200 bg-white p-5">
             <h3 className="font-semibold text-charcoal-900">Approvals</h3>
-            <p className="mt-2 text-sm text-neutral-700">
-              We handle DTCP / panchayat approval coordination in {city.name} as part of turnkey
-              packages, and as an add-on for other engagements.
-            </p>
+            <p className="mt-2 text-sm text-neutral-700">{city.approvalNote}</p>
           </div>
         </div>
       </section>
@@ -206,7 +96,7 @@ export default async function LocationPage({
         </div>
       </section>
 
-      {blurb?.faqs ? <FAQSection items={blurb.faqs} heading={`FAQs — ${city.name}`} /> : null}
+      <FAQSection items={city.faqs} heading={`FAQs — building in ${city.name}`} />
 
       <section className="my-16 rounded-lg bg-charcoal-900 p-8 text-center text-white">
         <h2 className="text-2xl font-bold">Building in {city.name}?</h2>

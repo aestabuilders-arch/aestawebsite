@@ -1,12 +1,11 @@
 import { Link } from '@/i18n/navigation';
-import { cookies } from 'next/headers';
 import type { Metadata } from 'next';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { isValidLocale, type Locale } from '@/i18n/config';
 import { notFound } from 'next/navigation';
 import { buildPageMetadata } from '@/lib/metadata/page-metadata';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
-import { createClient } from '@/utils/supabase/server';
+import { LOCATIONS } from '@/lib/content/locations';
 
 export async function generateMetadata({
   params: { locale },
@@ -17,13 +16,13 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale: locale as Locale,
     pathname: '/locations',
-    title: 'Locations — AESTA serves 17 cities across Tamil Nadu',
+    title: 'Construction & Building Locations Across Tamil Nadu | AESTA',
     description:
-      'AESTA Architects & Builders serves Pudukkottai, Karaikudi, Aranthangi, Trichy, Thanjavur, and 12 more cities across Tamil Nadu.',
+      'AESTA Architects & Builders serves Pudukkottai, Karaikudi, Aranthangi, Trichy, Thanjavur, and 12 more cities across Tamil Nadu — each with a local soil, approvals and cost guide.',
   });
 }
 
-export default async function LocationsOverview({
+export default function LocationsOverview({
   params: { locale },
 }: {
   params: { locale: string };
@@ -31,20 +30,13 @@ export default async function LocationsOverview({
   if (!isValidLocale(locale)) notFound();
   unstable_setRequestLocale(locale);
 
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const { data: cities } = await supabase
-    .from('cities')
-    .select('slug, name, name_ta, tier, district')
-    .order('tier', { ascending: true })
-    .order('name', { ascending: true });
-
-  const tier1 = (cities ?? []).filter((c) => c.tier === 1);
-  const tier2 = (cities ?? []).filter((c) => c.tier === 2);
+  const tier1 = LOCATIONS.filter((c) => c.tier === 1);
+  const tier2 = LOCATIONS.filter((c) => c.tier === 2);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-12">
       <Breadcrumbs
+        locale={locale as Locale}
         items={[
           { name: 'Home', href: '/' },
           { name: 'Locations', href: '/locations' },
@@ -64,7 +56,7 @@ export default async function LocationsOverview({
       <section className="my-12">
         <h2 className="mb-2 text-2xl font-bold text-charcoal-900">Primary cities</h2>
         <p className="mb-6 text-neutral-700">
-          Full content pages with local soil, climate, regulatory notes.
+          Full content pages with local soil, climate, approvals and cost notes.
         </p>
         <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-5">
           {tier1.map((city) => (
@@ -74,9 +66,7 @@ export default async function LocationsOverview({
               className="rounded-lg border border-neutral-200 bg-white p-5 transition hover:border-terracotta-600"
             >
               <h3 className="font-semibold text-charcoal-900">{city.name}</h3>
-              {city.district ? (
-                <p className="mt-1 text-xs text-neutral-500">{city.district} district</p>
-              ) : null}
+              <p className="mt-1 text-xs text-neutral-500">{city.district} district</p>
             </Link>
           ))}
         </div>
@@ -85,17 +75,19 @@ export default async function LocationsOverview({
       <section className="my-12">
         <h2 className="mb-2 text-2xl font-bold text-charcoal-900">Also serving</h2>
         <p className="mb-6 text-neutral-700">
-          We build in these cities too. Full pages coming soon — for now, ask us during your
-          consultation.
+          We build across these towns too — each has its own page with local soil, approvals and a
+          construction-cost answer.
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {tier2.map((city) => (
-            <span
+            <Link
               key={city.slug}
-              className="rounded-full bg-limestone-100 px-4 py-1 text-sm text-neutral-700"
+              href={`/locations/${city.slug}`}
+              className="rounded-lg border border-neutral-200 bg-white p-4 transition hover:border-terracotta-600"
             >
-              {city.name}
-            </span>
+              <h3 className="font-medium text-charcoal-900">{city.name}</h3>
+              <p className="mt-1 text-xs text-neutral-500">{city.district} district</p>
+            </Link>
           ))}
         </div>
       </section>

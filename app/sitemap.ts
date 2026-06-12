@@ -3,8 +3,7 @@ import { NAP } from '@/lib/constants/nap';
 import { locales, defaultLocale, type Locale } from '@/i18n/config';
 import { SERVICES } from '@/lib/content/services';
 import { PROJECTS } from '@/lib/content/projects';
-
-const TIER1_CITY_SLUGS = ['pudukkottai', 'karaikudi', 'aranthangi', 'trichy', 'thanjavur'];
+import { LOCATIONS } from '@/lib/content/locations';
 
 const STATIC_PATHS: {
   path: string;
@@ -31,9 +30,9 @@ const SERVICE_PATHS = SERVICES.map((s) => ({
   changeFrequency: 'monthly' as const,
 }));
 
-const LOCATION_PATHS = TIER1_CITY_SLUGS.map((slug) => ({
-  path: `/locations/${slug}`,
-  priority: 0.8,
+const LOCATION_PATHS = LOCATIONS.map((l) => ({
+  path: `/locations/${l.slug}`,
+  priority: l.tier === 1 ? 0.8 : 0.6,
   changeFrequency: 'monthly' as const,
 }));
 
