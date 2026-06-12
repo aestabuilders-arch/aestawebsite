@@ -21,4 +21,19 @@ describe('buildOrganization', () => {
     const org = buildOrganization() as unknown as Record<string, unknown>;
     expect(String(org['@id'])).toMatch(/#organization$/);
   });
+
+  it('includes a PostalAddress and a description', () => {
+    const org = buildOrganization() as unknown as Record<string, unknown>;
+    const address = org.address as Record<string, unknown>;
+    expect(address['@type']).toBe('PostalAddress');
+    expect(String(address.addressLocality)).toContain('Pudukkottai');
+    expect(String(address.addressCountry)).toBe('IN');
+    expect(String(org.description)).toContain('design-build');
+  });
+
+  it('omits sameAs and logo when their env vars are unset', () => {
+    const org = buildOrganization() as unknown as Record<string, unknown>;
+    expect(org.sameAs).toBeUndefined();
+    expect(org.logo).toBeUndefined();
+  });
 });

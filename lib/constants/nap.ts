@@ -14,6 +14,9 @@ export const NAP = {
     postalCode: '622001',
     addressCountry: 'IN',
   },
+  // Head-office coordinates (Pudukkottai). Used for sitewide LocalBusiness geo
+  // where no city-specific page context applies (e.g. the reviews page).
+  geo: { lat: 10.3833, lng: 78.8001 },
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aesta.co.in',
   areaServed: [
     { name: 'Pudukkottai', slug: 'pudukkottai', tier: 1 },

@@ -7,13 +7,19 @@ const MIN_COUNT_FOR_SCHEMA = 3;
 type AggregateRatingProps = {
   average: number;
   count: number;
+  /**
+   * Emit standalone AggregateRating JSON-LD. Set false when a parent already
+   * nests the rating in a LocalBusiness/Organization entity (avoids a duplicate,
+   * less-preferred standalone node). The visual stars always render.
+   */
+  withSchema?: boolean;
 };
 
 function roundTo1(n: number): number {
   return Math.round(n * 10) / 10;
 }
 
-export function AggregateRating({ average, count }: AggregateRatingProps) {
+export function AggregateRating({ average, count, withSchema = true }: AggregateRatingProps) {
   const rounded = roundTo1(average);
   const filled = Math.round(rounded);
   const stars = '★'.repeat(filled) + '☆'.repeat(5 - filled);
@@ -40,7 +46,7 @@ export function AggregateRating({ average, count }: AggregateRatingProps) {
       <span className="font-semibold">{rounded.toFixed(1)}</span>
       <span className="text-neutral-600">·</span>
       <span className="text-neutral-600">{count} reviews</span>
-      {count >= MIN_COUNT_FOR_SCHEMA ? <JsonLd data={data} /> : null}
+      {withSchema && count >= MIN_COUNT_FOR_SCHEMA ? <JsonLd data={data} /> : null}
     </div>
   );
 }

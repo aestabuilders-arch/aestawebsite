@@ -7,10 +7,13 @@ export type LocalBusinessInput = {
   lat: number;
   lng: number;
   citySlug?: string;
+  /** When provided (and reviewCount > 0), nests an AggregateRating in the entity. */
+  aggregateRating?: { ratingValue: number; reviewCount: number };
 };
 
 export function buildLocalBusiness(input: LocalBusinessInput): WithContext<LocalBusiness> {
   const idSuffix = input.citySlug ? `#localbusiness-${input.citySlug}` : '#localbusiness';
+  const ar = input.aggregateRating;
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -36,5 +39,18 @@ export function buildLocalBusiness(input: LocalBusinessInput): WithContext<Local
       '@type': 'City' as const,
       name: c.name,
     })),
+    // Nesting the rating inside the reviewed entity is what Google's
+    // review-snippet guidelines expect (vs. a standalone AggregateRating).
+    ...(ar && ar.reviewCount > 0
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating' as const,
+            ratingValue: ar.ratingValue,
+            reviewCount: ar.reviewCount,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
   };
 }

@@ -8,7 +8,14 @@ import { buildPageMetadata } from '@/lib/metadata/page-metadata';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { ReviewCard, type ReviewSource } from '@/components/seo/ReviewCard';
 import { AggregateRating } from '@/components/seo/AggregateRating';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { buildLocalBusiness } from '@/lib/schema/localBusiness';
+import { NAP } from '@/lib/constants/nap';
 import { createClient } from '@/utils/supabase/server';
+
+// Below this, an aggregate rating is statistically thin and risks looking
+// manufactured; keep it visual-only until enough reviews accumulate.
+const MIN_REVIEWS_FOR_RATING_SCHEMA = 3;
 
 export async function generateMetadata({
   params: { locale },
@@ -40,10 +47,26 @@ export default async function ReviewsPage({ params: { locale } }: { params: { lo
   const items = reviews ?? [];
   const count = items.length;
   const average = count === 0 ? 0 : items.reduce((sum, r) => sum + (r.rating ?? 0), 0) / count;
+  const showRatingSchema = count >= MIN_REVIEWS_FOR_RATING_SCHEMA;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-12">
+      {/* Nest the rating inside the business entity (Google's preferred shape)
+          rather than emitting a standalone AggregateRating node. */}
+      {showRatingSchema ? (
+        <JsonLd
+          data={buildLocalBusiness({
+            cityName: NAP.address.addressLocality,
+            citySlug: 'pudukkottai',
+            lat: NAP.geo.lat,
+            lng: NAP.geo.lng,
+            aggregateRating: { ratingValue: Math.round(average * 10) / 10, reviewCount: count },
+          })}
+        />
+      ) : null}
+
       <Breadcrumbs
+        locale={locale as Locale}
         items={[
           { name: 'Home', href: '/' },
           { name: 'Reviews', href: '/reviews' },
@@ -60,7 +83,8 @@ export default async function ReviewsPage({ params: { locale } }: { params: { lo
 
       {count > 0 ? (
         <section className="my-8">
-          <AggregateRating average={average} count={count} />
+          {/* Visual only — the rating schema is emitted above, nested in LocalBusiness. */}
+          <AggregateRating average={average} count={count} withSchema={false} />
         </section>
       ) : null}
 
