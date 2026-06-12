@@ -9,7 +9,7 @@ export default defineConfig({
     setupFiles: ['./vitest.setup.ts'],
     globals: true,
     include: ['**/*.test.{ts,tsx}'],
-    exclude: ['node_modules', '.next', 'dist'],
+    exclude: ['**/node_modules/**', '**/.next/**', '**/dist/**', '**/.worktrees/**'],
     coverage: {
       reporter: ['text', 'html'],
       exclude: ['**/*.config.*', '**/types.ts', 'utils/supabase/types.ts', 'lib/supabase/types.ts'],
