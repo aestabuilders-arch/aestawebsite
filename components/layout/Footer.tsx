@@ -60,6 +60,11 @@ export function Footer() {
             <h3 className="mb-3 font-semibold">{tFooter('resources')}</h3>
             <ul className="space-y-2 text-sm text-neutral-700">
               <li>
+                <Link href="/guides" className="hover:underline">
+                  Cost guides
+                </Link>
+              </li>
+              <li>
                 <Link href="/resources" className="hover:underline">
                   {tFooter('blog')}
                 </Link>

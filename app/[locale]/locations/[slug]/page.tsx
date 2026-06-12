@@ -9,6 +9,7 @@ import { LocationHero } from '@/components/seo/LocationHero';
 import { FAQSection } from '@/components/seo/FAQSection';
 import { SERVICES } from '@/lib/content/services';
 import { getLocation, getLocationSlugs } from '@/lib/content/locations';
+import { getGuideForCity } from '@/lib/content/guides';
 
 export function generateStaticParams() {
   return getLocationSlugs().map((slug) => ({ slug }));
@@ -41,6 +42,8 @@ export default function LocationPage({
   const city = getLocation(slug);
   if (!city) notFound();
 
+  const costGuide = getGuideForCity(city.slug);
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 md:px-6 md:py-12">
       <Breadcrumbs
@@ -62,6 +65,17 @@ export default function LocationPage({
 
       <section className="my-12">
         <p className="text-lg leading-relaxed text-neutral-700">{city.intro}</p>
+        {costGuide ? (
+          <p className="mt-5 rounded-lg border border-terracotta-600/30 bg-terracotta-50 p-4 text-sm">
+            <Link
+              href={`/guides/${costGuide.slug}`}
+              className="font-medium text-terracotta-700 hover:underline"
+            >
+              How much does it cost to build a house in {city.name}? Read the {city.name} cost guide
+              →
+            </Link>
+          </p>
+        ) : null}
       </section>
 
       <section className="my-12">

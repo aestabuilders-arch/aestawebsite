@@ -4,6 +4,7 @@ import { locales, defaultLocale, type Locale } from '@/i18n/config';
 import { SERVICES } from '@/lib/content/services';
 import { PROJECTS } from '@/lib/content/projects';
 import { LOCATIONS } from '@/lib/content/locations';
+import { GUIDES } from '@/lib/content/guides';
 
 const STATIC_PATHS: {
   path: string;
@@ -13,6 +14,7 @@ const STATIC_PATHS: {
   { path: '/', priority: 1.0, changeFrequency: 'weekly' },
   { path: '/services', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/pricing', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/guides', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/projects', priority: 0.8, changeFrequency: 'weekly' },
   { path: '/locations', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/about', priority: 0.7, changeFrequency: 'monthly' },
@@ -42,7 +44,19 @@ const PROJECT_PATHS = PROJECTS.map((p) => ({
   changeFrequency: 'monthly' as const,
 }));
 
-const ALL_PATHS = [...STATIC_PATHS, ...SERVICE_PATHS, ...LOCATION_PATHS, ...PROJECT_PATHS];
+const GUIDE_PATHS = GUIDES.map((g) => ({
+  path: `/guides/${g.slug}`,
+  priority: 0.8,
+  changeFrequency: 'monthly' as const,
+}));
+
+const ALL_PATHS = [
+  ...STATIC_PATHS,
+  ...SERVICE_PATHS,
+  ...LOCATION_PATHS,
+  ...PROJECT_PATHS,
+  ...GUIDE_PATHS,
+];
 
 function buildLocaleUrl(locale: Locale, path: string): string {
   const prefix = locale === defaultLocale ? '' : `/${locale}`;

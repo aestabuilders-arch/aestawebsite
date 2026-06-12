@@ -77,6 +77,14 @@ export default function PricingPage({ params: { locale } }: { params: { locale: 
           Four spec tiers. Published rates. No hidden costs. Pick the tier that fits your budget; we
           tell you exactly what materials and finishes that gets you.
         </p>
+        <p className="mt-4 text-sm">
+          <Link
+            href="/guides/construction-cost-per-sqft-tamil-nadu"
+            className="font-medium text-terracotta-600 hover:underline"
+          >
+            New to this? Read our guide to house construction cost per sqft in Tamil Nadu →
+          </Link>
+        </p>
       </header>
 
       <section className="my-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
