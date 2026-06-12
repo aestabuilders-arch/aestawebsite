@@ -16,7 +16,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale: locale as Locale,
     pathname: '/services',
-    title: 'Services — AESTA Architects & Builders',
+    title: 'Construction Services in Pudukkottai, Tamil Nadu | AESTA',
     description:
       'Eight construction and design services from AESTA — residential, commercial, architectural design, interior design, renovation, project management, 3D visualization, turnkey homes.',
   });

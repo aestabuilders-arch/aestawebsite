@@ -2,6 +2,7 @@ import type { WithContext, BreadcrumbList } from 'schema-dts';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Link } from '@/i18n/navigation';
 import { NAP } from '@/lib/constants/nap';
+import { defaultLocale, type Locale } from '@/i18n/config';
 
 export type BreadcrumbItem = {
   name: string;
@@ -10,21 +11,31 @@ export type BreadcrumbItem = {
 
 type BreadcrumbsProps = {
   items: BreadcrumbItem[];
+  /** Locale for absolute JSON-LD item URLs. Non-default locales get a path prefix. */
+  locale?: Locale;
 };
 
-export function Breadcrumbs({ items }: BreadcrumbsProps) {
-  if (items.length === 0) return null;
-
-  const data: WithContext<BreadcrumbList> = {
+export function buildBreadcrumbJsonLd(
+  items: BreadcrumbItem[],
+  locale: Locale = defaultLocale,
+): WithContext<BreadcrumbList> {
+  const prefix = locale === defaultLocale ? '' : `/${locale}`;
+  return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: items.map((item, idx) => ({
       '@type': 'ListItem' as const,
       position: idx + 1,
       name: item.name,
-      item: `${NAP.siteUrl}${item.href === '/' ? '' : item.href}`,
+      item: `${NAP.siteUrl}${prefix}${item.href === '/' ? '' : item.href}`,
     })),
   };
+}
+
+export function Breadcrumbs({ items, locale = defaultLocale }: BreadcrumbsProps) {
+  if (items.length === 0) return null;
+
+  const data = buildBreadcrumbJsonLd(items, locale);
 
   return (
     <nav aria-label="Breadcrumb" className="my-4 text-sm text-neutral-600">

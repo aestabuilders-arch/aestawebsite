@@ -12,5 +12,7 @@ export default createMiddleware({
 });
 
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|admin|.*\\..*).*)'],
+  // Exclude API/internal paths, admin, the generated opengraph-image route
+  // (must not be locale-redirected or crawlers hit a 307), and any file (has a dot).
+  matcher: ['/((?!api|_next|_vercel|admin|.*opengraph-image|.*\\..*).*)'],
 };

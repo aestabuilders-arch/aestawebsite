@@ -30,7 +30,11 @@ export async function generateMetadata({
   const project = getProject(slug);
   if (!project) return {};
 
-  const base = buildPageMetadata({
+  const ogImage = project.cover
+    ? `${NAP.siteUrl}${project.cover.src.startsWith('/') ? '' : '/'}${project.cover.src}`
+    : undefined;
+
+  return buildPageMetadata({
     locale: locale as Locale,
     pathname: `/projects/${slug}`,
     title:
@@ -39,28 +43,9 @@ export async function generateMetadata({
       project.seo?.description ??
       project.brief ??
       `${project.name} — designed and built by AESTA Architects & Builders.`,
+    ogType: 'article',
+    ogImage,
   });
-
-  const ogImage = project.cover
-    ? `${NAP.siteUrl}${project.cover.src.startsWith('/') ? '' : '/'}${project.cover.src}`
-    : undefined;
-
-  return {
-    ...base,
-    openGraph: {
-      type: 'article',
-      title: base.title as string,
-      description: base.description as string,
-      url: `${NAP.siteUrl}/projects/${slug}`,
-      images: ogImage ? [{ url: ogImage, alt: project.cover?.alt }] : undefined,
-    },
-    twitter: {
-      card: ogImage ? 'summary_large_image' : 'summary',
-      title: base.title as string,
-      description: base.description as string,
-      images: ogImage ? [ogImage] : undefined,
-    },
-  };
 }
 
 export default function ProjectDetail({

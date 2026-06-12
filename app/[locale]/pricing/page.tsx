@@ -19,9 +19,9 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale: locale as Locale,
     pathname: '/pricing',
-    title: 'Pricing — AESTA Architects & Builders',
+    title: 'House Construction Cost per Sqft in Tamil Nadu (2026 Rates) | AESTA',
     description:
-      'Transparent per-sqft construction rates across four tiers (Economy, Standard, Premium, Luxury). Full materials and finishes spec. Pudukkottai, Karaikudi, Aranthangi, Trichy, Thanjavur.',
+      'Transparent per-sqft house construction cost across four tiers (Economy ₹1,999 to Luxury ₹3,299+). Full materials and finishes spec. Pudukkottai, Karaikudi, Aranthangi, Trichy, Thanjavur.',
   });
 }
 

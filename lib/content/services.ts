@@ -300,3 +300,26 @@ export const SERVICES: ServiceContent[] = [
 export function getService(slug: string): ServiceContent | null {
   return SERVICES.find((s) => s.slug === slug) ?? null;
 }
+
+/**
+ * SEO-optimised <title> tags per service, written to match how prospects
+ * actually search ("house construction in pudukkottai", "home renovation")
+ * rather than our internal service names. Falls back to the service name.
+ */
+export const SERVICE_SEO_TITLES: Record<ServiceSlug, string> = {
+  'residential-construction':
+    'House Construction in Pudukkottai | Building Contractors — AESTA',
+  'commercial-construction':
+    'Commercial Construction in Pudukkottai & Trichy | AESTA Builders',
+  'architectural-design':
+    'Architectural Design & House Plans, Tamil Nadu | AESTA Architects',
+  'interior-design': 'Interior Design in Pudukkottai & Karaikudi | AESTA',
+  renovation: 'Home Renovation & Remodelling in Pudukkottai | AESTA',
+  'project-management': 'Construction Project Management, Tamil Nadu | AESTA',
+  'three-d-visualization': '3D Elevation & Walkthrough Design | AESTA Architects',
+  'turnkey-homes': 'Turnkey House Construction in Pudukkottai | AESTA Builders',
+};
+
+export function getServiceSeoTitle(slug: ServiceSlug): string {
+  return SERVICE_SEO_TITLES[slug];
+}

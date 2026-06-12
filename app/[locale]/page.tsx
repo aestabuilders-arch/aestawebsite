@@ -20,9 +20,9 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale: locale as Locale,
     pathname: '/',
-    title: 'AESTA — Architects & Builders | Pudukkottai, Karaikudi, Trichy',
+    title: 'Builders in Pudukkottai | AESTA — Construction Company & Architects',
     description:
-      'Design-build firm by NIT Trichy architects. 100+ homes since 2010. Transparent pricing across 4 tiers. Serving 17 cities in Tamil Nadu.',
+      'Design-build firm by NIT Trichy architects. 100+ homes since 2010. Transparent per-sqft pricing across 4 tiers. Serving Pudukkottai, Karaikudi, Trichy, Thanjavur & 17 cities in Tamil Nadu.',
   });
 }
 

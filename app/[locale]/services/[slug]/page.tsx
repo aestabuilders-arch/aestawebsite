@@ -8,7 +8,7 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { FAQSection } from '@/components/seo/FAQSection';
 import { ProcessSteps } from '@/components/seo/ProcessSteps';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { SERVICES, getService } from '@/lib/content/services';
+import { SERVICES, getService, getServiceSeoTitle } from '@/lib/content/services';
 import { NAP } from '@/lib/constants/nap';
 import type { WithContext, Service } from 'schema-dts';
 
@@ -27,7 +27,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale: locale as Locale,
     pathname: `/services/${slug}`,
-    title: `${service.name} — AESTA`,
+    title: getServiceSeoTitle(service.slug),
     description: service.shortDescription,
   });
 }
