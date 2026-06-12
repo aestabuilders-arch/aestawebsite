@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { NAP } from '@/lib/constants/nap';
 import { locales, defaultLocale, type Locale } from '@/i18n/config';
 import { SERVICES } from '@/lib/content/services';
+import { PROJECTS } from '@/lib/content/projects';
 
 const TIER1_CITY_SLUGS = ['pudukkottai', 'karaikudi', 'aranthangi', 'trichy', 'thanjavur'];
 
@@ -36,7 +37,13 @@ const LOCATION_PATHS = TIER1_CITY_SLUGS.map((slug) => ({
   changeFrequency: 'monthly' as const,
 }));
 
-const ALL_PATHS = [...STATIC_PATHS, ...SERVICE_PATHS, ...LOCATION_PATHS];
+const PROJECT_PATHS = PROJECTS.map((p) => ({
+  path: `/projects/${p.slug}`,
+  priority: p.status === 'completed' ? 0.8 : 0.5,
+  changeFrequency: 'monthly' as const,
+}));
+
+const ALL_PATHS = [...STATIC_PATHS, ...SERVICE_PATHS, ...LOCATION_PATHS, ...PROJECT_PATHS];
 
 function buildLocaleUrl(locale: Locale, path: string): string {
   const prefix = locale === defaultLocale ? '' : `/${locale}`;
