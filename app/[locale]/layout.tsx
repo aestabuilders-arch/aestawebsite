@@ -3,7 +3,9 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Inter, Fraunces, Noto_Sans_Tamil, Hind_Madurai } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import { isValidLocale, type Locale, locales } from '@/i18n/config';
+import { NAP } from '@/lib/constants/nap';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { buildOrganization } from '@/lib/schema/organization';
 import { SkipToContent } from '@/components/layout/SkipToContent';
@@ -40,6 +42,18 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+// Search-engine ownership verification. Only emit a tag when its env var is
+// set so we never render empty <meta> tags (which some validators flag).
+function buildVerification(): Metadata['verification'] | undefined {
+  const google = process.env.GOOGLE_SITE_VERIFICATION;
+  const bing = process.env.BING_SITE_VERIFICATION;
+  if (!google && !bing) return undefined;
+  return {
+    ...(google ? { google } : {}),
+    ...(bing ? { other: { 'msvalidate.01': bing } } : {}),
+  };
+}
+
 export async function generateMetadata({
   params: { locale },
 }: {
@@ -47,8 +61,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'meta' });
   return {
+    metadataBase: new URL(NAP.siteUrl),
     title: t('siteName'),
     description: t('tagline'),
+    verification: buildVerification(),
   };
 }
 
@@ -76,6 +92,7 @@ export default async function RootLayout({
           <main id="main">{children}</main>
           <Footer />
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
