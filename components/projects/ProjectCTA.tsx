@@ -23,8 +23,8 @@ export function ProjectCTA({ projectName, projectType }: ProjectCTAProps) {
             Building something like {projectName}?
           </h2>
           <p className="mt-3 max-w-lg text-white/80 md:text-lg">
-            Tell us what you&apos;re planning. We&apos;ll come back with a clear scope, timeline, and
-            tier-priced estimate — usually within 24 hours.
+            Tell us what you&apos;re planning. We&apos;ll come back with a clear scope, timeline,
+            and tier-priced estimate — usually within 24 hours.
           </p>
         </div>
 

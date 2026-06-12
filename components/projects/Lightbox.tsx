@@ -82,7 +82,9 @@ export function Lightbox({ images, index, onClose, onIndexChange }: LightboxProp
       <header className="flex items-center justify-between px-4 py-3 md:px-6">
         <span className="text-sm text-white/80">
           {index + 1} / {total}
-          {current.category ? <span className="ml-3 uppercase tracking-wider">{current.category}</span> : null}
+          {current.category ? (
+            <span className="ml-3 uppercase tracking-wider">{current.category}</span>
+          ) : null}
         </span>
         <button
           ref={closeRef}
@@ -118,7 +120,13 @@ export function Lightbox({ images, index, onClose, onIndexChange }: LightboxProp
           className="absolute left-2 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 md:flex"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-            <path d="M12 4l-6 6 6 6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M12 4l-6 6 6 6"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
 
@@ -141,7 +149,13 @@ export function Lightbox({ images, index, onClose, onIndexChange }: LightboxProp
           className="absolute right-2 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 md:flex"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-            <path d="M8 4l6 6-6 6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M8 4l6 6-6 6"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
       </div>

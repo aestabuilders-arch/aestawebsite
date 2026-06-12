@@ -307,12 +307,9 @@ export function getService(slug: string): ServiceContent | null {
  * rather than our internal service names. Falls back to the service name.
  */
 export const SERVICE_SEO_TITLES: Record<ServiceSlug, string> = {
-  'residential-construction':
-    'House Construction in Pudukkottai | Building Contractors — AESTA',
-  'commercial-construction':
-    'Commercial Construction in Pudukkottai & Trichy | AESTA Builders',
-  'architectural-design':
-    'Architectural Design & House Plans, Tamil Nadu | AESTA Architects',
+  'residential-construction': 'House Construction in Pudukkottai | Building Contractors — AESTA',
+  'commercial-construction': 'Commercial Construction in Pudukkottai & Trichy | AESTA Builders',
+  'architectural-design': 'Architectural Design & House Plans, Tamil Nadu | AESTA Architects',
   'interior-design': 'Interior Design in Pudukkottai & Karaikudi | AESTA',
   renovation: 'Home Renovation & Remodelling in Pudukkottai | AESTA',
   'project-management': 'Construction Project Management, Tamil Nadu | AESTA',

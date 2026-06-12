@@ -6,7 +6,7 @@
 
 ## Goal
 
-A repeatable, low-touch deployment pipeline for the AESTA website that lets Hari say *"deploy all changes"* and have code, database migrations, hosting, and (eventually) DNS update through the correct sequence with verification at each step.
+A repeatable, low-touch deployment pipeline for the AESTA website that lets Hari say _"deploy all changes"_ and have code, database migrations, hosting, and (eventually) DNS update through the correct sequence with verification at each step.
 
 ## Non-goals
 
@@ -23,19 +23,20 @@ Two cooperating layers sitting on top of the existing Vercel Git integration.
 
 Workflows in `.github/workflows/`:
 
-| File | Trigger | Purpose |
-|---|---|---|
-| `ci.yml` (exists) | PR + push to `main` | format, lint, typecheck, test, build |
-| `migrate.yml` (NEW) | `workflow_dispatch` only | List pending Supabase migrations, then apply via `supabase db push` |
-| `deploy-check.yml` (NEW) | Push to `main` | Wait for Vercel deploy to finish, smoke-test live URL, report pass/fail |
+| File                     | Trigger                  | Purpose                                                                 |
+| ------------------------ | ------------------------ | ----------------------------------------------------------------------- |
+| `ci.yml` (exists)        | PR + push to `main`      | format, lint, typecheck, test, build                                    |
+| `migrate.yml` (NEW)      | `workflow_dispatch` only | List pending Supabase migrations, then apply via `supabase db push`     |
+| `deploy-check.yml` (NEW) | Push to `main`           | Wait for Vercel deploy to finish, smoke-test live URL, report pass/fail |
 
 Vercel Git integration is unchanged: push to `main` → Vercel builds and ships to `https://aesta.co.in`. CI runs in parallel and does not gate the deploy. Trade-off accepted: a broken build can reach Vercel, but Vercel's own build catches the same failures and the previous deploy stays live; net risk is low and matches today's behavior.
 
 ### Layer 2 — MCP runbook ("deploy all changes")
 
-A documented runbook at `docs/superpowers/runbooks/deploy-all-changes.md`, referenced from `CLAUDE.md` so Claude auto-loads it when Hari says any of: *"deploy all changes"*, *"deploy"*, *"ship it"*, *"push to prod"*.
+A documented runbook at `docs/superpowers/runbooks/deploy-all-changes.md`, referenced from `CLAUDE.md` so Claude auto-loads it when Hari says any of: _"deploy all changes"_, _"deploy"_, _"ship it"_, _"push to prod"_.
 
 Claude orchestrates via MCPs:
+
 - **Supabase MCP** — `list_migrations`, `apply_migration` for DB changes
 - **GitHub MCP** — to trigger `migrate.yml` if Hari prefers the workflow path
 - **Vercel MCP** — `get_deployment`, `get_deployment_build_logs` for post-push polling
@@ -71,9 +72,10 @@ Every step has an abort point — Claude stops and asks if anything looks unexpe
 
 ## DNS (deferred)
 
-Today: GoDaddy A record → `76.76.21.21` (Vercel). The runbook contains a stubbed step *"TODO: when on Cloudflare, update DNS via mcp\_\_cloudflare\_\_execute"*. No code change today; only documentation so the runbook is structurally complete.
+Today: GoDaddy A record → `76.76.21.21` (Vercel). The runbook contains a stubbed step _"TODO: when on Cloudflare, update DNS via mcp\_\_cloudflare\_\_execute"_. No code change today; only documentation so the runbook is structurally complete.
 
 When Hari triggers the migration:
+
 1. Generate Cloudflare API token with Zone:DNS:Edit
 2. Add zone for `aesta.co.in` in Cloudflare
 3. Switch nameservers at GoDaddy → Cloudflare's NS pair
@@ -84,14 +86,14 @@ This will be a separate one-shot, not part of the recurring deploy runbook.
 
 ## Error handling
 
-| Failure | Behavior |
-|---|---|
-| Local CI fails in pre-flight | Runbook stops before any push or migration. Hari fixes locally, retries. |
-| Migration MCP call fails | Runbook stops. Reports which migration broke. Hari/Claude write a reverse migration manually. No auto-rollback. |
-| `git push` rejected (non-FF) | Runbook stops. Reports remote state. Hari decides: rebase, force, or abort. |
-| Vercel build fails | Previous deploy stays live. Runbook reports build log URL. |
-| Smoke test fails post-deploy | Runbook reports red. Hari rolls back via Vercel dashboard (one-click) — runbook documents this step inline. |
-| `migrate.yml` workflow fails | Logs in GitHub Actions tab. Same recovery as above (manual reverse migration). |
+| Failure                      | Behavior                                                                                                        |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Local CI fails in pre-flight | Runbook stops before any push or migration. Hari fixes locally, retries.                                        |
+| Migration MCP call fails     | Runbook stops. Reports which migration broke. Hari/Claude write a reverse migration manually. No auto-rollback. |
+| `git push` rejected (non-FF) | Runbook stops. Reports remote state. Hari decides: rebase, force, or abort.                                     |
+| Vercel build fails           | Previous deploy stays live. Runbook reports build log URL.                                                      |
+| Smoke test fails post-deploy | Runbook reports red. Hari rolls back via Vercel dashboard (one-click) — runbook documents this step inline.     |
+| `migrate.yml` workflow fails | Logs in GitHub Actions tab. Same recovery as above (manual reverse migration).                                  |
 
 ## Secrets
 
@@ -105,11 +107,13 @@ Vercel env vars stay in Vercel project settings (Hari already manages these).
 ## Files to create or modify
 
 **New files:**
+
 - `.github/workflows/migrate.yml`
 - `.github/workflows/deploy-check.yml`
 - `docs/superpowers/runbooks/deploy-all-changes.md`
 
 **Modified files:**
+
 - `CLAUDE.md` — add a "Deploy commands" section pointing at the runbook with trigger phrases listed
 - `MEMORY.md` (Hari's auto-memory) — update the AESTA stack memory with new deploy paths after the workflows ship
 

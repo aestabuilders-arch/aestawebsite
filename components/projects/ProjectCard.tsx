@@ -48,9 +48,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <span
           className={[
             'absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-medium backdrop-blur',
-            isComingSoon
-              ? 'bg-charcoal-900/70 text-white'
-              : 'bg-white/85 text-charcoal-900',
+            isComingSoon ? 'bg-charcoal-900/70 text-white' : 'bg-white/85 text-charcoal-900',
           ].join(' ')}
         >
           {STATUS_LABEL[project.status]}

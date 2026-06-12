@@ -25,11 +25,7 @@ export async function generateMetadata({
   });
 }
 
-export default function ProjectsGallery({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) {
+export default function ProjectsGallery({ params: { locale } }: { params: { locale: string } }) {
   if (!isValidLocale(locale)) notFound();
   unstable_setRequestLocale(locale);
 
@@ -61,10 +57,7 @@ export default function ProjectsGallery({
 
       {completed.length > 0 ? (
         <section aria-labelledby="completed-heading" className="mt-8">
-          <h2
-            id="completed-heading"
-            className="sr-only"
-          >
+          <h2 id="completed-heading" className="sr-only">
             Completed projects
           </h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

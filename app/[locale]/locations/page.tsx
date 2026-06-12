@@ -22,11 +22,7 @@ export async function generateMetadata({
   });
 }
 
-export default function LocationsOverview({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) {
+export default function LocationsOverview({ params: { locale } }: { params: { locale: string } }) {
   if (!isValidLocale(locale)) notFound();
   unstable_setRequestLocale(locale);
 

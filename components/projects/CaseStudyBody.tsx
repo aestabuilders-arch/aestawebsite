@@ -49,7 +49,10 @@ export function CaseStudyBody({ project }: CaseStudyBodyProps) {
       ) : null}
 
       {project.approach && project.approach.length > 0 ? (
-        <section aria-labelledby="approach-heading" className="rounded-2xl bg-limestone-50 p-6 md:p-10">
+        <section
+          aria-labelledby="approach-heading"
+          className="rounded-2xl bg-limestone-50 p-6 md:p-10"
+        >
           <header className="max-w-2xl">
             <p
               className="text-xs font-semibold uppercase tracking-wider text-sage-600"

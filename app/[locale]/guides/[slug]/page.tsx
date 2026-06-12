@@ -201,7 +201,9 @@ export default function GuidePage({
       {/* CTA + internal links */}
       <section className="my-12 rounded-lg bg-charcoal-900 p-8 text-center text-white">
         <h2 className="text-2xl font-bold">
-          {city ? `Get a real number for your ${city.name} plot` : 'Get a real number for your plot'}
+          {city
+            ? `Get a real number for your ${city.name} plot`
+            : 'Get a real number for your plot'}
         </h2>
         <p className="mt-2 text-neutral-300">
           Share your plot size and tier — we return an itemised estimate within 24 hours. Free site

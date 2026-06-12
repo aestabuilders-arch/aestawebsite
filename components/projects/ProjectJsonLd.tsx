@@ -21,7 +21,9 @@ export function ProjectJsonLd({ project, pageUrl }: ProjectJsonLdProps) {
   }
 
   const description =
-    project.seo?.description ?? project.brief ?? `${project.name} — case study by AESTA Architects & Builders.`;
+    project.seo?.description ??
+    project.brief ??
+    `${project.name} — case study by AESTA Architects & Builders.`;
 
   const data: Record<string, unknown> = {
     '@context': 'https://schema.org',

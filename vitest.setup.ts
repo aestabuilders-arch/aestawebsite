@@ -7,7 +7,12 @@ import { vi } from 'vitest';
 // behavior with localePrefix='as-needed' (en-IN is default → no prefix).
 // Tests that need a specific pathname can override this mock at the file level.
 vi.mock('@/i18n/navigation', () => ({
-  Link: ({ href, locale, children, ...rest }: { href: string; locale?: string } & Record<string, unknown>) => {
+  Link: ({
+    href,
+    locale,
+    children,
+    ...rest
+  }: { href: string; locale?: string } & Record<string, unknown>) => {
     const prefix = locale === 'ta-IN' ? '/ta-IN' : '';
     const finalHref = href === '/' ? prefix || '/' : `${prefix}${href}`;
     return React.createElement('a', { ...rest, href: finalHref }, children as React.ReactNode);

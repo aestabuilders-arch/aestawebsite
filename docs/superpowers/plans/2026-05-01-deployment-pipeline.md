@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Ship a two-layer deployment pipeline — GitHub Actions for the automated path (CI + manual `migrate.yml` + post-deploy smoke), plus an MCP-driven runbook Claude follows when Hari says *"deploy all changes"*.
+**Goal:** Ship a two-layer deployment pipeline — GitHub Actions for the automated path (CI + manual `migrate.yml` + post-deploy smoke), plus an MCP-driven runbook Claude follows when Hari says _"deploy all changes"_.
 
 **Architecture:** Vercel's existing Git integration stays untouched and remains the actual code-deploy mechanism. Two new GitHub Actions workflows wrap it: `migrate.yml` for `workflow_dispatch`-triggered Supabase migrations, and `deploy-check.yml` for post-push smoke testing. A Markdown runbook + `CLAUDE.md` hook teach Claude to orchestrate the same flow with observation via the Supabase, GitHub, and Vercel MCPs.
 
@@ -11,6 +11,7 @@
 **Spec:** `docs/superpowers/specs/2026-05-01-deployment-pipeline-design.md`
 
 **Files to create or modify:**
+
 - Create: `.github/workflows/migrate.yml`
 - Create: `.github/workflows/deploy-check.yml`
 - Create: `docs/superpowers/runbooks/deploy-all-changes.md`
@@ -24,6 +25,7 @@
 ## Task 1: Create the Supabase migration workflow
 
 **Files:**
+
 - Create: `.github/workflows/migrate.yml`
 
 - [ ] **Step 1: Write the workflow file**
@@ -37,13 +39,13 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "If true, only list pending migrations without applying them"
+        description: 'If true, only list pending migrations without applying them'
         required: false
-        default: "false"
+        default: 'false'
         type: choice
         options:
-          - "false"
-          - "true"
+          - 'false'
+          - 'true'
 
 jobs:
   migrate:
@@ -103,6 +105,7 @@ and SUPABASE_DB_PASSWORD secrets."
 ## Task 2: Create the post-deploy smoke check workflow
 
 **Files:**
+
 - Create: `.github/workflows/deploy-check.yml`
 
 - [ ] **Step 1: Write the workflow file**
@@ -170,6 +173,7 @@ and contain 'AESTA' in the body."
 ## Task 3: Write the deploy-all-changes runbook
 
 **Files:**
+
 - Create: `docs/superpowers/runbooks/deploy-all-changes.md`
 
 - [ ] **Step 1: Create the runbooks directory and runbook file**
@@ -235,6 +239,7 @@ For each pending migration in filename order:
 3. If apply returns an error: stop, report which migration failed and the error, do not continue. Hari will write a reverse migration manually.
 
 If Hari prefers the workflow path instead, trigger `migrate.yml`:
+
 - GitHub MCP — dispatch `migrate.yml` on branch `main` with `dry_run=false`
 - Poll the workflow run until `conclusion` = `success` or `failure`
 
@@ -267,12 +272,12 @@ Vercel auto-builds on push. Poll Vercel MCP `mcp__vercel__get_deployment` (proje
 
 Fetch each URL and assert:
 
-| URL | Expected status | Expected body contains |
-|---|---|---|
-| `https://aesta.co.in/` | 200 | `AESTA` |
-| `https://aesta.co.in/about` | 200 | `AESTA` |
+| URL                         | Expected status | Expected body contains |
+| --------------------------- | --------------- | ---------------------- |
+| `https://aesta.co.in/`      | 200             | `AESTA`                |
+| `https://aesta.co.in/about` | 200             | `AESTA`                |
 
-If either fails: report failure. Tell Hari how to roll back: *"Open https://vercel.com/aesta-management/aesta-website/deployments → click the last green deploy → 'Promote to Production'."*
+If either fails: report failure. Tell Hari how to roll back: _"Open https://vercel.com/aesta-management/aesta-website/deployments → click the last green deploy → 'Promote to Production'."_
 
 ## Step 8 — Report
 
@@ -315,6 +320,7 @@ and Vercel MCPs for orchestration with abort points throughout."
 ## Task 4: Create CLAUDE.md with the deploy hook
 
 **Files:**
+
 - Create: `CLAUDE.md`
 
 - [ ] **Step 1: Write CLAUDE.md**
@@ -337,11 +343,12 @@ This file is auto-loaded into every Claude Code session in this repo. Keep it sh
 ## Deploy commands
 
 When Hari says any of:
-- *"deploy all changes"*
-- *"deploy"*
-- *"ship it"*
-- *"push to prod"*
-- *"deploy to production"*
+
+- _"deploy all changes"_
+- _"deploy"_
+- _"ship it"_
+- _"push to prod"_
+- _"deploy to production"_
 
 Auto-load and follow `docs/superpowers/runbooks/deploy-all-changes.md` end-to-end. Do not improvise. Each step has an abort point.
 
@@ -366,6 +373,7 @@ For deploy work: do not say "deployed" until the post-deploy smoke check passes 
 
 Run: `grep -E '^##' CLAUDE.md`
 Expected output:
+
 ```
 ## Project at a glance
 ## Deploy commands
@@ -422,6 +430,7 @@ Do not proceed to Task 6 until Hari confirms.
 ## Task 6: End-to-end validation
 
 **Files:**
+
 - Create: `supabase/migrations/20260501000000_validation_noop.sql` (kept in repo — idempotent no-op)
 
 This task validates that all three new pieces (migrate.yml + deploy-check.yml + the runbook flow they support) work end-to-end against real prod.
@@ -496,6 +505,7 @@ If the run shows failure: open it (`gh run view --log`), inspect which smoke ste
 - [ ] **Step 8: Report success to Hari**
 
 Report:
+
 ```
 Deployment pipeline validated end-to-end:
 - Validation migration pushed to main and applied via migrate.yml (dry-run + real)

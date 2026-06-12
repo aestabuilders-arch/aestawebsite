@@ -6,11 +6,7 @@ export type ProjectSlug =
 
 export type ProjectStatus = 'completed' | 'ongoing' | 'coming-soon';
 
-export type ProjectType =
-  | 'Apartment'
-  | 'Bungalow'
-  | 'Residence'
-  | 'Sustainable Housing';
+export type ProjectType = 'Apartment' | 'Bungalow' | 'Residence' | 'Sustainable Housing';
 
 export type ProjectImage = {
   src: string;
@@ -237,7 +233,8 @@ export const PROJECTS: ProjectContent[] = [
   {
     slug: 'pushparaj-sustainable-housing',
     name: 'Pushparaj Sustainable Housing',
-    tagline: 'A residence built around climate, daylight, and material restraint — case study in preparation.',
+    tagline:
+      'A residence built around climate, daylight, and material restraint — case study in preparation.',
     status: 'coming-soon',
     type: 'Sustainable Housing',
     location: 'Pudukkottai region, Tamil Nadu',

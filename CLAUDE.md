@@ -14,11 +14,12 @@ This file is auto-loaded into every Claude Code session in this repo. Keep it sh
 ## Deploy commands
 
 When Hari says any of:
-- *"deploy all changes"*
-- *"deploy"*
-- *"ship it"*
-- *"push to prod"*
-- *"deploy to production"*
+
+- _"deploy all changes"_
+- _"deploy"_
+- _"ship it"_
+- _"push to prod"_
+- _"deploy to production"_
 
 Auto-load and follow `docs/superpowers/runbooks/deploy-all-changes.md` end-to-end. Do not improvise. Each step has an abort point.
 

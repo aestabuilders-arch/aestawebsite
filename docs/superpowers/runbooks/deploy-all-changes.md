@@ -56,6 +56,7 @@ For each pending migration in filename order:
 3. If apply returns an error: stop, report which migration failed and the error, do not continue. Hari will write a reverse migration manually.
 
 If Hari prefers the workflow path instead, trigger `migrate.yml`:
+
 - GitHub MCP — dispatch `migrate.yml` on branch `main` with `dry_run=false`
 - Poll the workflow run until `conclusion` = `success` or `failure`
 
@@ -88,12 +89,12 @@ Vercel auto-builds on push. Poll Vercel MCP `mcp__vercel__get_deployment` (proje
 
 Fetch each URL and assert:
 
-| URL | Expected status | Expected body contains |
-|---|---|---|
-| `https://aesta.co.in/` | 200 | `AESTA` |
-| `https://aesta.co.in/about` | 200 | `AESTA` |
+| URL                         | Expected status | Expected body contains |
+| --------------------------- | --------------- | ---------------------- |
+| `https://aesta.co.in/`      | 200             | `AESTA`                |
+| `https://aesta.co.in/about` | 200             | `AESTA`                |
 
-If either fails: report failure. Tell Hari how to roll back: *"Open https://vercel.com/aesta-management/aesta-website/deployments → click the last green deploy → 'Promote to Production'."*
+If either fails: report failure. Tell Hari how to roll back: _"Open https://vercel.com/aesta-management/aesta-website/deployments → click the last green deploy → 'Promote to Production'."_
 
 ## Step 8 — Report
 

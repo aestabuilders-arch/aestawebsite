@@ -85,9 +85,9 @@ export function ThreeViewCompare({ views, heading }: ThreeViewCompareProps) {
           {heading ?? 'See the building from drawing to door'}
         </h2>
         <p className="mt-3 max-w-2xl text-neutral-700">
-          Architecture is a conversation between intent and reality. Tap a tab — or swipe the
-          image — to see the elevation we drew, the visualisation we approved with the client, and
-          the building that stands today.
+          Architecture is a conversation between intent and reality. Tap a tab — or swipe the image
+          — to see the elevation we drew, the visualisation we approved with the client, and the
+          building that stands today.
         </p>
       </header>
 
@@ -136,7 +136,7 @@ export function ThreeViewCompare({ views, heading }: ThreeViewCompareProps) {
         className="mt-5"
       >
         <figure
-          className="group relative overflow-hidden rounded-2xl bg-limestone-100 shadow-sm ring-1 ring-limestone-200 select-none touch-pan-y"
+          className="group relative touch-pan-y select-none overflow-hidden rounded-2xl bg-limestone-100 shadow-sm ring-1 ring-limestone-200"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -181,11 +181,7 @@ export function ThreeViewCompare({ views, heading }: ThreeViewCompareProps) {
         </figure>
 
         <div className="mt-4 flex items-center justify-between gap-3">
-          <div
-            className="flex items-center gap-1.5"
-            role="presentation"
-            aria-hidden
-          >
+          <div className="flex items-center gap-1.5" role="presentation" aria-hidden>
             {ORDER.map((_, idx) => (
               <span
                 key={idx}
