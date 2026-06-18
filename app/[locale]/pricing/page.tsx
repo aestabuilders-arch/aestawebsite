@@ -8,7 +8,7 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { TIERS, SPEC_ROWS, PRICING_DISCLAIMERS } from '@/lib/content/pricing';
 import { NAP } from '@/lib/constants/nap';
-import type { WithContext, Product } from 'schema-dts';
+import type { WithContext, Service } from 'schema-dts';
 
 export async function generateMetadata({
   params: { locale },
@@ -40,25 +40,46 @@ export default function PricingPage({ params: { locale } }: { params: { locale: 
   if (!isValidLocale(locale)) notFound();
   unstable_setRequestLocale(locale);
 
-  const productSchemas: WithContext<Product>[] = TIERS.map((tier) => ({
+  const constructionService: WithContext<Service> = {
     '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: `AESTA ${tier.name} construction tier`,
-    description: tier.positioning,
-    brand: {
+    '@type': 'Service',
+    name: 'Residential house construction',
+    serviceType: 'House construction — design and build',
+    description:
+      'Per-sqft house construction across four tiers (Economy to Luxury) with transparent materials and finishes specs.',
+    provider: {
       '@type': 'Organization',
       '@id': `${NAP.siteUrl}/#organization`,
       name: NAP.name,
     },
+    areaServed: NAP.areaServed.map((c) => ({ '@type': 'City' as const, name: c.name })),
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'INR',
-      lowPrice: tier.rateRange.min,
-      highPrice: tier.rateRange.max,
+      lowPrice: Math.min(...TIERS.map((t) => t.rateRange.min)),
+      highPrice: Math.max(...TIERS.map((t) => t.rateRange.max)),
+      offerCount: TIERS.length,
       priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
     },
-  }));
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Construction tiers',
+      itemListElement: TIERS.map((tier) => ({
+        '@type': 'Offer',
+        name: `AESTA ${tier.name} construction tier`,
+        description: tier.positioning,
+        priceCurrency: 'INR',
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          minPrice: tier.rateRange.min,
+          maxPrice: tier.rateRange.max,
+          priceCurrency: 'INR',
+          unitText: 'per square foot',
+        },
+      })),
+    },
+  };
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12">
@@ -215,9 +236,7 @@ export default function PricingPage({ params: { locale } }: { params: { locale: 
         </Link>
       </section>
 
-      {productSchemas.map((schema, i) => (
-        <JsonLd key={i} data={schema} />
-      ))}
+      <JsonLd data={constructionService} />
     </div>
   );
 }
