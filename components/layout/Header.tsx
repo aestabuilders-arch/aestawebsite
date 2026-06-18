@@ -19,7 +19,7 @@ export function Header() {
         >
           AESTA
         </Link>
-        <nav aria-label="primary" className="hidden md:block">
+        <nav aria-label="primary" className="hidden lg:block">
           <ul className="flex items-center gap-6">
             {PRIMARY_NAV.map((item) => (
               <li key={item.href}>

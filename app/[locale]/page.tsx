@@ -7,9 +7,15 @@ import { notFound } from 'next/navigation';
 import { buildPageMetadata } from '@/lib/metadata/page-metadata';
 import { ProcessSteps } from '@/components/seo/ProcessSteps';
 import { FAQSection } from '@/components/seo/FAQSection';
+import { HomeRatingPill, HomeReviews } from '@/components/seo/HomeReviews';
 import { SERVICES } from '@/lib/content/services';
 import { TIERS } from '@/lib/content/pricing';
+import { INFRASTRUCTURE_BENEFITS } from '@/lib/content/equipment';
 import { NAP, getWhatsAppLink, getPhoneLink } from '@/lib/constants/nap';
+
+// Revalidate hourly so newly-added reviews surface on the homepage without a
+// redeploy, while keeping the page statically cached between refreshes.
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params: { locale },
@@ -116,13 +122,15 @@ export default function Home({ params: { locale } }: { params: { locale: string 
               WhatsApp us
             </a>
           </div>
+          {/* Google rating — appears once enough real reviews accrue */}
+          <HomeRatingPill />
         </div>
       </section>
 
-      {/* Credibility strip */}
+      {/* Proof band */}
       <section className="border-y border-neutral-200 bg-white py-8">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <ul className="grid grid-cols-2 gap-6 text-center md:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-6 text-center md:grid-cols-3 lg:grid-cols-5">
             <li>
               <div className="font-serif text-3xl font-bold text-charcoal-900">2010</div>
               <div className="mt-1 text-sm text-neutral-600">Founded</div>
@@ -133,11 +141,19 @@ export default function Home({ params: { locale } }: { params: { locale: string 
             </li>
             <li>
               <div className="font-serif text-3xl font-bold text-charcoal-900">NIT</div>
-              <div className="mt-1 text-sm text-neutral-600">Trichy alumni</div>
+              <div className="mt-1 text-sm text-neutral-600">Trichy architects</div>
             </li>
             <li>
               <div className="font-serif text-3xl font-bold text-charcoal-900">17</div>
               <div className="mt-1 text-sm text-neutral-600">Cities served</div>
+            </li>
+            <li>
+              <Link href="/infrastructure" className="group block rounded-md hover:bg-limestone-50">
+                <div className="font-serif text-3xl font-bold text-charcoal-900 group-hover:text-terracotta-600">
+                  Owned
+                </div>
+                <div className="mt-1 text-sm text-neutral-600">Plant &amp; equipment</div>
+              </Link>
             </li>
           </ul>
         </div>
@@ -241,6 +257,44 @@ export default function Home({ params: { locale } }: { params: { locale: string 
           ))}
         </div>
       </section>
+
+      {/* Infrastructure teaser */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <div className="grid items-center gap-8 rounded-2xl border border-limestone-200 bg-limestone-50 p-8 md:grid-cols-2 md:p-12">
+            <div>
+              <p className="mb-3 text-sm font-medium uppercase tracking-wider text-terracotta-600">
+                Our infrastructure
+              </p>
+              <h2 className="font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">
+                We own our equipment
+              </h2>
+              <p className="mt-4 text-neutral-700">
+                Excavation, concrete, formwork, lifting and finishing plant — owned and run by our
+                own crews, not rented job-to-job. Your build keeps moving, with no rental queue and
+                no hire markup on your bill.
+              </p>
+              <Link
+                href="/infrastructure"
+                className="mt-6 inline-flex items-center rounded-md bg-terracotta-600 px-6 py-3 text-sm font-medium text-white hover:bg-terracotta-700"
+              >
+                See the equipment we own →
+              </Link>
+            </div>
+            <ul className="grid grid-cols-2 gap-4">
+              {INFRASTRUCTURE_BENEFITS.map((b) => (
+                <li key={b.title} className="rounded-lg border border-limestone-200 bg-white p-4">
+                  <p className="font-semibold text-charcoal-900">{b.title}</p>
+                  <p className="mt-1 text-sm text-neutral-600">{b.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* What clients say */}
+      <HomeReviews />
 
       {/* Locations */}
       <section className="bg-limestone-50 py-16 md:py-24">

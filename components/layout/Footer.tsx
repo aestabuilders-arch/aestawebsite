@@ -76,6 +76,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/infrastructure" className="hover:underline">
+                  Infrastructure &amp; equipment
+                </Link>
+              </li>
+              <li>
                 <Link href="/press" className="hover:underline">
                   {tFooter('press')}
                 </Link>

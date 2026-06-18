@@ -1,12 +1,20 @@
 export type NavItem = {
   href: string;
-  labelKey: 'services' | 'projects' | 'pricing' | 'locations' | 'about' | 'contact';
+  labelKey:
+    | 'services'
+    | 'projects'
+    | 'pricing'
+    | 'infrastructure'
+    | 'locations'
+    | 'about'
+    | 'contact';
 };
 
 export const PRIMARY_NAV: readonly NavItem[] = [
   { href: '/services', labelKey: 'services' },
   { href: '/projects', labelKey: 'projects' },
   { href: '/pricing', labelKey: 'pricing' },
+  { href: '/infrastructure', labelKey: 'infrastructure' },
   { href: '/locations', labelKey: 'locations' },
   { href: '/about', labelKey: 'about' },
   { href: '/contact', labelKey: 'contact' },

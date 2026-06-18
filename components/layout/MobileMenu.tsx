@@ -26,7 +26,7 @@ export function MobileMenu() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls="mobile-menu"
-        className="inline-flex h-10 w-10 items-center justify-center rounded text-charcoal-900 hover:bg-limestone-100 md:hidden"
+        className="inline-flex h-10 w-10 items-center justify-center rounded text-charcoal-900 hover:bg-limestone-100 lg:hidden"
       >
         <span className="sr-only">{open ? tLayout('closeMenu') : tLayout('openMenu')}</span>
         <span aria-hidden className="text-2xl leading-none">
@@ -37,7 +37,7 @@ export function MobileMenu() {
         <nav
           id="mobile-menu"
           aria-label="mobile"
-          className="fixed inset-0 top-16 z-40 bg-limestone-50 p-6 md:hidden"
+          className="fixed inset-0 top-16 z-40 bg-limestone-50 p-6 lg:hidden"
         >
           <ul className="flex flex-col gap-4">
             {PRIMARY_NAV.map((item) => (

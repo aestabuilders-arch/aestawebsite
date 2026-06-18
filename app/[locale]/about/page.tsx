@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import type { Metadata } from 'next';
 import { unstable_setRequestLocale } from 'next-intl/server';
@@ -6,6 +7,7 @@ import { notFound } from 'next/navigation';
 import { buildPageMetadata } from '@/lib/metadata/page-metadata';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { ProcessSteps } from '@/components/seo/ProcessSteps';
+import { TEAM_MEMBERS, ROLE_COVERAGE, TEAM_PRINCIPLE } from '@/lib/content/team';
 
 export async function generateMetadata({
   params: { locale },
@@ -112,25 +114,44 @@ export default function AboutPage({ params: { locale } }: { params: { locale: st
       </section>
 
       <section className="my-12">
-        <h2 className="mb-6 text-2xl font-bold text-charcoal-900">The team</h2>
+        <h2 className="mb-2 text-2xl font-bold text-charcoal-900">The team</h2>
+        <p className="mb-6 max-w-3xl text-neutral-700">{TEAM_PRINCIPLE}</p>
+
+        {/* Disciplines covered in-house — our honest answer to "how big is the team" */}
+        <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {ROLE_COVERAGE.map((r) => (
+            <div key={r.role} className="rounded-lg border border-neutral-200 bg-white p-4">
+              <h3 className="font-semibold text-charcoal-900">{r.role}</h3>
+              <p className="mt-1 text-sm text-neutral-700">{r.detail}</p>
+            </div>
+          ))}
+        </div>
+
         <div className="grid gap-6 md:grid-cols-2">
-          <article className="rounded-lg border border-neutral-200 bg-white p-6">
-            <h3 className="text-lg font-semibold text-charcoal-900">Hari Babu</h3>
-            <p className="text-sm text-neutral-600">Founder, lead architect</p>
-            <p className="mt-3 text-sm text-neutral-700">
-              B.Arch, NIT Trichy 2011–2016. Founded AESTA in 2010 alongside an emerging
-              architectural practice. Currently splits time between AESTA project oversight, Neram
-              Classes (educational initiative), and architectural research.
-            </p>
-          </article>
-          <article className="rounded-lg border border-neutral-200 bg-white p-6">
-            <h3 className="text-lg font-semibold text-charcoal-900">Civil engineer</h3>
-            <p className="text-sm text-neutral-600">Site supervisor</p>
-            <p className="mt-3 text-sm text-neutral-700">
-              Daily site supervisor across active projects. Bio details available on request during
-              your consultation.
-            </p>
-          </article>
+          {TEAM_MEMBERS.map((m, i) => (
+            <article
+              key={i}
+              className="flex gap-4 rounded-lg border border-neutral-200 bg-white p-6"
+            >
+              {m.photo ? (
+                <Image
+                  src={m.photo.src}
+                  alt={m.photo.alt}
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 flex-shrink-0 rounded-full object-cover"
+                />
+              ) : null}
+              <div>
+                <h3 className="text-lg font-semibold text-charcoal-900">{m.name ?? m.role}</h3>
+                <p className="text-sm text-neutral-600">{m.name ? m.role : m.credential}</p>
+                {m.name && m.credential ? (
+                  <p className="text-xs text-neutral-500">{m.credential}</p>
+                ) : null}
+                <p className="mt-3 text-sm text-neutral-700">{m.bio}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 

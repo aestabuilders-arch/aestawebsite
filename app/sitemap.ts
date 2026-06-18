@@ -14,6 +14,7 @@ const STATIC_PATHS: {
   { path: '/', priority: 1.0, changeFrequency: 'weekly' },
   { path: '/services', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/trades', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/infrastructure', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/pricing', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/guides', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/projects', priority: 0.8, changeFrequency: 'weekly' },

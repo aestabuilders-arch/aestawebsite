@@ -2,11 +2,12 @@ import { describe, it, expect } from 'vitest';
 import { PRIMARY_NAV, type NavItem } from './primary-nav';
 
 describe('PRIMARY_NAV', () => {
-  it('exposes all six top-level nav items in stable order', () => {
+  it('exposes all top-level nav items in stable order', () => {
     expect(PRIMARY_NAV.map((i: NavItem) => i.href)).toEqual([
       '/services',
       '/projects',
       '/pricing',
+      '/infrastructure',
       '/locations',
       '/about',
       '/contact',
@@ -15,7 +16,15 @@ describe('PRIMARY_NAV', () => {
 
   it('every item has a translation key under the nav namespace', () => {
     const keys = PRIMARY_NAV.map((i) => i.labelKey);
-    expect(keys).toEqual(['services', 'projects', 'pricing', 'locations', 'about', 'contact']);
+    expect(keys).toEqual([
+      'services',
+      'projects',
+      'pricing',
+      'infrastructure',
+      'locations',
+      'about',
+      'contact',
+    ]);
   });
 
   it('every href starts with /', () => {

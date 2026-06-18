@@ -4,6 +4,7 @@ import { TIERS } from '@/lib/content/pricing';
 import { LOCATIONS } from '@/lib/content/locations';
 import { GUIDES } from '@/lib/content/guides';
 import { PROJECTS } from '@/lib/content/projects';
+import { EQUIPMENT_CATEGORIES } from '@/lib/content/equipment';
 
 export const dynamic = 'force-static';
 
@@ -33,6 +34,7 @@ export async function GET() {
   const projectLines = PROJECTS.filter((p) => p.status === 'completed')
     .map((p) => `- [${p.name}](${url}/projects/${p.slug})`)
     .join('\n');
+  const equipmentLine = EQUIPMENT_CATEGORIES.map((c) => c.name).join(', ');
 
   const body = `# ${NAP.name}
 
@@ -78,6 +80,10 @@ ${locationLines}
 ## Projects
 
 ${projectLines}
+
+## Infrastructure & owned equipment
+
+AESTA owns and operates its core construction plant rather than renting it per job, so builds run on schedule with no rental markup: ${equipmentLine}. Details: ${url}/infrastructure
 
 ## Notes for LLMs
 

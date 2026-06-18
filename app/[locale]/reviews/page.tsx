@@ -48,6 +48,7 @@ export default async function ReviewsPage({ params: { locale } }: { params: { lo
   const count = items.length;
   const average = count === 0 ? 0 : items.reduce((sum, r) => sum + (r.rating ?? 0), 0) / count;
   const showRatingSchema = count >= MIN_REVIEWS_FOR_RATING_SCHEMA;
+  const googleReviewUrl = process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-12">
@@ -124,6 +125,25 @@ export default async function ReviewsPage({ params: { locale } }: { params: { lo
           ))}
         </section>
       )}
+
+      {/* Review collection — links to the Google Business Profile write-a-review
+          page. Renders only when the URL is configured. */}
+      {googleReviewUrl ? (
+        <section className="my-12 rounded-lg bg-limestone-100 p-6 text-center">
+          <h2 className="text-lg font-semibold text-charcoal-900">Worked with AESTA?</h2>
+          <p className="mt-2 text-neutral-700">
+            A short review on Google helps other families in your area choose with confidence.
+          </p>
+          <a
+            href={googleReviewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center rounded-md bg-terracotta-600 px-6 py-3 text-sm font-medium text-white hover:bg-terracotta-700"
+          >
+            Review us on Google →
+          </a>
+        </section>
+      ) : null}
     </div>
   );
 }
