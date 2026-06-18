@@ -44,6 +44,16 @@ export default function LocationPage({
 
   const costGuide = getGuideForCity(city.slug);
 
+  // Capture "civil engineers / structural engineer in {city}" intent on every
+  // location page, interpolated so each page's FAQ is city-specific.
+  const cityFaqs = [
+    ...city.faqs,
+    {
+      question: `Do you provide civil and structural engineering in ${city.name}?`,
+      answer: `Yes. AESTA's in-house civil and structural engineers handle soil assessment, foundation and RCC design, and on-site supervision for every project in ${city.name} — and we also provide structural drawings as a standalone service if you are building with your own contractor. The team is NIT Trichy-credentialed.`,
+    },
+  ];
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 md:px-6 md:py-12">
       <Breadcrumbs
@@ -78,6 +88,25 @@ export default function LocationPage({
         ) : null}
       </section>
 
+      <section className="my-8">
+        <p className="text-sm text-neutral-600">
+          Planning your build?{' '}
+          <Link
+            href="/guides/steps-to-build-a-house-in-tamil-nadu"
+            className="font-medium text-terracotta-600 hover:underline"
+          >
+            Steps to build a house in Tamil Nadu
+          </Link>{' '}
+          ·{' '}
+          <Link
+            href="/guides/how-to-choose-a-construction-company-in-tamil-nadu"
+            className="font-medium text-terracotta-600 hover:underline"
+          >
+            How to choose a construction company
+          </Link>
+        </p>
+      </section>
+
       <section className="my-12">
         <h2 className="mb-4 text-2xl font-bold text-charcoal-900">Local context</h2>
         <div className="grid gap-6 md:grid-cols-2">
@@ -110,7 +139,7 @@ export default function LocationPage({
         </div>
       </section>
 
-      <FAQSection items={city.faqs} heading={`FAQs — building in ${city.name}`} />
+      <FAQSection items={cityFaqs} heading={`FAQs — building in ${city.name}`} />
 
       <section className="my-16 rounded-lg bg-charcoal-900 p-8 text-center text-white">
         <h2 className="text-2xl font-bold">Building in {city.name}?</h2>

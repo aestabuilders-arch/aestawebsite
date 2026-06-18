@@ -40,8 +40,11 @@ export default function LocationsOverview({ params: { locale } }: { params: { lo
       />
 
       <header className="my-8">
-        <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
+        <p className="mb-3 text-sm font-medium uppercase tracking-wider text-terracotta-600">
           Where we build
+        </p>
+        <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
+          Construction Company Serving Pudukkottai &amp; Tamil Nadu
         </h1>
         <p className="mt-4 max-w-3xl text-lg text-neutral-700">
           Primary coverage in the Pudukkottai–Karaikudi belt of Tamil Nadu, with active projects and

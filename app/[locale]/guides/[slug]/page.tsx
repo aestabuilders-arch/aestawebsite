@@ -55,6 +55,19 @@ export default function GuidePage({
 
   const city = guide.citySlug ? getLocation(guide.citySlug) : null;
   const pageUrl = `${NAP.siteUrl}/guides/${slug}`;
+  // Cost guides show the per-sqft rate card, calculator and worked-cost table.
+  // Topic/advice guides (architect fees, process, comparisons) omit them.
+  const showCostTables = (guide.kind ?? 'cost') !== 'topic';
+
+  // Surface same-kind guides first in "Related guides" so a topic guide links
+  // to other topic guides rather than cost tables, and vice versa.
+  const relatedGuides = [...GUIDES.filter((g) => g.slug !== slug)]
+    .sort((a, b) => {
+      const sameA = (a.kind ?? 'cost') === (guide.kind ?? 'cost') ? 0 : 1;
+      const sameB = (b.kind ?? 'cost') === (guide.kind ?? 'cost') ? 0 : 1;
+      return sameA - sameB;
+    })
+    .slice(0, 4);
 
   const articleSchema: WithContext<Article> = {
     '@context': 'https://schema.org',
@@ -97,77 +110,84 @@ export default function GuidePage({
         <p className="mt-5 text-lg leading-relaxed text-neutral-700">{guide.intro}</p>
       </header>
 
-      {/* Rate card — single source of truth is lib/content/pricing.ts */}
-      <section className="my-10">
-        <h2 className="mb-4 text-2xl font-bold text-charcoal-900">2026 rate by tier</h2>
-        <div className="overflow-x-auto rounded-lg border border-limestone-200">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-limestone-100 text-charcoal-900">
-              <tr>
-                <th className="px-4 py-3 font-semibold">Tier</th>
-                <th className="px-4 py-3 font-semibold">Per sqft</th>
-                <th className="px-4 py-3 font-semibold">Best for</th>
-              </tr>
-            </thead>
-            <tbody>
-              {TIERS.map((t) => (
-                <tr key={t.slug} className="border-t border-limestone-200">
-                  <td className="px-4 py-3 font-medium text-charcoal-900">{t.name}</td>
-                  <td className="whitespace-nowrap px-4 py-3 text-neutral-700">{t.rateLabel}</td>
-                  <td className="px-4 py-3 text-neutral-600">{t.targetClient}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="mt-3 text-sm">
-          <Link href="/pricing" className="font-medium text-terracotta-600 hover:underline">
-            See the full line-by-line spec for every tier →
-          </Link>
-        </p>
-      </section>
-
-      {/* Interactive calculator */}
-      <section className="my-10">
-        <CostCalculator />
-      </section>
-
-      {/* Worked examples computed from the tier rates */}
-      <section className="my-10">
-        <h2 className="mb-4 text-2xl font-bold text-charcoal-900">Worked cost examples</h2>
-        <p className="mb-4 text-sm text-neutral-600">
-          Total construction cost (built-up area × tier rate). Excludes land, approvals, compound
-          wall, sump, borewell and interiors.
-        </p>
-        <div className="overflow-x-auto rounded-lg border border-limestone-200">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-limestone-100 text-charcoal-900">
-              <tr>
-                <th className="px-4 py-3 font-semibold">Built-up area</th>
-                {TIERS.map((t) => (
-                  <th key={t.slug} className="px-4 py-3 font-semibold">
-                    {t.name}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {EXAMPLE_SQFT.map((area) => (
-                <tr key={area} className="border-t border-limestone-200">
-                  <td className="whitespace-nowrap px-4 py-3 font-medium text-charcoal-900">
-                    {area.toLocaleString('en-IN')} sqft
-                  </td>
+      {showCostTables && (
+        <>
+          {/* Rate card — single source of truth is lib/content/pricing.ts */}
+          <section className="my-10">
+            <h2 className="mb-4 text-2xl font-bold text-charcoal-900">2026 rate by tier</h2>
+            <div className="overflow-x-auto rounded-lg border border-limestone-200">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-limestone-100 text-charcoal-900">
+                  <tr>
+                    <th className="px-4 py-3 font-semibold">Tier</th>
+                    <th className="px-4 py-3 font-semibold">Per sqft</th>
+                    <th className="px-4 py-3 font-semibold">Best for</th>
+                  </tr>
+                </thead>
+                <tbody>
                   {TIERS.map((t) => (
-                    <td key={t.slug} className="whitespace-nowrap px-4 py-3 text-neutral-700">
-                      {formatLakh(area * t.rateRange.min)} – {formatLakh(area * t.rateRange.max)}
-                    </td>
+                    <tr key={t.slug} className="border-t border-limestone-200">
+                      <td className="px-4 py-3 font-medium text-charcoal-900">{t.name}</td>
+                      <td className="whitespace-nowrap px-4 py-3 text-neutral-700">
+                        {t.rateLabel}
+                      </td>
+                      <td className="px-4 py-3 text-neutral-600">{t.targetClient}</td>
+                    </tr>
                   ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-sm">
+              <Link href="/pricing" className="font-medium text-terracotta-600 hover:underline">
+                See the full line-by-line spec for every tier →
+              </Link>
+            </p>
+          </section>
+
+          {/* Interactive calculator */}
+          <section className="my-10">
+            <CostCalculator />
+          </section>
+
+          {/* Worked examples computed from the tier rates */}
+          <section className="my-10">
+            <h2 className="mb-4 text-2xl font-bold text-charcoal-900">Worked cost examples</h2>
+            <p className="mb-4 text-sm text-neutral-600">
+              Total construction cost (built-up area × tier rate). Excludes land, approvals,
+              compound wall, sump, borewell and interiors.
+            </p>
+            <div className="overflow-x-auto rounded-lg border border-limestone-200">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-limestone-100 text-charcoal-900">
+                  <tr>
+                    <th className="px-4 py-3 font-semibold">Built-up area</th>
+                    {TIERS.map((t) => (
+                      <th key={t.slug} className="px-4 py-3 font-semibold">
+                        {t.name}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {EXAMPLE_SQFT.map((area) => (
+                    <tr key={area} className="border-t border-limestone-200">
+                      <td className="whitespace-nowrap px-4 py-3 font-medium text-charcoal-900">
+                        {area.toLocaleString('en-IN')} sqft
+                      </td>
+                      {TIERS.map((t) => (
+                        <td key={t.slug} className="whitespace-nowrap px-4 py-3 text-neutral-700">
+                          {formatLakh(area * t.rateRange.min)} –{' '}
+                          {formatLakh(area * t.rateRange.max)}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </>
+      )}
 
       {/* City- or topic-specific prose — kept unique per guide */}
       {guide.sections.map((section) => (
@@ -182,19 +202,21 @@ export default function GuidePage({
       ))}
 
       {/* What the rate excludes */}
-      <section className="my-10 rounded-lg border border-limestone-200 bg-limestone-50 p-6">
-        <h2 className="mb-3 text-xl font-bold text-charcoal-900">What the rate excludes</h2>
-        <ul className="space-y-2 text-sm text-neutral-700">
-          {PRICING_DISCLAIMERS.map((d) => (
-            <li key={d} className="flex gap-2">
-              <span aria-hidden className="text-terracotta-600">
-                •
-              </span>
-              <span>{d}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {showCostTables && (
+        <section className="my-10 rounded-lg border border-limestone-200 bg-limestone-50 p-6">
+          <h2 className="mb-3 text-xl font-bold text-charcoal-900">What the rate excludes</h2>
+          <ul className="space-y-2 text-sm text-neutral-700">
+            {PRICING_DISCLAIMERS.map((d) => (
+              <li key={d} className="flex gap-2">
+                <span aria-hidden className="text-terracotta-600">
+                  •
+                </span>
+                <span>{d}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <FAQSection items={guide.faqs} heading="Frequently asked questions" />
 
@@ -236,20 +258,18 @@ export default function GuidePage({
 
       {/* Related guides */}
       <section className="my-10">
-        <h2 className="mb-4 text-xl font-bold text-charcoal-900">More cost guides</h2>
+        <h2 className="mb-4 text-xl font-bold text-charcoal-900">Related guides</h2>
         <ul className="grid gap-3 sm:grid-cols-2">
-          {GUIDES.filter((g) => g.slug !== slug)
-            .slice(0, 4)
-            .map((g) => (
-              <li key={g.slug}>
-                <Link
-                  href={`/guides/${g.slug}`}
-                  className="block rounded-lg border border-limestone-200 bg-white p-4 transition hover:border-terracotta-600"
-                >
-                  <span className="font-medium text-charcoal-900">{g.title}</span>
-                </Link>
-              </li>
-            ))}
+          {relatedGuides.map((g) => (
+            <li key={g.slug}>
+              <Link
+                href={`/guides/${g.slug}`}
+                className="block rounded-lg border border-limestone-200 bg-white p-4 transition hover:border-terracotta-600"
+              >
+                <span className="font-medium text-charcoal-900">{g.title}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </section>
 

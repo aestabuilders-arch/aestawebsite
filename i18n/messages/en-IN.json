@@ -3,6 +3,9 @@
     "siteName": "AESTA — Architects & Builders",
     "tagline": "Divinely beautiful. Built to last."
   },
+  "home": {
+    "h1": "Builders & Architects in Pudukkottai"
+  },
   "nav": {
     "services": "Services",
     "projects": "Projects",

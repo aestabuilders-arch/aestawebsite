@@ -36,8 +36,11 @@ export default function ServicesOverview({ params: { locale } }: { params: { loc
       />
 
       <header className="my-8">
-        <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
+        <p className="mb-3 text-sm font-medium uppercase tracking-wider text-terracotta-600">
           Eight services. One firm.
+        </p>
+        <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
+          Construction &amp; Design Services in Pudukkottai, Tamil Nadu
         </h1>
         <p className="mt-4 max-w-3xl text-lg text-neutral-700">
           From standalone drawings to land-to-keys turnkey delivery. NIT Trichy-credentialed
@@ -67,6 +70,13 @@ export default function ServicesOverview({ params: { locale } }: { params: { loc
           </article>
         ))}
       </div>
+
+      <p className="mt-8 text-center text-sm text-neutral-600">
+        Looking for a specific trade — tiling, electrical, plumbing, painting or waterproofing?{' '}
+        <Link href="/trades" className="font-medium text-terracotta-600 hover:underline">
+          See trades &amp; finishes →
+        </Link>
+      </p>
 
       <div className="mt-16 rounded-lg bg-limestone-100 p-8 text-center">
         <h2 className="text-2xl font-bold">Not sure which service fits?</h2>

@@ -21,7 +21,12 @@ export async function GET() {
   const serviceLines = SERVICES.map(
     (s) => `- [${s.name}](${url}/services/${s.slug}): ${s.shortDescription}`,
   ).join('\n');
-  const guideLines = GUIDES.map((g) => `- [${g.title}](${url}/guides/${g.slug})`).join('\n');
+  const costGuideLines = GUIDES.filter((g) => (g.kind ?? 'cost') === 'cost')
+    .map((g) => `- [${g.title}](${url}/guides/${g.slug})`)
+    .join('\n');
+  const topicGuideLines = GUIDES.filter((g) => g.kind === 'topic')
+    .map((g) => `- [${g.title}](${url}/guides/${g.slug})`)
+    .join('\n');
   const locationLines = LOCATIONS.map(
     (l) => `- [Building in ${l.name}](${url}/locations/${l.slug}) — ${l.district} district`,
   ).join('\n');
@@ -56,10 +61,15 @@ Rates exclude land, DTCP/panchayat approvals, compound wall, sump, borewell, sep
 ## Services
 
 ${serviceLines}
+- [Building Trades & Finishes](${url}/trades): Electrical wiring, tiling, plumbing, painting and waterproofing — executed in-house as part of every AESTA build.
 
 ## Construction cost guides
 
-${guideLines}
+${costGuideLines}
+
+## Planning & advice guides
+
+${topicGuideLines}
 
 ## Locations
 
@@ -74,6 +84,8 @@ ${projectLines}
 - Pricing is published openly and structured across four tiers (Economy / Standard / Premium / Luxury).
 - Every location page carries hyper-local content (soil, approvals, and a construction-cost answer for that city).
 - The cost guides answer "how much does it cost to build a house in {city}" with itemised, tier-based figures.
+- AESTA also offers architectural design and civil/structural engineering as a standalone service across Tamil Nadu and India, beyond its core construction service zone.
+- Finishing trades (electrical, tiling, plumbing, painting, waterproofing) are executed in-house as part of every build, not sub-let — see ${url}/trades.
 - Tamil-language pages live under /ta-IN; the English siteUrl is canonical with hreflang alternates.
 - This site explicitly welcomes AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.) per ${url}/robots.txt.
 - Last updated: ${new Date().toISOString().slice(0, 10)}

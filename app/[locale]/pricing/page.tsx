@@ -70,8 +70,11 @@ export default function PricingPage({ params: { locale } }: { params: { locale: 
       />
 
       <header className="my-8">
-        <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
+        <p className="mb-3 text-sm font-medium uppercase tracking-wider text-terracotta-600">
           Transparent pricing
+        </p>
+        <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
+          House Construction Cost per Sqft in Tamil Nadu (2026)
         </h1>
         <p className="mt-4 max-w-3xl text-lg text-neutral-700">
           Four spec tiers. Published rates. No hidden costs. Pick the tier that fits your budget; we
@@ -83,6 +86,14 @@ export default function PricingPage({ params: { locale } }: { params: { locale: 
             className="font-medium text-terracotta-600 hover:underline"
           >
             New to this? Read our guide to house construction cost per sqft in Tamil Nadu →
+          </Link>
+        </p>
+        <p className="mt-2 text-sm">
+          <Link
+            href="/guides/architect-fees-in-tamil-nadu"
+            className="font-medium text-terracotta-600 hover:underline"
+          >
+            Design only? See how architect &amp; house-design fees work →
           </Link>
         </p>
       </header>

@@ -12,6 +12,7 @@ const SERVICE_LINKS = [
   { href: '/services/interior-design', label: 'Interior Design' },
   { href: '/services/renovation', label: 'Renovation' },
   { href: '/services/turnkey-homes', label: 'Turnkey Homes' },
+  { href: '/trades', label: 'Trades & Finishes' },
 ] as const;
 
 export function Footer() {

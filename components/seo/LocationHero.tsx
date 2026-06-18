@@ -29,8 +29,11 @@ export function LocationHero({ cityName, cityNameTa, citySlug, lat, lng }: Locat
   return (
     <section className="my-8 grid gap-6 md:grid-cols-2">
       <div>
-        <h1 className="text-4xl font-bold">
-          AESTA — Building in {cityName}
+        <p className="text-sm font-medium uppercase tracking-wider text-terracotta-600">
+          AESTA · Design-build architects &amp; builders
+        </p>
+        <h1 className="mt-2 text-4xl font-bold">
+          Builders &amp; Construction Company in {cityName}
           {cityNameTa ? <span className="ml-2 text-neutral-500">/ {cityNameTa}</span> : null}
         </h1>
         <p className="mt-3 text-lg text-neutral-700">since 2010</p>

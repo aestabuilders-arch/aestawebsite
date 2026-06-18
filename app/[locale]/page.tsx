@@ -81,6 +81,7 @@ export default function Home({ params: { locale } }: { params: { locale: string 
   if (!isValidLocale(locale)) notFound();
   unstable_setRequestLocale(locale);
   const t = useTranslations('meta');
+  const tHome = useTranslations('home');
   const tNav = useTranslations('nav');
 
   const tier1Cities = NAP.areaServed.filter((c) => c.tier === 1);
@@ -94,8 +95,9 @@ export default function Home({ params: { locale } }: { params: { locale: string 
             Design-build · Since 2010 · NIT Trichy architects
           </p>
           <h1 className="font-serif text-5xl font-bold text-charcoal-900 md:text-7xl">
-            {t('tagline')}
+            {tHome('h1')}
           </h1>
+          <p className="mt-4 font-serif text-2xl italic text-terracotta-700">{t('tagline')}</p>
           <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-700">
             Design-build homes by NIT Trichy architects. 16 years. 100+ projects. Pudukkottai to
             Chennai.

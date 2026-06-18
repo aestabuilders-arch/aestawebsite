@@ -113,7 +113,7 @@ export const SERVICES: ServiceContent[] = [
     shortDescription:
       'Standalone design — 2D plans, 3D elevations, structural drawings. Use any contractor; we supply the drawings.',
     longDescription:
-      'Already have a contractor? Want to bid the build separately? We provide architectural and structural drawings as a stand-alone service. NIT Trichy-trained architects, structural engineers in-house. Drawings are issued in formats your contractor can build from directly.',
+      'Already have a contractor, or want to bid the build separately? We provide architectural design and civil/structural engineering as a stand-alone service across Tamil Nadu. NIT Trichy-trained architects and in-house civil engineers produce your 2D plans, 3D elevations and full structural drawings — foundation, RCC, beams, columns and slab schedules — issued in formats your contractor can build from directly.',
     whatsIncluded: [
       'Site analysis + climate/soil considerations',
       '2D floor plans (all floors)',
@@ -132,6 +132,11 @@ export const SERVICES: ServiceContent[] = [
       {
         question: 'How much does architectural design cost?',
         answer: '₹15–40 per sqft of built-up area, depending on complexity and revisions.',
+      },
+      {
+        question: 'Do you provide standalone civil and structural engineering?',
+        answer:
+          'Yes. Our in-house civil and structural engineers can provide foundation and RCC design, load calculations and structural drawings on their own — for clients building with another contractor — or as part of our full design-build service.',
       },
       {
         question: 'Can I upgrade to full construction later?',
