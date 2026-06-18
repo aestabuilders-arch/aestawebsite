@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { NAP, getPhoneLink, getWhatsAppLink, getMailtoLink } from './nap';
 
 describe('NAP', () => {
@@ -29,5 +29,32 @@ describe('NAP', () => {
 
   it('provides a mailto URL', () => {
     expect(getMailtoLink()).toMatch(/^mailto:[^@]+@[^@]+\.[^@]+$/);
+  });
+
+  it('siteUrl has no surrounding or embedded whitespace', () => {
+    expect(NAP.siteUrl).toBe(NAP.siteUrl.trim());
+    expect(NAP.siteUrl).not.toMatch(/\s/);
+  });
+});
+
+describe('NAP env hygiene', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  });
+
+  it('trims a trailing newline from a dashboard-polluted NEXT_PUBLIC_SITE_URL', async () => {
+    vi.stubEnv('NEXT_PUBLIC_SITE_URL', 'https://example.test\n');
+    vi.resetModules();
+    const fresh = await import('./nap');
+    expect(fresh.NAP.siteUrl).toBe('https://example.test');
+    expect(fresh.NAP.siteUrl).not.toMatch(/\s/);
+  });
+
+  it('falls back to the default when the env var is blank/whitespace-only', async () => {
+    vi.stubEnv('NEXT_PUBLIC_SITE_URL', '   ');
+    vi.resetModules();
+    const fresh = await import('./nap');
+    expect(fresh.NAP.siteUrl).toBe('https://aesta.co.in');
   });
 });
