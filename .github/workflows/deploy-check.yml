@@ -35,3 +35,30 @@ jobs:
             exit 1
           fi
           echo "About page OK"
+
+      - name: Smoke test sitemap is valid XML with clean URLs
+        # Guards against the trailing-newline env-var bug that produced
+        # malformed <loc> URLs and a "Sitemap could not be read" in GSC.
+        run: |
+          url="https://aesta.co.in/sitemap.xml"
+          ctype=$(curl -fsSL -o /tmp/sitemap.xml -w '%{content_type}' "$url")
+          echo "Content-Type: $ctype"
+          case "$ctype" in
+            *xml*) : ;;
+            *) echo "::error::sitemap Content-Type is '$ctype', expected application/xml"; exit 1 ;;
+          esac
+          python3 - <<'PY'
+          import xml.dom.minidom as m
+          d = m.parse('/tmp/sitemap.xml')
+          urls = d.getElementsByTagName('url')
+          locs = [u.getElementsByTagName('loc')[0].firstChild.data for u in urls]
+          bad = [l for l in locs if l != l.strip() or any(c in l for c in '\n\r\t ')]
+          assert len(urls) >= 50, f"sitemap has only {len(urls)} urls -- stale/empty build?"
+          assert not bad, f"malformed <loc> (whitespace/newline): {bad[:5]}"
+          print(f"sitemap OK -- {len(urls)} urls, all <loc> clean")
+          PY
+          if ! curl -fsSL https://aesta.co.in/robots.txt | grep -qx 'Sitemap: https://aesta.co.in/sitemap.xml'; then
+            echo "::error::robots.txt Sitemap line missing or malformed"
+            exit 1
+          fi
+          echo "Sitemap smoke OK"
