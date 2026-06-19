@@ -56,9 +56,12 @@ export const INFRASTRUCTURE_BENEFITS: InfrastructureBenefit[] = [
   },
 ];
 
-// NOTE: Items below are a representative starting list for a design-build firm.
-// Replace each category's `items` with AESTA's actual owned inventory before
-// go-live, and drop any category that doesn't apply.
+// All seven categories below are confirmed AESTA-owned (Hari, 2026-06-19):
+// earthwork, concrete mixing, formwork, lifting, power/cutting tools, site
+// logistics, survey/testing. The named machines (monkey hoist, breaker,
+// drilling machines, core cutter, concrete mixer) are explicit; the rest are
+// representative of each category — extend with specific machines/counts as
+// wanted. Photos still to be added via each category's `images`.
 export const EQUIPMENT_CATEGORIES: EquipmentCategory[] = [
   {
     slug: 'earthwork-excavation',
@@ -72,13 +75,12 @@ export const EQUIPMENT_CATEGORIES: EquipmentCategory[] = [
   },
   {
     slug: 'concrete-batching',
-    name: 'Concrete & batching',
+    name: 'Concrete & mixing',
     whyItMatters: 'Consistent, well-cured concrete — the single biggest driver of structural life.',
     items: [
-      'Concrete mixers',
+      'Concrete mixer machine',
       'Needle and surface vibrators',
       'Concrete transport and placing equipment',
-      'Material weigh-batching for mix control',
     ],
   },
   {
@@ -92,18 +94,19 @@ export const EQUIPMENT_CATEGORIES: EquipmentCategory[] = [
     slug: 'lifting-access',
     name: 'Lifting & access',
     whyItMatters: 'Material moves up the building safely, without manual bottlenecks.',
-    items: ['Material hoists / lifts', 'Scaffolding systems', 'Access towers and ladders'],
+    items: ['Monkey hoist (material lift)', 'Scaffolding systems', 'Access towers and ladders'],
   },
   {
     slug: 'power-finishing-tools',
-    name: 'Power & finishing tools',
+    name: 'Power & cutting tools',
     whyItMatters: 'A full owned tool kit keeps trades moving instead of sharing hired tools.',
     items: [
+      'Concrete / demolition breaker',
+      'Drilling machines',
+      'Core cutter',
       'Tile and stone cutters',
-      'Angle grinders and core-cutting tools',
-      'Drilling and breaking tools',
+      'Angle grinders',
       'Power floats and plastering tools',
-      'Welding and fabrication tools',
     ],
   },
   {
