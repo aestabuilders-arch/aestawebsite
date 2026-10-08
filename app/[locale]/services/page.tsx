@@ -18,7 +18,7 @@ export async function generateMetadata({
     pathname: '/services',
     title: 'Construction Services in Pudukkottai, Tamil Nadu | AESTA',
     description:
-      'Eight construction and design services from AESTA — residential, commercial, architectural design, interior design, renovation, project management, 3D visualization, turnkey homes.',
+      'Construction, architecture and civil engineering services from AESTA — house construction, commercial buildings, architectural design, civil & structural engineering, interiors, renovation, project management, 3D visualization, turnkey homes.',
   });
 }
 
@@ -37,7 +37,7 @@ export default function ServicesOverview({ params: { locale } }: { params: { loc
 
       <header className="my-8">
         <p className="mb-3 text-sm font-medium uppercase tracking-wider text-terracotta-600">
-          Eight services. One firm.
+          Nine services. One firm.
         </p>
         <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
           Construction &amp; Design Services in Pudukkottai, Tamil Nadu

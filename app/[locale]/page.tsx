@@ -12,6 +12,7 @@ import { SERVICES } from '@/lib/content/services';
 import { TIERS } from '@/lib/content/pricing';
 import { INFRASTRUCTURE_BENEFITS } from '@/lib/content/equipment';
 import { NAP, getWhatsAppLink, getPhoneLink } from '@/lib/constants/nap';
+import { QuickEnquiry } from '@/components/leads/QuickEnquiry';
 
 // Revalidate hourly so newly-added reviews surface on the homepage without a
 // redeploy, while keeping the page statically cached between refreshes.
@@ -80,6 +81,21 @@ const HOMEPAGE_FAQS = [
   {
     question: 'Do you handle DTCP approvals?',
     answer: 'Yes — included in turnkey packages and available as an add-on for other engagements.',
+  },
+  {
+    question: 'Do you have civil engineers and architects in Pudukkottai?',
+    answer:
+      'Yes. AESTA is a Pudukkottai-based design-build firm (office: North Second Street, Pudukkottai) with NIT Trichy-trained architects and in-house civil and structural engineers. You can hire us for the full build, or only for house plans, structural design, estimates or site supervision.',
+  },
+  {
+    question: 'Can you only draw my house plan, and I will build with my own mason?',
+    answer:
+      'Yes. We provide 2D plans, 3D elevation and full structural drawings as a standalone service, and can add stage-wise engineer inspections while your own contractor builds.',
+  },
+  {
+    question: 'How do I start?',
+    answer:
+      'Call or WhatsApp +91-9176137043, or fill the short form on this page. An engineer calls you back within 24 hours, then visits your plot free of charge.',
   },
 ];
 
@@ -159,31 +175,60 @@ export default function Home({ params: { locale } }: { params: { locale: string 
         </div>
       </section>
 
-      {/* Featured projects — empty state */}
+      {/* Enquiry — first thing after the proof band. Case-study grid returns here once
+          real projects are published (see lib/content/projects.ts). */}
       <section className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-        <div className="flex items-end justify-between">
-          <div>
+        <div className="grid items-start gap-10 lg:grid-cols-5">
+          <div className="lg:col-span-2">
             <h2 className="font-serif text-3xl font-bold text-charcoal-900 md:text-4xl">
-              Featured projects
+              Planning to build in Pudukkottai?
             </h2>
-            <p className="mt-2 text-neutral-700">Recent homes we&apos;ve designed and built.</p>
+            <p className="mt-3 text-neutral-700">
+              Talk to an architect and a civil engineer — not a salesperson. Tell us about your plot
+              and we&apos;ll call you back with a rough budget, timeline and next steps.
+            </p>
+            <ul className="mt-6 space-y-3 text-neutral-700">
+              <li className="flex gap-2">
+                <span aria-hidden className="text-terracotta-600">
+                  ✓
+                </span>
+                Free site visit anywhere in Pudukkottai district
+              </li>
+              <li className="flex gap-2">
+                <span aria-hidden className="text-terracotta-600">
+                  ✓
+                </span>
+                Per-sqft pricing published upfront — no hidden extras
+              </li>
+              <li className="flex gap-2">
+                <span aria-hidden className="text-terracotta-600">
+                  ✓
+                </span>
+                Design, structural engineering, approvals and construction under one roof
+              </li>
+              <li className="flex gap-2">
+                <span aria-hidden className="text-terracotta-600">
+                  ✓
+                </span>
+                See a completed project:{' '}
+                <Link
+                  href="/projects/padmavathy-apartments"
+                  className="font-medium text-terracotta-600 hover:underline"
+                >
+                  Padmavathy Apartments, Pudukkottai
+                </Link>
+              </li>
+            </ul>
+            <p className="mt-6 text-sm text-neutral-600">
+              Or call{' '}
+              <a href={getPhoneLink()} className="font-semibold text-charcoal-900 hover:underline">
+                {NAP.phone}
+              </a>
+            </p>
           </div>
-          <Link
-            href="/projects"
-            className="hidden text-sm font-medium text-terracotta-600 hover:underline md:block"
-          >
-            View all →
-          </Link>
-        </div>
-        <div className="mt-8 rounded-lg border border-dashed border-neutral-300 bg-limestone-50 p-12 text-center">
-          <p className="text-neutral-600">
-            Project case studies coming soon. We&apos;re photographing recent completions for the
-            site.
-          </p>
-          <p className="mt-3 text-sm text-neutral-500">
-            In the meantime, ask us during your consultation — we&apos;ll show you projects in your
-            area.
-          </p>
+          <div className="lg:col-span-3">
+            <QuickEnquiry defaultCity="Pudukkottai" />
+          </div>
         </div>
       </section>
 
@@ -194,7 +239,7 @@ export default function Home({ params: { locale } }: { params: { locale: string 
             {tNav('services')}
           </h2>
           <p className="mt-2 text-neutral-700">
-            Eight services. One firm. Single-point accountability.
+            Nine services. One firm. Single-point accountability.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {SERVICES.map((s) => (

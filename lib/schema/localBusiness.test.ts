@@ -2,43 +2,41 @@ import { describe, it, expect } from 'vitest';
 import { buildLocalBusiness } from './localBusiness';
 
 describe('buildLocalBusiness', () => {
-  it('produces a valid LocalBusiness schema with geo fields', () => {
-    const lb = buildLocalBusiness({
-      cityName: 'Pudukkottai',
-      cityNameTa: 'புதுக்கோட்டை',
-      lat: 10.3833,
-      lng: 78.8001,
-    }) as unknown as Record<string, unknown>;
+  it('is a GeneralContractor located at the Pudukkottai office', () => {
+    const lb = buildLocalBusiness() as unknown as Record<string, unknown>;
     expect(lb['@context']).toBe('https://schema.org');
-    expect(lb['@type']).toBe('LocalBusiness');
+    expect(lb['@type']).toBe('GeneralContractor');
     expect(String(lb.name)).toContain('AESTA');
-    expect(lb.address).toBeDefined();
+    expect(lb.address).toMatchObject({ addressLocality: 'Pudukkottai', postalCode: '622001' });
     expect(lb.geo).toMatchObject({
       '@type': 'GeoCoordinates',
       latitude: 10.3833,
       longitude: 78.8001,
     });
+    expect(lb.priceRange).toBeDefined();
   });
 
-  it('areaServed is an array of cities, including the focus city', () => {
-    const lb = buildLocalBusiness({
-      cityName: 'Karaikudi',
-      cityNameTa: 'காரைக்குடி',
-      lat: 10.0667,
-      lng: 78.7833,
+  it('uses one stable @id so every page describes the same entity', () => {
+    const a = buildLocalBusiness() as unknown as Record<string, unknown>;
+    const b = buildLocalBusiness({
+      aggregateRating: { ratingValue: 5, reviewCount: 3 },
     }) as unknown as Record<string, unknown>;
+    expect(a['@id']).toBe(b['@id']);
+    expect(String(a['@id'])).toMatch(/#localbusiness$/);
+  });
+
+  it('areaServed lists the served cities', () => {
+    const lb = buildLocalBusiness() as unknown as Record<string, unknown>;
     const areaNames = (lb.areaServed as { name: string }[]).map((a) => a.name);
-    expect(areaNames).toContain('Karaikudi');
+    expect(areaNames).toEqual(expect.arrayContaining(['Pudukkottai', 'Karaikudi']));
   });
 
-  it('@id contains the city slug for uniqueness across city pages', () => {
-    const lb = buildLocalBusiness({
-      cityName: 'Aranthangi',
-      cityNameTa: 'அறந்தாங்கி',
-      lat: 10.1667,
-      lng: 78.9833,
-      citySlug: 'aranthangi',
+  it('nests aggregateRating only when there are reviews', () => {
+    const none = buildLocalBusiness() as unknown as Record<string, unknown>;
+    expect(none.aggregateRating).toBeUndefined();
+    const some = buildLocalBusiness({
+      aggregateRating: { ratingValue: 4.8, reviewCount: 12 },
     }) as unknown as Record<string, unknown>;
-    expect(String(lb['@id'])).toContain('aranthangi');
+    expect(some.aggregateRating).toMatchObject({ ratingValue: 4.8, reviewCount: 12 });
   });
 });

@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { PRIMARY_NAV } from '@/lib/nav/primary-nav';
+import { NAP, getPhoneLink } from '@/lib/constants/nap';
 import { LanguageSwitcher } from '@/components/seo/LanguageSwitcher';
 import { MobileMenu } from './MobileMenu';
 
@@ -37,6 +38,12 @@ export function Header() {
           <div className="hidden md:block">
             <LanguageSwitcher />
           </div>
+          <a
+            href={getPhoneLink()}
+            className="hidden whitespace-nowrap text-sm font-semibold text-charcoal-900 hover:text-terracotta-600 xl:inline"
+          >
+            {NAP.phone}
+          </a>
           <Link
             href="/quote"
             className="hidden items-center rounded-md bg-terracotta-600 px-4 py-2 text-sm font-medium text-white hover:bg-terracotta-700 md:inline-flex"

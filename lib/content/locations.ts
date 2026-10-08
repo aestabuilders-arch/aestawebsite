@@ -13,6 +13,8 @@ export type LocationContent = {
   soilNote: string;
   approvalNote: string;
   faqs: LocationFaq[];
+  /** Localities and nearby towns covered from this base — matches "near me" / village searches. */
+  nearbyAreas?: string[];
 };
 
 // Cost-intent FAQ shared shape: every city answers "how much to build here" with
@@ -50,6 +52,45 @@ export const LOCATIONS: LocationContent[] = [
         answer:
           'Yes. We have the municipality / DTCP and panchayat relationships in Pudukkottai town and surrounding areas — a typical approval cycle is 4–8 weeks.',
       },
+      {
+        question: 'How do I choose a good builder or civil engineer in Pudukkottai?',
+        answer:
+          'Check four things: (1) ask to visit a house they finished in Pudukkottai and speak to that owner; (2) get an itemised per-sqft quote that names cement, steel and tile brands; (3) confirm a qualified architect and civil engineer — not only a mason — are responsible for the drawings and site checks; (4) get payment stages tied to construction milestones in writing. AESTA has worked in Pudukkottai since 2010 and publishes its per-sqft rates on this site.',
+      },
+      {
+        question: 'Do you take projects in villages around Pudukkottai?',
+        answer:
+          'Yes. We build across Pudukkottai district — including Thirumayam, Alangudi, Gandarvakottai, Keeranur, Karambakudi, Annavasal, Viralimalai and Aranthangi — and site visits within the district are free.',
+      },
+      {
+        question: 'Can I get only a house plan or structural drawing in Pudukkottai?',
+        answer:
+          'Yes. Our architects and civil engineers provide house plans, 3D elevations and structural drawings as a standalone service, so you can build with your own contractor.',
+      },
+    ],
+    nearbyAreas: [
+      'Pudukkottai town',
+      'Thirugokarnam',
+      'Machuvadi',
+      'Rajagopalapuram',
+      'Thirukattalai',
+      'Mullur',
+      'Narthamalai',
+      'Kudumiyanmalai',
+      'Keeranur',
+      'Annavasal',
+      'Kunnandarkoil',
+      'Karambakudi',
+      'Alangudi',
+      'Gandarvakottai',
+      'Thirumayam',
+      'Ponnamaravathy',
+      'Viralimalai',
+      'Illuppur',
+      'Kulathur',
+      'Aranthangi',
+      'Avudaiyarkoil',
+      'Manamelkudi',
     ],
   },
   {

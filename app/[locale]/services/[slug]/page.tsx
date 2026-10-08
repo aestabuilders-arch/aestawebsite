@@ -8,8 +8,15 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs';
 import { FAQSection } from '@/components/seo/FAQSection';
 import { ProcessSteps } from '@/components/seo/ProcessSteps';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { SERVICES, getService, getServiceSeoTitle } from '@/lib/content/services';
+import {
+  SERVICES,
+  SERVICE_ENQUIRY_TYPE,
+  SERVICE_H1,
+  getService,
+  getServiceSeoTitle,
+} from '@/lib/content/services';
 import { NAP } from '@/lib/constants/nap';
+import { QuickEnquiry } from '@/components/leads/QuickEnquiry';
 import type { WithContext, Service } from 'schema-dts';
 
 export function generateStaticParams() {
@@ -66,14 +73,24 @@ export default function ServicePage({
       />
 
       <header className="my-8">
-        <h1 className="font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
-          {service.name}
+        <p className="text-sm font-medium uppercase tracking-wider text-terracotta-600">
+          AESTA · {service.name}
+        </p>
+        <h1 className="mt-2 font-serif text-4xl font-bold text-charcoal-900 md:text-5xl">
+          {SERVICE_H1[service.slug]}
         </h1>
         <p className="mt-4 text-xl text-neutral-700">{service.shortDescription}</p>
       </header>
 
       <section className="prose prose-neutral my-12 max-w-none">
         <p className="text-lg leading-relaxed text-neutral-700">{service.longDescription}</p>
+      </section>
+
+      <section className="my-12">
+        <QuickEnquiry
+          defaultProjectType={SERVICE_ENQUIRY_TYPE[service.slug]}
+          whatsappMessage={`Hi AESTA, I would like to know more about ${service.name.toLowerCase()}.`}
+        />
       </section>
 
       <section className="my-12">

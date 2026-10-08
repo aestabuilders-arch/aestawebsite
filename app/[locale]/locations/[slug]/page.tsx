@@ -10,6 +10,7 @@ import { FAQSection } from '@/components/seo/FAQSection';
 import { SERVICES } from '@/lib/content/services';
 import { getLocation, getLocationSlugs } from '@/lib/content/locations';
 import { getGuideForCity } from '@/lib/content/guides';
+import { QuickEnquiry } from '@/components/leads/QuickEnquiry';
 
 export function generateStaticParams() {
   return getLocationSlugs().map((slug) => ({ slug }));
@@ -88,6 +89,14 @@ export default function LocationPage({
         ) : null}
       </section>
 
+      <section className="my-12">
+        <QuickEnquiry
+          defaultCity={city.name}
+          heading={`Planning to build in ${city.name}? Talk to our engineer`}
+          whatsappMessage={`Hi AESTA, I am planning a construction project in ${city.name}. Can we discuss?`}
+        />
+      </section>
+
       <section className="my-8">
         <p className="text-sm text-neutral-600">
           Planning your build?{' '}
@@ -120,6 +129,27 @@ export default function LocationPage({
           </div>
         </div>
       </section>
+
+      {city.nearbyAreas ? (
+        <section className="my-12">
+          <h2 className="mb-4 text-2xl font-bold text-charcoal-900">
+            Areas we serve around {city.name}
+          </h2>
+          <ul className="flex flex-wrap gap-2">
+            {city.nearbyAreas.map((area) => (
+              <li
+                key={area}
+                className="rounded-full border border-neutral-200 bg-white px-3 py-1 text-sm text-neutral-700"
+              >
+                {area}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-sm text-neutral-600">
+            Free site visit anywhere in {city.district} district.
+          </p>
+        </section>
+      ) : null}
 
       <section className="my-12">
         <h2 className="mb-4 text-2xl font-bold text-charcoal-900">

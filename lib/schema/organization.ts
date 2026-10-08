@@ -7,7 +7,7 @@ const DESCRIPTION =
 // Social / external profile URLs for Organization.sameAs — populated from a
 // comma-separated env var so the Google Business Profile, Instagram, Facebook,
 // etc. can be added (and strengthen entity recognition) without a code change.
-function getSameAs(): string[] {
+export function getSameAs(): string[] {
   const raw = process.env.NEXT_PUBLIC_SOCIAL_PROFILES;
   if (!raw) return [];
   return raw

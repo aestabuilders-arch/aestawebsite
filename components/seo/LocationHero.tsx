@@ -1,5 +1,7 @@
+import type { WithContext, Service } from 'schema-dts';
 import { JsonLd } from './JsonLd';
-import { buildLocalBusiness } from '@/lib/schema/localBusiness';
+import { LOCAL_BUSINESS_ID, buildLocalBusiness } from '@/lib/schema/localBusiness';
+import { NAP } from '@/lib/constants/nap';
 
 type LocationHeroProps = {
   cityName: string;
@@ -24,7 +26,23 @@ function buildOsmEmbedUrl(lat: number, lng: number): string {
 }
 
 export function LocationHero({ cityName, cityNameTa, citySlug, lat, lng }: LocationHeroProps) {
-  const schema = buildLocalBusiness({ cityName, cityNameTa, lat, lng, citySlug });
+  // One business entity sitewide (office geo); this page's city relevance is
+  // carried by a Service scoped to the city and provided by that entity.
+  const business = buildLocalBusiness();
+  const cityService: WithContext<Service> = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${NAP.siteUrl}/locations/${citySlug}#service`,
+    name: `House construction, architecture and civil engineering in ${cityName}`,
+    serviceType: 'Building construction',
+    provider: { '@id': LOCAL_BUSINESS_ID },
+    areaServed: {
+      '@type': 'City',
+      name: cityName,
+      ...(cityNameTa ? { alternateName: cityNameTa } : {}),
+      geo: { '@type': 'GeoCoordinates', latitude: lat, longitude: lng },
+    },
+  };
 
   return (
     <section className="my-8 grid gap-6 md:grid-cols-2">
@@ -33,7 +51,7 @@ export function LocationHero({ cityName, cityNameTa, citySlug, lat, lng }: Locat
           AESTA · Design-build architects &amp; builders
         </p>
         <h1 className="mt-2 text-4xl font-bold">
-          Builders &amp; Construction Company in {cityName}
+          Builders, Architects &amp; Civil Engineers in {cityName}
           {cityNameTa ? <span className="ml-2 text-neutral-500">/ {cityNameTa}</span> : null}
         </h1>
         <p className="mt-3 text-lg text-neutral-700">since 2010</p>
@@ -46,7 +64,8 @@ export function LocationHero({ cityName, cityNameTa, citySlug, lat, lng }: Locat
           className="h-full w-full"
         />
       </div>
-      <JsonLd data={schema} />
+      <JsonLd data={business} />
+      <JsonLd data={cityService} />
     </section>
   );
 }

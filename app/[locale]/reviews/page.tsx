@@ -57,10 +57,6 @@ export default async function ReviewsPage({ params: { locale } }: { params: { lo
       {showRatingSchema ? (
         <JsonLd
           data={buildLocalBusiness({
-            cityName: NAP.address.addressLocality,
-            citySlug: 'pudukkottai',
-            lat: NAP.geo.lat,
-            lng: NAP.geo.lng,
             aggregateRating: { ratingValue: Math.round(average * 10) / 10, reviewCount: count },
           })}
         />

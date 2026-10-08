@@ -1,6 +1,7 @@
 'use client';
 
 import { useFormState, useFormStatus } from 'react-dom';
+import { LeadContextFields } from '@/components/leads/LeadContextFields';
 import { submitContactLead, type LeadFormState } from './actions';
 
 const initial: LeadFormState = { status: 'idle' };
@@ -22,7 +23,8 @@ export function ContactForm() {
   const [state, formAction] = useFormState(submitContactLead, initial);
 
   return (
-    <form action={formAction} className="space-y-4">
+    <form action={formAction} className="relative space-y-4">
+      <LeadContextFields />
       <div>
         <label htmlFor="name" className="mb-1 block text-sm font-medium text-charcoal-900">
           Your name <span className="text-terracotta-600">*</span>

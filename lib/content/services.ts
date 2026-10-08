@@ -1,7 +1,10 @@
+import type { ProjectTypeKey } from '@/lib/leads/projectTypes';
+
 export type ServiceSlug =
   | 'residential-construction'
   | 'commercial-construction'
   | 'architectural-design'
+  | 'civil-structural-engineering'
   | 'interior-design'
   | 'renovation'
   | 'project-management'
@@ -145,6 +148,63 @@ export const SERVICES: ServiceContent[] = [
       },
     ],
     pricingHint: '₹15–40/sqft based on complexity.',
+  },
+  {
+    slug: 'civil-structural-engineering',
+    name: 'Civil & Structural Engineering',
+    shortDescription:
+      'Civil engineers in Pudukkottai for structural design, estimates, soil-led foundation design and site supervision — for your own build or ours.',
+    longDescription:
+      "Looking for a civil engineer in Pudukkottai? AESTA's in-house civil and structural engineers have worked on 100+ buildings across the Pudukkottai–Karaikudi belt since 2010. We design foundations to the actual soil on your plot — laterite, red soil, filled land and expansive clay each need a different footing — size every column, beam and slab, prepare the material estimate, and supervise the pour so what is built matches the drawing. Hire us for engineering alone if you already have a mason or contractor, or as part of a full design-build project.",
+    whatsIncluded: [
+      'Site inspection and soil-test recommendation',
+      'Foundation design matched to your soil (isolated, combined, raft)',
+      'RCC structural drawings — columns, beams, slabs, staircase, lintels',
+      'Bar-bending schedule and quantity / material estimate',
+      'Approval-ready structural drawings with engineer signature',
+      'Site supervision visits at footing, column, beam and slab stages',
+      'Structural check of existing buildings before adding a floor',
+      'Crack, leakage and dampness diagnosis for older homes',
+    ],
+    process: [
+      { name: 'Site visit', text: 'Engineer visits the plot, reviews soil, levels and access.' },
+      {
+        name: 'Design',
+        text: 'Structural design and drawings based on the architectural plan and soil.',
+      },
+      {
+        name: 'Estimate',
+        text: 'Material quantities and cost estimate you can check line by line.',
+      },
+      {
+        name: 'Supervise',
+        text: 'Stage inspections before every concrete pour — reinforcement, cover, shuttering.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can I hire AESTA only as a civil engineer while using my own contractor?',
+        answer:
+          'Yes. Many clients in Pudukkottai already have a trusted mason. We provide the structural design, drawings, estimate and stage-wise supervision visits, and your contractor builds to them.',
+      },
+      {
+        question: 'Can you check whether my existing house can take one more floor?',
+        answer:
+          'Yes. An engineer inspects the existing footings, columns and slab, reviews any old drawings, and tells you whether a floor can be added safely and what strengthening, if any, is needed.',
+      },
+      {
+        question: 'Why does the foundation depend on soil type?',
+        answer:
+          'Soil changes within a few kilometres here — laterite and red soil around Pudukkottai town, filled land on new layouts, and expansive clay pockets in low-lying areas that swell in the monsoon and crack walls if the footing is too shallow. We design the footing depth and type to the soil on your plot rather than using one standard size.',
+      },
+      {
+        question: 'How much does structural design cost?',
+        answer:
+          'It depends on built-up area, number of floors and whether supervision visits are included. Share your plan or plot details on WhatsApp and we will give you a fixed quote, usually the same day.',
+      },
+    ],
+    pricingHint:
+      'Fixed quote per project based on built-up area, floors and supervision visits. Credited toward construction if you build with us.',
   },
   {
     slug: 'interior-design',
@@ -314,7 +374,9 @@ export function getService(slug: string): ServiceContent | null {
 export const SERVICE_SEO_TITLES: Record<ServiceSlug, string> = {
   'residential-construction': 'House Construction in Pudukkottai | Building Contractors — AESTA',
   'commercial-construction': 'Commercial Construction in Pudukkottai & Trichy | AESTA Builders',
-  'architectural-design': 'Architectural Design & House Plans, Tamil Nadu | AESTA Architects',
+  'architectural-design': 'Architects in Pudukkottai | House Plans & 3D Elevation — AESTA',
+  'civil-structural-engineering':
+    'Civil Engineers in Pudukkottai | Structural Design & Supervision — AESTA',
   'interior-design': 'Interior Design in Pudukkottai & Karaikudi | AESTA',
   renovation: 'Home Renovation & Remodelling in Pudukkottai | AESTA',
   'project-management': 'Construction Project Management, Tamil Nadu | AESTA',
@@ -325,3 +387,32 @@ export const SERVICE_SEO_TITLES: Record<ServiceSlug, string> = {
 export function getServiceSeoTitle(slug: ServiceSlug): string {
   return SERVICE_SEO_TITLES[slug];
 }
+
+/**
+ * Keyword-led H1 per service — the phrase people type into Google, with the
+ * service name kept as the kicker above it.
+ */
+export const SERVICE_H1: Record<ServiceSlug, string> = {
+  'residential-construction': 'House Construction in Pudukkottai',
+  'commercial-construction': 'Commercial Building Construction in Pudukkottai & Trichy',
+  'architectural-design': 'Architects in Pudukkottai — House Plans & 3D Elevation',
+  'civil-structural-engineering': 'Civil Engineers in Pudukkottai',
+  'interior-design': 'Interior Designers in Pudukkottai & Karaikudi',
+  renovation: 'Home Renovation & Extension in Pudukkottai',
+  'project-management': 'Construction Project Management in Tamil Nadu',
+  'three-d-visualization': '3D Elevation & Walkthrough Design',
+  'turnkey-homes': 'Turnkey House Construction in Pudukkottai',
+};
+
+/** Which "What are you planning?" option the enquiry form preselects. */
+export const SERVICE_ENQUIRY_TYPE: Record<ServiceSlug, ProjectTypeKey> = {
+  'residential-construction': 'house',
+  'commercial-construction': 'commercial',
+  'architectural-design': 'design',
+  'civil-structural-engineering': 'structural',
+  'interior-design': 'interiors',
+  renovation: 'renovation',
+  'project-management': 'house',
+  'three-d-visualization': 'design',
+  'turnkey-homes': 'house',
+};

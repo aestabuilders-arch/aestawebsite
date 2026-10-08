@@ -49,5 +49,32 @@
     "services": "Our services",
     "pricing": "Transparent pricing",
     "contact": "Contact us"
+  },
+  "leads": {
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "quote": "Free quote",
+    "waDefault": "Hi AESTA, I would like to discuss a construction project.",
+    "waCity": "Hi AESTA, I am planning a construction project in {city}. Can we discuss?",
+    "waService": "Hi AESTA, I would like to know more about {service}.",
+    "formTitle": "Get a call back from our engineer",
+    "formSubtitle": "Free consultation and site visit. We reply within 24 hours — usually the same day.",
+    "name": "Your name",
+    "phone": "Phone / WhatsApp number",
+    "city": "Where is your plot?",
+    "projectType": "What are you planning?",
+    "types": {
+      "house": "New house",
+      "commercial": "Commercial building",
+      "renovation": "Renovation / extension",
+      "design": "Architectural design / house plan only",
+      "structural": "Civil & structural engineering only",
+      "interiors": "Interiors",
+      "other": "Something else"
+    },
+    "submit": "Request a call back",
+    "sending": "Sending…",
+    "orWhatsapp": "Prefer WhatsApp? Message us directly",
+    "privacy": "We only use your number to discuss your project. No spam."
   }
 }

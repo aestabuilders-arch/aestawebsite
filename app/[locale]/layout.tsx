@@ -11,6 +11,7 @@ import { buildOrganization } from '@/lib/schema/organization';
 import { SkipToContent } from '@/components/layout/SkipToContent';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { StickyContactBar } from '@/components/leads/StickyContactBar';
 import '../globals.css';
 
 const inter = Inter({
@@ -91,6 +92,7 @@ export default async function RootLayout({
           <Header />
           <main id="main">{children}</main>
           <Footer />
+          <StickyContactBar />
         </NextIntlClientProvider>
         <Analytics />
       </body>

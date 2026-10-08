@@ -30,13 +30,25 @@ describe('LocationHero', () => {
     expect(iframe).toHaveAttribute('loading', 'lazy');
   });
 
-  it('emits LocalBusiness JSON-LD with correct geo and citySlug-keyed @id', () => {
+  it('emits the single office-located business entity, not a per-city one', () => {
+    const { container } = render(
+      <LocationHero {...props} citySlug="karaikudi" lat={10.07} lng={78.78} />,
+    );
+    const scripts = [...container.querySelectorAll('script[type="application/ld+json"]')].map((s) =>
+      JSON.parse(s.textContent!),
+    );
+    const business = scripts.find((d) => d['@type'] === 'GeneralContractor');
+    expect(business.geo.latitude).toBe(10.3833);
+    expect(business['@id']).toMatch(/#localbusiness$/);
+  });
+
+  it('emits a city-scoped Service provided by the business', () => {
     const { container } = render(<LocationHero {...props} />);
-    const script = container.querySelector('script[type="application/ld+json"]');
-    const data = JSON.parse(script!.textContent!);
-    expect(data['@type']).toBe('LocalBusiness');
-    expect(data.geo.latitude).toBe(10.3833);
-    expect(data.geo.longitude).toBe(78.8001);
-    expect(data['@id']).toContain('pudukkottai');
+    const scripts = [...container.querySelectorAll('script[type="application/ld+json"]')].map((s) =>
+      JSON.parse(s.textContent!),
+    );
+    const service = scripts.find((d) => d['@type'] === 'Service');
+    expect(service.areaServed.name).toBe('Pudukkottai');
+    expect(service.provider['@id']).toMatch(/#localbusiness$/);
   });
 });

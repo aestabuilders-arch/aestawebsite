@@ -9,6 +9,7 @@ const SERVICE_LINKS = [
   { href: '/services/residential-construction', label: 'Residential Construction' },
   { href: '/services/commercial-construction', label: 'Commercial Construction' },
   { href: '/services/architectural-design', label: 'Architectural Design' },
+  { href: '/services/civil-structural-engineering', label: 'Civil & Structural Engineering' },
   { href: '/services/interior-design', label: 'Interior Design' },
   { href: '/services/renovation', label: 'Renovation' },
   { href: '/services/turnkey-homes', label: 'Turnkey Homes' },
@@ -63,11 +64,6 @@ export function Footer() {
               <li>
                 <Link href="/guides" className="hover:underline">
                   Cost guides
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources" className="hover:underline">
-                  {tFooter('blog')}
                 </Link>
               </li>
               <li>
